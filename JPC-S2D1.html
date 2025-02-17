@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dia 1: Exercícios de Japonês</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #4a148c;
+    }
+    .exercise {
+      margin-bottom: 30px;
+    }
+    .exercise h3 {
+      color: #4a148c;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+    p {
+      line-height: 1.5;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: 5px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    .answer {
+      background-color: #e8eaf6;
+      border-left: 4px solid #4a148c;
+      padding: 10px;
+      margin-top: 10px;
+      display: none;
+      white-space: pre-wrap;
+      font-family: "Courier New", Courier, monospace;
+    }
+    ol li {
+      margin-bottom: 15px;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      padding-top: 25px;
+      height: 0;
+      margin-bottom: 10px;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .btn {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+    .feedback {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Semana 2: Dia 1</h1>
+    
+    <!-- Revisão Rápida -->
+    <div class="exercise" id="revisao">
+      <h3>1. Revisão Rápida (5 minutos)</h3>
+      <p><strong>Fale em voz alta</strong> os cumprimentos e expressões essenciais:</p>
+      <p>こんにちは, おはようございます, すみません, ありがとうございます, お願いします</p>
+      <p>Tente lembrar como pronunciar de 1 a 10 (いち, に, さん...)</p>
+      <p><strong>Revise:</strong></p>
+      <ul>
+        <li>どこですか？ (Onde fica…?)</li>
+        <li>分かりません (Não entendo / Não sei.)</li>
+        <li>もう一度お願いします (Mais uma vez, por favor.)</li>
+        <li>ゆっくり話してください (Fale devagar, por favor.)</li>
+      </ul>
+    </div>
+
+    <!-- Treino Auditivo -->
+    <div class="exercise" id="treino-auditivo">
+      <h3>2. Treino Auditivo (Vídeo Curto)</h3>
+      <p><strong>Vídeo:</strong> Conversa em um restaurante</p>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/8Nd8C1KuprA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <button class="btn" onclick="toggleAnswer('transcript')">Mostrar Transcrição</button>
+      <div id="transcript" class="answer">
+Garçom:
+いらっしゃいませ、何名様ですか？
+(Irasshaimase, nanmei-sama desu ka?)
+
+Cliente:
+二人です。
+(Futari desu.)
+
+Garçom:
+ご案内いたします。
+(Goannai itashimasu.)
+
+Garçom:
+ご注文お決まりになりましたら、こちらのベルでお呼びください。
+(Gochūmon o okimari ni narimashitara, kochira no beru de oyobi kudasai.)
+
+Garçom:
+お伺いいたします。
+(Oukagai itashimasu.)
+
+Cliente:
+天ぷらそば一つと、カレーうどんを一つお願いします。
+(Tenpura soba hitotsu to, karē udon o hitotsu onegai shimasu.)
+
+Garçom:
+お飲み物はいかがなさいますか？
+(Onomimono wa ikaga nasaimasu ka?)
+
+Cliente:
+オレンジジュースとホットコーヒーで。
+(Orenji jūsu to hotto kōhī de.)
+
+Garçom:
+お飲み物はいつ頃をお持ちいたしましょうか？
+(Onomimono wa itsugoro o omochi itashimashou ka?)
+
+Cliente:
+食後でお願いします。
+(Shokugo de onegai shimasu.)
+      </div>
+      <p><strong>Exercício 1:</strong> Identificação de Palavras</p>
+      <p>Assista o vídeo sem ler o transcript de cara. Anote pelo menos 3 expressões que você reconheceu de ouvido.</p>
+      <textarea rows="3" placeholder="Digite as expressões que você reconheceu..."></textarea>
+    </div>
+
+    <!-- Prática Escrita em Romaji -->
+    <div class="exercise" id="pratica-escrita">
+      <h3>3. Prática Escrita em Romaji</h3>
+      <p><strong>Exercício 2:</strong> Complete as Frases em Romaji</p>
+      <p>Reescreva as frases abaixo em romaji, completando as partes que faltam (use o transcript como base, se precisar):</p>
+      <ol>
+        <li>
+          いらっしゃいませ、＿＿＿＿＿様ですか？<br>
+          <em>Irasshaimase, _________ sama desu ka? (Dica: Pergunta quantas pessoas)</em><br>
+          <input type="text" id="ans1" placeholder="Digite sua resposta aqui...">
+          <div id="feedback1" class="feedback"></div>
+        </li>
+        <li>
+          ご注文お＿＿＿＿＿になりましたら、こちらのベルでお呼びください。<br>
+          <em>Gochūmon o _________ ni narimashitara, kochira no beru de oyobi kudasai. (Dica: O verbo significa “decidir” ou “estar definido” sobre o pedido)</em><br>
+          <input type="text" id="ans2" placeholder="Digite sua resposta aqui...">
+          <div id="feedback2" class="feedback"></div>
+        </li>
+        <li>
+          天ぷらそば＿＿＿と、カレーうどんを＿＿＿お願いします。<br>
+          <em>Tenpura soba ____ to, karē udon o ____ onegai shimasu. (Dica: Significa “um” de cada)</em><br>
+          <input type="text" id="ans3a" placeholder="Primeiro espaço...">
+          <div id="feedback3a" class="feedback"></div>
+          <input type="text" id="ans3b" placeholder="Segundo espaço...">
+          <div id="feedback3b" class="feedback"></div>
+        </li>
+        <li>
+          お飲み物は＿＿＿頃をお持ちいたしましょうか？<br>
+          <em>Onomimono wa _______ goro o omochi itashimashou ka? (Dica: Pergunta “Quando trazer a bebida?”)</em><br>
+          <input type="text" id="ans4" placeholder="Digite sua resposta aqui...">
+          <div id="feedback4" class="feedback"></div>
+        </li>
+        <li>
+          食後でお願いします。<br>
+          <em>Shokugo de onegai shimasu.</em><br>
+          <input type="text" id="ans5" placeholder="Reescreva em romaji...">
+          <div id="feedback5" class="feedback"></div>
+        </li>
+      </ol>
+      <button class="btn" onclick="checkAnswers()">Verificar Respostas</button>
+      </div>
+    </div>
+
+    <!-- Exercício de Criação -->
+    <div class="exercise" id="exercicio-criacao">
+      <h3>4. Exercício de Criação</h3>
+      <p><strong>Exercício 3:</strong> Mini Diálogo</p>
+      <p>Imagine que você vai pedir algo diferente no mesmo restaurante. Escreva duas ou três falas usando um cumprimento, pedido de prato e pedido de bebida.</p>
+      <textarea rows="4" placeholder="Escreva seu mini diálogo aqui..."></textarea>
+      <button class="btn" onclick="toggleAnswer('exampleDialogue')">Mostrar Diálogo Exemplo</button>
+      <div id="exampleDialogue" class="answer">
+Garçon: Irasshaimase, nanmei-sama desu ka?<br>
+Cliente: Futari desu.<br>
+Garçon: Gochūmon okimari ni narimashitara, beru de oyobi kudasai.<br>
+Cliente: Kōhī o futatsu to, ramen o hitotsu onegai shimasu.
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function toggleAnswer(id) {
+      var elem = document.getElementById(id);
+      if (elem.style.display === "block") {
+        elem.style.display = "none";
+      } else {
+        elem.style.display = "block";
+      }
+    }
+
+    // Função para determinar o ID de feedback correto para cada campo
+    function getFeedbackId(key) {
+      if(key === "ans3a") return "feedback3a";
+      if(key === "ans3b") return "feedback3b";
+      return "feedback" + key.replace(/[^\d]/g, "");
+    }
+
+    function checkAnswers() {
+      // Definindo as respostas corretas (em letras minúsculas)
+      const answers = {
+        ans1: "nanmei",
+        ans2: "okimari",
+        ans3a: "hitotsu",
+        ans3b: "hitotsu",
+        ans4: "itsugoro",
+        ans5: "shokugo de onegai shimasu"
+      };
+
+      // Verifica cada resposta e mostra feedback
+      for (let key in answers) {
+        let userInput = document.getElementById(key).value.trim().toLowerCase();
+        let correct = answers[key];
+        let feedbackId = getFeedbackId(key);
+        let feedbackElem = document.getElementById(feedbackId);
+        
+        if (userInput === correct) {
+          document.getElementById(key).style.borderColor = "green";
+          if(feedbackElem) {
+            feedbackElem.textContent = "Correto!";
+            feedbackElem.style.color = "green";
+          }
+        } else {
+          document.getElementById(key).style.borderColor = "red";
+          if(feedbackElem) {
+            feedbackElem.textContent = "Incorreto. A resposta correta é: " + correct;
+            feedbackElem.style.color = "red";
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

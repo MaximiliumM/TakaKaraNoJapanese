@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dia 2: Exercícios de Japonês</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #4a148c;
+    }
+    .exercise {
+      margin-bottom: 30px;
+    }
+    .exercise h3 {
+      color: #4a148c;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+    p {
+      line-height: 1.5;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"] {
+      width: 40%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    .feedback {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .btn {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+      }
+      input[type="text"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Semana 2: Dia 2</h1>
+    
+    <!-- Exercício 1: Números (100～1000) -->
+    <div class="exercise" id="numeros">
+      <h3>Exercício 1: Números (100～1000)</h3>
+      <p>Pratique as leituras dos números com seus respectivos romaji:</p>
+      <ul>
+        <li>100: ひゃく (hyaku)</li>
+        <li>200: にひゃく (nihyaku)</li>
+        <li>300: さんびゃく (sanbyaku)</li>
+        <li>400: よんひゃく (yonhyaku)</li>
+        <li>500: ごひゃく (gohyaku)</li>
+        <li>600: ろっぴゃく (roppyaku)</li>
+        <li>700: ななひゃく (nanahyaku)</li>
+        <li>800: はっぴゃく (happyaku)</li>
+        <li>900: きゅうひゃく (kyuuhyaku)</li>
+        <li>1000: せん (sen)</li>
+      </ul>
+      <p>Tente 2 ou 3 exemplos aleatórios. Por exemplo: <strong>560 = ごひゃくろくじゅう (gohyaku rokujuu)</strong></p>
+      <button class="btn" onclick="generateRandomNumber()">Gerar número aleatório</button>
+      <button class="btn" onclick="showJapaneseReading()">Mostrar Leitura</button>
+      <div id="randomNumber" style="font-size: 24px; margin-top: 10px; text-align: center;"></div>
+      <div id="japaneseReading" style="font-size: 24px; margin-top: 10px; text-align: center;"></div>
+    </div>
+    
+    <!-- Exercício 2: Vocabulário do Cardápio -->
+    <div class="exercise" id="vocab-cardapio">
+      <h3>Exercício 2: Vocabulário do Cardápio</h3>
+      <p>Revise as seguintes palavras e escreva a tradução ao lado:</p>
+      <ol>
+        <li>
+          おすすめ (osusume) – 
+          <input type="text" id="vocab1" placeholder="Tradução...">
+          <span id="vocabFeedback1" class="feedback"></span>
+        </li>
+        <li>
+          人気 (ninki) – 
+          <input type="text" id="vocab2" placeholder="Tradução...">
+          <span id="vocabFeedback2" class="feedback"></span>
+        </li>
+        <li>
+          期間限定 (kikan gentei) – 
+          <input type="text" id="vocab3" placeholder="Tradução...">
+          <span id="vocabFeedback3" class="feedback"></span>
+        </li>
+      </ol>
+      <p>Depois, tente buscar online um cardápio de um restaurante japonês e explore alguns itens do menu para entender melhor o vocabulário.</p>
+      <button class="btn" onclick="checkVocab()">Verificar Respostas</button>
+    </div>
+  </div>
+  
+  <script>
+    function generateRandomNumber() {
+      // Gera um número aleatório entre 100 e 1000
+      var min = 100;
+      var max = 1000;
+      var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      document.getElementById('randomNumber').textContent = randomNumber;
+      // Limpa a leitura anterior, se houver
+      document.getElementById('japaneseReading').textContent = "";
+    }
+    
+    function convertToJapaneseAndRomaji(num) {
+      if(num === 1000) return "せん (sen)";
+      
+      let hundreds = Math.floor(num / 100);
+      let tens = Math.floor((num % 100) / 10);
+      let ones = num % 10;
+      
+      const hundredsMapJP = {
+        1: "ひゃく",
+        2: "にひゃく",
+        3: "さんびゃく",
+        4: "よんひゃく",
+        5: "ごひゃく",
+        6: "ろっぴゃく",
+        7: "ななひゃく",
+        8: "はっぴゃく",
+        9: "きゅうひゃく"
+      };
+      
+      const hundredsMapRomaji = {
+        1: "hyaku",
+        2: "nihyaku",
+        3: "sanbyaku",
+        4: "yonhyaku",
+        5: "gohyaku",
+        6: "roppyaku",
+        7: "nanahyaku",
+        8: "happyaku",
+        9: "kyuuhyaku"
+      };
+      
+      const onesMapJP = {
+        1: "いち",
+        2: "に",
+        3: "さん",
+        4: "よん",
+        5: "ご",
+        6: "ろく",
+        7: "なな",
+        8: "はち",
+        9: "きゅう"
+      };
+      
+      const onesMapRomaji = {
+        1: "ichi",
+        2: "ni",
+        3: "san",
+        4: "yon",
+        5: "go",
+        6: "roku",
+        7: "nana",
+        8: "hachi",
+        9: "kyuu"
+      };
+      
+      let jp = "";
+      let rm = "";
+      
+      if (hundreds > 0) {
+        jp += hundredsMapJP[hundreds];
+        rm += hundredsMapRomaji[hundreds];
+      }
+      
+      if (tens > 0) {
+        if (tens === 1) {
+          jp += "じゅう";
+          rm += "juu";
+        } else {
+          jp += onesMapJP[tens] + "じゅう";
+          rm += onesMapRomaji[tens] + "juu";
+        }
+      }
+      
+      if (ones > 0) {
+        jp += onesMapJP[ones];
+        rm += onesMapRomaji[ones];
+      }
+      
+      return jp + " (" + rm + ")";
+    }
+    
+    function showJapaneseReading() {
+      let randomNumberText = document.getElementById('randomNumber').textContent;
+      let num = parseInt(randomNumberText);
+      if(isNaN(num)) {
+        alert("Por favor, gere um número primeiro!");
+        return;
+      }
+      let reading = convertToJapaneseAndRomaji(num);
+      document.getElementById('japaneseReading').textContent = reading;
+    }
+    
+    function checkVocab() {
+      // Definindo as respostas corretas (em letras minúsculas)
+      const vocabAnswers = {
+        vocab1: "recomendação",
+        vocab2: "popular",
+        vocab3: "por tempo limitado"
+      };
+      
+      for (let key in vocabAnswers) {
+        let userInput = document.getElementById(key).value.trim().toLowerCase();
+        let correct = vocabAnswers[key];
+        let feedbackId = "vocabFeedback" + key.slice(-1);
+        let feedbackElem = document.getElementById(feedbackId);
+        
+        if (userInput === correct) {
+          document.getElementById(key).style.borderColor = "green";
+          feedbackElem.textContent = "Correto!";
+          feedbackElem.style.color = "green";
+        } else {
+          document.getElementById(key).style.borderColor = "red";
+          feedbackElem.textContent = "Incorreto. A resposta correta é: " + correct;
+          feedbackElem.style.color = "red";
+        }
+      }
+    }
+  </script>
+</body>
+</html>

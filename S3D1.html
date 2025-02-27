@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pratica Restaurante</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #4a148c;
+    }
+    h3 {
+      color: #4a148c;
+      margin-top: 20px;
+    }
+    p, li {
+      line-height: 1.6;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"], select, textarea {
+      width: 90%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .feedback {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    #transcript {
+      white-space: pre-wrap;
+      background-color: #f0f0f0;
+      padding: 10px;
+      margin-top: 10px;
+      border-left: 4px solid #4a148c;
+      display: none;
+    }
+    /* Tooltip CSS */
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c; /* Dark purple */
+      background-color: rgba(74, 20, 140, 0.1); /* Light purple highlight */
+      border-radius: 3px;
+      padding: 2px 4px;
+      /* Remove dotted underline */
+      border-bottom: none;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      input[type="text"], select, textarea {
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pratica Restaurante</h1>
+    <p>Nesta atividade, você assistirá a um vídeo com um diálogo em um restaurante japonês e, depois, responderá a exercícios interativos para testar sua compreensão e vocabulário. Lembre-se: todas as respostas devem ser digitadas em <strong>romaji</strong> (minúsculas).</p>
+    
+    <!-- Vídeo -->
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/vd6mwUSiS40" frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Botão para mostrar a transcrição -->
+    <button class="btn" onclick="toggleTranscript()">Mostrar Transcrição</button>
+    <div id="transcript">
+Cliente:  
+こんにちは。  
+konnichiwa.
+
+Garçom:  
+いらっしゃいませ。何名様ですか？  
+irasshaimase. nanmei-sama desu ka?
+
+Cliente:  
+ひとりです。  
+hitori desu.
+
+Garçom:  
+こちらへどうぞ。  
+kochira e dōzo.
+
+Cliente:  
+あ、すみません。英語のメニューありますか？  
+a, sumimasen. eigo no menyū arimasu ka?
+
+Garçom:  
+はい、こちらにあります。  
+hai, kochira ni arimasu.
+
+Cliente:  
+ありがとうございます。  
+arigatou gozaimasu.
+
+Cliente:  
+すみません。注文をお願いします。  
+sumimasen. chūmon o onegai shimasu.
+
+Garçom:  
+はい、<span class="tooltip">お伺いします<span class="tooltiptext">Expressão polida usada pelo garçom para indicar que irá anotar o pedido; usada com "chūmon" para dizer "vou atender seu pedido".</span></span>。  
+hai, oukagai shimasu.
+
+Cliente:  
+えっと、これ、お願いします。  
+etto, kore, onegai shimasu.
+
+Garçom:  
+かしこまりました。お飲み物は<span class="tooltip">いかが<span class="tooltiptext">Usado para perguntar "como?" ou "de que maneira?", indicando uma escolha ou opinião.</span></span>ですか？  
+kashikomarimashita. onomimono wa ikaga desu ka?
+
+Cliente:  
+ビールをお願いします。  
+biiru o onegai shimasu.
+
+Garçom:  
+以上でよろしいでしょうか？  
+ijō de yoroshii deshou ka?
+
+Cliente:  
+はい、<span class="tooltip">大丈夫<span class="tooltiptext">Significa "ok" ou "tudo bem".</span></span>です。  
+hai, daijoubu desu.
+
+Garçom:  
+かしこまりました。  
+kashikomarimashita.
+
+Garçom:  
+はい、こちらビールです。  
+hai, kochira biiru desu.
+
+Cliente:  
+ありがとうございます。  
+arigatou gozaimasu.
+
+Garçom:  
+<span class="tooltip">大変<span class="tooltiptext">Expressa "muito" ou "extremamente", indicando que houve uma longa espera.</span></span>お待たせいたしました。  
+taihen omatase itashimashita.
+
+Cliente:  
+ありがとうございます。お〜！<span class="tooltip">美味しそう<span class="tooltiptext">Significa "parece delicioso".</span></span>。  
+arigatou gozaimasu. o~! oishisou.
+
+Cliente:  
+あ、すみません。これ、なんですか？<span class="tooltip">とりにく<span class="tooltiptext">Significa "carne de frango".</span></span>ですか？  
+a, sumimasen. kore, nan desu ka? toriniku desu ka?
+
+Garçom:  
+こちら、とうふです。  
+kochira, tōfu desu.
+
+Cliente:  
+あ〜とうふ。おいしそう。  
+a~ tōfu. oishisou.
+
+Cliente:  
+あ！おかわりをお願いします。  
+a! okawari o onegai shimasu.
+
+Garçom:  
+はい、かしこまりました。  
+hai, kashikomarimashita.
+
+Cliente:  
+いただきます。  
+itadakimasu.
+
+Cliente:  
+すみません、おはしをもらえますか？  
+sumimasen, ohashi o moraemasu ka?
+
+Garçom:  
+はい、<span class="tooltip">少々<span class="tooltiptext">Significa "um pouco" ou "brevemente".</span></span>お待ちください。  
+hai, shō shō omachi kudasai.
+
+Cliente:  
+すみません。  
+sumimasen.
+
+Garçom:  
+どうぞ。  
+dōzo.
+
+Cliente:  
+ありがとうございます。  
+arigatou gozaimasu.
+
+Garçom:  
+こちら、<span class="tooltip">お下げします<span class="tooltiptext">Expressão usada pelo garçom para indicar que os pratos serão retirados da mesa.</span></span>ね。  
+kochira, osage shimasu ne.
+
+Cliente:  
+すみません、今日の<span class="tooltip">デザート<span class="tooltiptext">Significa "sobremesa".</span></span>はなんですか？  
+sumimasen, kyō no dezāto wa nan desu ka?
+
+Garçom:  
+今日の<span class="tooltip">デザート<span class="tooltiptext">Significa "sobremesa".</span></span>は<span class="tooltip">シフォンケーキ<span class="tooltiptext">Um tipo de bolo leve e aerado, conhecido como chiffon cake.</span></span>とチョコレートケーキです。  
+kyō no dezāto wa shifon kēki to chokorēto kēki desu.
+
+Cliente:  
+じゃあ、<span class="tooltip">シフォンケーキ<span class="tooltiptext">Um tipo de bolo leve e aerado.</span></span>をお願いします。  
+jā, shifon kēki o onegai shimasu.
+
+Garçom:  
+かしこまりました。  
+kashikomarimashita.
+
+Garçom:  
+お待たせいたしました。<span class="tooltip">シフォンケーキ<span class="tooltiptext">Um tipo de bolo leve e aerado.</span></span>です。  
+omatase itashimashita. shifon kēki desu.
+
+Cliente:  
+ありがとうございます。おいしそう！  
+arigatou gozaimasu. oishisou!
+
+Cliente:  
+あ、すみません！お会計をお願いします。  
+a, sumimasen! okaikei o onegai shimasu.
+
+Garçom:  
+はい、かしこまりました。  
+hai, kashikomarimashita.
+
+Cliente:  
+ごちそうさまでした。  
+gochisousama deshita.
+
+Garçom:  
+お会計が1100円です。  
+okaikei ga 1100-en desu.
+
+Garçom:  
+ありがとうございました。  
+arigatou gozaimashita.
+
+Cliente:  
+ごちそうさまでした。ありがとうございます。  
+gochisousama deshita. arigatou gozaimasu.
+    </div>
+    
+    <hr>
+    
+    <!-- Exercício 1: Compreensão do Diálogo -->
+    <h2>Exercício 1: Compreensão do Diálogo</h2>
+    <p>Responda às perguntas abaixo sobre o diálogo, digitando as respostas em <strong>romaji</strong> (minúsculas):</p>
+    <ol>
+      <li>
+        Qual é a saudação inicial do cliente?<br>
+        <input type="text" id="q1" placeholder="Digite sua resposta...">
+        <span id="q1Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual é o número de pessoas que o cliente responde?<br>
+        <input type="text" id="q2" placeholder="Digite sua resposta...">
+        <span id="q2Feedback" class="feedback"></span>
+      </li>
+      <li>
+        O que o cliente acha que é a comida antes de saber que é tofu?<br>
+        <input type="text" id="q3" placeholder="Digite sua resposta...">
+        <span id="q3Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual bebida o cliente pede?<br>
+        <input type="text" id="q4" placeholder="Digite sua resposta...">
+        <span id="q4Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual é o valor da conta?<br>
+        <input type="text" id="q5" placeholder="Digite sua resposta...">
+        <span id="q5Feedback" class="feedback"></span>
+      </li>
+    </ol>
+    <button class="btn" onclick="checkComprehension()">Verificar Respostas</button>
+    
+    <hr>
+    
+    <!-- Exercício 2: Complete as Lacunas -->
+    <h2>Exercício 2: Complete as Lacunas</h2>
+    <p>Preencha as lacunas com as palavras corretas em <strong>romaji</strong>:</p>
+    <ol>
+      <li>
+        Garçom: "kashikomarimashita. _____ wa ikaga desu ka?"<br>
+        <input type="text" id="fill1" placeholder="Digite a palavra...">
+        <span id="fill1Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Cliente: "kore, _____."<br>
+        <input type="text" id="fill2" placeholder="Digite a palavra...">
+        <span id="fill2Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Garçom: "_____ ga 1800-en desu."<br>
+        <input type="text" id="fill3" placeholder="Digite a palavra...">
+        <span id="fill3Feedback" class="feedback"></span>
+      </li>
+    </ol>
+    <button class="btn" onclick="checkFillBlanks()">Verificar Respostas</button>
+    
+    <hr>
+    
+    <!-- Exercício 3: Teste de Escolha Múltipla e Associação -->
+    <h2>Exercício 3: Teste de Escolha Múltipla e Associação</h2>
+    <p>Selecione a alternativa correta para cada pergunta:</p>
+    <ol>
+      <li>
+        Qual o significado de "kashikomarimashita"?<br>
+        <select id="select1">
+          <option value="">Selecione...</option>
+          <option value="obrigado">obrigado</option>
+          <option value="desculpe">desculpe</option>
+          <option value="bem-vindo">bem-vindo</option>
+          <option value="entendido">entendido</option>
+        </select>
+        <span id="select1Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual o sentido de "nanmei-sama desu ka?"<br>
+        <select id="select2">
+          <option value="">Selecione...</option>
+          <option value="qual o prato?">qual o prato?</option>
+          <option value="onde fica o restaurante?">onde fica o restaurante?</option>
+          <option value="quantas pessoas?">quantas pessoas?</option>
+          <option value="por favor, sente-se">por favor, sente-se</option>
+        </select>
+        <span id="select2Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual o significado de "kochira e dōzo"?<br>
+        <select id="select3">
+          <option value="">Selecione...</option>
+          <option value="siga-me">siga-me</option>
+          <option value="sente-se, por favor">sente-se, por favor</option>
+          <option value="bom apetite">bom apetite</option>
+          <option value="obrigado">obrigado</option>
+        </select>
+        <span id="select3Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual a tradução de "sumimasen, ohashi o moraemasu ka?"<br>
+        <select id="select4">
+          <option value="">Selecione...</option>
+          <option value="por favor, traga os hashis">por favor, traga os hashis</option>
+          <option value="desculpe, poderia trazer hashis?">desculpe, poderia trazer hashis?</option>
+          <option value="obrigado, poderia trazer hashis?">obrigado, poderia trazer hashis?</option>
+          <option value="quanto custa?">quanto custa?</option>
+        </select>
+        <span id="select4Feedback" class="feedback"></span>
+      </li>
+      <li>
+        Qual o significado de "gochisousama deshita"?<br>
+        <select id="select5">
+          <option value="">Selecione...</option>
+          <option value="até logo">até logo</option>
+          <option value="bom apetite">bom apetite</option>
+          <option value="obrigado pela comida">obrigado pela comida</option>
+          <option value="por favor, sente-se">por favor, sente-se</option>
+        </select>
+        <span id="select5Feedback" class="feedback"></span>
+      </li>
+    </ol>
+    <button class="btn" onclick="checkMultipleChoice()">Verificar Respostas</button>
+    
+    <hr>
+    
+    <!-- Exercício 4: Ordem dos Eventos -->
+    <h2>Exercício 4: Ordem dos Eventos</h2>
+    <p>Os eventos abaixo foram apresentados fora de ordem. Para cada evento, selecione a posição correta (de 1 a 5) em que ele ocorreu no diálogo.</p>
+    <ol>
+      <li>
+        <strong>Evento A:</strong> "biiru o onegai shimasu."<br>
+        Posição: 
+        <select id="orderA">
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <span id="orderAFeedback" class="feedback"></span>
+      </li>
+      <li>
+        <strong>Evento B:</strong> "konnichiwa."<br>
+        Posição: 
+        <select id="orderB">
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <span id="orderBFeedback" class="feedback"></span>
+      </li>
+      <li>
+        <strong>Evento C:</strong> "okaikei ga 1100-en desu."<br>
+        Posição: 
+        <select id="orderC">
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <span id="orderCFeedback" class="feedback"></span>
+      </li>
+      <li>
+        <strong>Evento D:</strong> "hitori desu."<br>
+        Posição: 
+        <select id="orderD">
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <span id="orderDFeedback" class="feedback"></span>
+      </li>
+      <li>
+        <strong>Evento E:</strong> "irasshaimase. nanmei-sama desu ka?"<br>
+        Posição: 
+        <select id="orderE">
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <span id="orderEFeedback" class="feedback"></span>
+      </li>
+    </ol>
+    <button class="btn" onclick="checkOrder()">Verificar Respostas</button>
+    
+  </div>
+  
+  <script>
+    function toggleTranscript() {
+      var transcriptDiv = document.getElementById('transcript');
+      transcriptDiv.style.display = (transcriptDiv.style.display === 'none' || transcriptDiv.style.display === '') ? 'block' : 'none';
+    }
+    
+    // Exercício 1: Compreensão do Diálogo
+    function checkComprehension() {
+      var answers = {
+        q1: "konnichiwa",
+        q2: "hitori",
+        q3: "toriniku",
+        q4: "biiru",
+        q5: "1100"
+      };
+      
+      for (let key in answers) {
+        var userAnswer = document.getElementById(key).value.trim().toLowerCase();
+        var feedbackElem = document.getElementById(key + "Feedback");
+        if (userAnswer === answers[key]) {
+          feedbackElem.textContent = " Correto!";
+          feedbackElem.style.color = "green";
+        } else {
+          feedbackElem.textContent = " Incorreto. Resposta: " + answers[key];
+          feedbackElem.style.color = "red";
+        }
+      }
+    }
+    
+    // Exercício 2: Complete as Lacunas
+    function checkFillBlanks() {
+      var answers = {
+        fill1: "onomimono",
+        fill2: "onegai shimasu",
+        fill3: "okaikei"
+      };
+      
+      for (let key in answers) {
+        var userAnswer = document.getElementById(key).value.trim().toLowerCase();
+        var feedbackElem = document.getElementById(key + "Feedback");
+        if (userAnswer === answers[key]) {
+          feedbackElem.textContent = " Correto!";
+          feedbackElem.style.color = "green";
+        } else {
+          feedbackElem.textContent = " Incorreto. Resposta: " + answers[key];
+          feedbackElem.style.color = "red";
+        }
+      }
+    }
+    
+    // Exercício 3: Teste de Escolha Múltipla e Associação
+    function checkMultipleChoice() {
+      var answers = {
+        select1: "entendido",
+        select2: "quantas pessoas?",
+        select3: "siga-me",
+        select4: "desculpe, poderia trazer hashis?",
+        select5: "obrigado pela comida"
+      };
+      
+      for (let key in answers) {
+        var userAnswer = document.getElementById(key).value.trim().toLowerCase();
+        var feedbackElem = document.getElementById(key + "Feedback");
+        if (userAnswer === answers[key]) {
+          feedbackElem.textContent = " Correto!";
+          feedbackElem.style.color = "green";
+        } else {
+          feedbackElem.textContent = " Incorreto. Resposta: " + answers[key];
+          feedbackElem.style.color = "red";
+        }
+      }
+    }
+    
+    // Exercício 4: Ordem dos Eventos
+    function checkOrder() {
+      // Valores corretos: A=4, B=1, C=5, D=3, E=2
+      var correct = {
+        orderA: "4",
+        orderB: "1",
+        orderC: "5",
+        orderD: "3",
+        orderE: "2"
+      };
+      
+      for (let key in correct) {
+        var userAnswer = document.getElementById(key).value.trim();
+        var feedbackElem = document.getElementById(key + "Feedback");
+        if (userAnswer === correct[key]) {
+          feedbackElem.textContent = " Correto!";
+          feedbackElem.style.color = "green";
+        } else {
+          feedbackElem.textContent = " Incorreto. Resposta: " + correct[key];
+          feedbackElem.style.color = "red";
+        }
+      }
+    }
+  </script>
+</body>
+</html>

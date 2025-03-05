@@ -306,13 +306,25 @@
     </select>
     <span id="p6_2Feedback" class="feedback"></span>
 
-    <p><strong>3)</strong> 田中さん ___ 行きます。<br>
-    <em>Tanaka-san ___ ikimasu.</em><br>
-    (Vou para o Tanaka-san / Vou encontrar o Tanaka-san / Dependendo do contexto.)</p>
-    <select id="p6_3">
+    <p><strong>3)</strong> 友達(ともだち) ___ 映画(えいが) ___ 見(み) ___ 行(い)きます<br>
+    <em>Tomodachi ___ eiga ___ mi ___ ikimasu.</em>
+    (Vou assistir a um filme com meu amigo/minha amiga.)</p>
+    <select id="p6_3a">
+      <option value="">Selecione...</option>
+      <option value="ni">ni</option>
+      <option value="to">to</option>
+      <option value="o">o</option>
+    </select>
+    <select id="p6_3b">
       <option value="">Selecione...</option>
       <option value="ni">ni</option>
       <option value="wa">wa</option>
+      <option value="o">o</option>
+    </select>
+    <select id="p6_3c">
+      <option value="">Selecione...</option>
+      <option value="ni">ni</option>
+      <option value="to">to</option>
       <option value="o">o</option>
     </select>
     <span id="p6_3Feedback" class="feedback"></span>
@@ -661,7 +673,9 @@
         p6_1a: "wa",
         p6_1b: "o",
         p6_2: "de",
-        p6_3: "ni",
+        p6_3a: "to",
+        p6_3b: "o",
+        p6_3c: "ni",
         p6_4a: "wa",
         p6_4b: "to"
       };
@@ -791,6 +805,31 @@
           fb.style.color = "red";
         }
       }
+    }
+
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.tooltip').forEach(el => {
+        el.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevents click from affecting parent elements
+          let tooltipText = this.querySelector('.tooltiptext');
+          // Toggle visibility on tap
+          if (tooltipText.style.visibility === 'visible') {
+            tooltipText.style.visibility = 'hidden';
+            tooltipText.style.opacity = 0;
+          } else {
+            tooltipText.style.visibility = 'visible';
+            tooltipText.style.opacity = 1;
+          }
+        });
+      });
+
+      // Optionally hide tooltips when tapping outside
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.tooltip .tooltiptext').forEach(tt => {
+          tt.style.visibility = 'hidden';
+          tt.style.opacity = 0;
+        });
+      });
     }
 
   </script>

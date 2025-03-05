@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios: Verbos e Partículas</title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #4a148c;
+    }
+    p, li {
+      line-height: 1.6;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"], select, textarea {
+      width: 90%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .feedback {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    .dica {
+      background-color: #e8eaf6;
+      padding: 10px;
+      border-left: 4px solid #4a148c;
+      margin-bottom: 10px;
+      display: none;
+    }
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c;
+      background-color: rgba(74,20,140,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      input[type="text"], select, textarea {
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Exercícios: Verbos e Partículas</h1>
+
+    <!-- Exercício 1: Partículas (Preencha as Lacunas) -->
+    <h2>Exercício 1: Partículas</h2>
+    <p>Complete as frases usando a partícula correta em <strong>romaji</strong>:</p>
+    <p>
+      <strong>1)</strong> 私(わたし) ___ 日本(にほん)に行(い)きます。<br>
+      <em>Watashi ___ Nihon ni ikimasu.</em>
+    </p>
+    <input type="text" id="p1_a">
+    
+    <p>
+      <strong>2)</strong> 私(わたし) ___ すし ___ 食(た)べます。<br>
+      <em>Watashi ___ sushi ___ tabemasu.</em>
+    </p>
+    <input type="text" id="p1_b1"><br>
+    <input type="text" id="p1_b2">
+    
+    <p>
+      <strong>3)</strong> 電車(でんしゃ) ___ 学校(がっこう) ___ 行(い)きます。<br>
+      <em>Densha ___ gakkou ___ ikimasu.</em>
+    </p>
+    <input type="text" id="p1_c1"><br>
+    <input type="text" id="p1_c2">
+    
+    <p>
+      <strong>4)</strong> 田中(たなか)さん ___ います。<br>
+      <em>Tanaka-san ___ imasu.</em>
+    </p>
+    <input type="text" id="p1_d">
+    
+    <p>
+      <strong>5)</strong> 明日(あした) ___ 友達(ともだち) ___ 映画(えいが)を見(み)ます。<br>
+      <em>Ashita ___ tomodachi ___ eiga o mimasu.</em>
+    </p>
+    <input type="text" id="p1_e1"><br>
+    <input type="text" id="p1_e2">
+
+    <p></p>
+
+    <button class="btn" onclick="toggleDica('dica1')">Mostrar Dica</button>
+    <div id="dica1" class="dica">
+      <strong>Dica:</strong><br>
+      • Use <span class="tooltip">wa<span class="tooltiptext">marca o tópico</span></span> para marcar o assunto.<br>
+      • Use <span class="tooltip">ga<span class="tooltiptext">enfatiza o sujeito ou existência</span></span> quando necessário.<br>
+      • Use <span class="tooltip">o<span class="tooltiptext">marca o objeto direto (を)</span></span> para o objeto.<br>
+      • Use <span class="tooltip">ni<span class="tooltiptext">indica tempo ou destino</span></span> ou <span class="tooltip">e<span class="tooltiptext">indica direção (へ)</span></span> para destino/direção.<br>
+      • Use <span class="tooltip">de<span class="tooltiptext">indica o local da ação ou meio</span></span> para local/meio.<br>
+      • Use <span class="tooltip">to<span class="tooltiptext">indica "e" ou "com"</span></span> para companhia ou conjunção.
+    </div>
+    <button class="btn" onclick="checkParticulas()">Verificar Respostas</button>
+    
+    <hr>
+
+    <!-- Exercício 2: Transformação Verbal -->
+    <h2>Exercício 2: Transformação Verbal</h2>
+    <p>
+      Transforme os verbos da forma do dicionário para a forma ます e escreva seu significado em português. <br>
+      <em>Exemplo: kaku → kakimasu / "escrever"</em>
+    </p>
+    <ol>
+      <li>書(か)く (kaku) → <input type="text" id="tv1_masu"> / <input type="text" id="tv1_meaning"></li>
+      <li>見(み)る (miru) → <input type="text" id="tv2_masu"> / <input type="text" id="tv2_meaning"></li>
+      <li>話(はな)す (hanasu) → <input type="text" id="tv3_masu"> / <input type="text" id="tv3_meaning"></li>
+      <li>来(く)る (kuru) → <input type="text" id="tv4_masu"> / <input type="text" id="tv4_meaning"></li>
+      <li>する (suru) → <input type="text" id="tv5_masu"> / <input type="text" id="tv5_meaning"></li>
+      <li>泳(およ)ぐ (oyogu) → <input type="text" id="tv6_masu"> / <input type="text" id="tv6_meaning"></li>
+    </ol>
+    <button class="btn" onclick="toggleDica('dica2')">Mostrar Dica</button>
+    <div id="dica2" class="dica">
+      <strong>Dica:</strong><br>
+      • Grupo 1: Muda a última sílaba (ex.: kaku → kakimasu).<br>
+      • Grupo 2: Normalmente termina em る (ex.: taberu → tabemasu).<br>
+      • Irregulares: kuru → kimasu; suru → shimasu.
+    </div>
+    <button class="btn" onclick="checkTransformacao()">Verificar Respostas</button>
+    
+    <hr>
+
+    <!-- Exercício 4: Combine Pergunta e Resposta (Múltipla Escolha) -->
+    <h2>Exercício 3: Combine Pergunta e Resposta</h2>
+    <p>Abaixo há perguntas e respostas do dia a dia. Escolha a alternativa correta para cada uma.</p>
+
+    <p>
+      <strong>Pergunta 1:</strong> いつ起(お)きますか？<br>
+      <em class="tooltip">Itsu okimasu ka?<span class="tooltiptext">Quando você acorda?</span></em>
+    </p>
+    <select id="mc_q1" data-correct="a">
+      <option value="">Selecione...</option>
+      <option value="a" data-correct="true">A) 6-ji ni okimasu.</option>
+      <option value="b">B) Resutoran de tabemasu.</option>
+      <option value="c">C) Koohii o nomimasu.</option>
+      <option value="d">D) Densha de ikimasu.</option>
+    </select>
+    <span id="mc_q1Feedback" class="feedback"></span>
+    <br><br>
+
+    <p>
+      <strong>Pergunta 2:</strong> どこで食(た)べますか？<br>
+      <em class="tooltip">Doko de tabemasu ka?<span class="tooltiptext">Onde você vai comer?</span></em>
+    </p>
+    <select id="mc_q2" data-correct="b">
+      <option value="">Selecione...</option>
+      <option value="a">A) 6-ji ni okimasu.</option>
+      <option value="b" data-correct="true">B) Resutoran de tabemasu.</option>
+      <option value="c">C) Koohii o nomimasu.</option>
+      <option value="d">D) Densha de ikimasu.</option>
+    </select>
+    <span id="mc_q2Feedback" class="feedback"></span>
+    <br><br>
+
+    <p>
+      <strong>Pergunta 3:</strong> 何(なに)を飲(の)みますか？<br>
+      <em class="tooltip">Nani o nomimasu ka?<span class="tooltiptext">O que você vai beber?</span></em>
+    </p>
+    <select id="mc_q3" data-correct="c">
+      <option value="">Selecione...</option>
+      <option value="a">A) 6-ji ni okimasu.</option>
+      <option value="b">B) Resutoran de tabemasu.</option>
+      <option value="c" data-correct="true">C) Koohii o nomimasu.</option>
+      <option value="d">D) Densha de ikimasu.</option>
+    </select>
+    <span id="mc_q3Feedback" class="feedback"></span>
+    <br><br>
+
+    <p>
+      <strong>Pergunta 4:</strong> どうやって会社(かいしゃ)に行(い)きますか？<br>
+      <em class="tooltip">Dou yatte kaisha ni ikimasu ka?<span class="tooltiptext">Como você vai ao trabalho?</span></em>
+    </p>
+    <select id="mc_q4" data-correct="d">
+      <option value="">Selecione...</option>
+      <option value="a">A) 6-ji ni okimasu.</option>
+      <option value="b">B) Resutoran de tabemasu.</option>
+      <option value="c">C) Koohii o nomimasu.</option>
+      <option value="d" data-correct="true">D) Densha de ikimasu.</option>
+    </select>
+    <span id="mc_q4Feedback" class="feedback"></span>
+    <br>
+
+    <button class="btn" onclick="checkPerguntaResposta()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 5: Ordenação (Monte a Frase Correta) -->
+    <h2>Exercício 4: Ordenação</h2>
+    <p>
+      As palavras abaixo estão fora de ordem. Organize-as na forma correta (Sujeito + Objeto + Verbo). Em seguida, escreva a tradução.
+    </p>
+    <p>
+      <strong>(A)</strong> (ringo) (tabemasu) (o) (watashi wa) <br>
+      Frase em japonês: <input type="text" id="ordA_sentence"><br>
+      Tradução: <input type="text" id="ordA_translation">
+    </p>
+    <p>
+      <strong>(B)</strong> (mimasu) (tomodachi to) (watashi wa) (eiga o) <br>
+      Frase em japonês: <input type="text" id="ordB_sentence"><br>
+      Tradução: <input type="text" id="ordB_translation">
+    </p>
+    <button class="btn" onclick="checkOrdenacao()">Verificar Respostas</button>
+    
+    <hr>
+
+    <!-- Exercício 6: Partículas (Escolha a Correta) -->
+    <h2>Exercício 5: Partículas</h2>
+    <p>Escolha a partícula certa para cada frase:</p>
+    
+    <p><strong>1)</strong> 私 ___ りんご ___ 食べます。<br>
+    <em>Watashi ___ ringo ___ tabemasu.</em><br>
+    (Eu como maçã.)</p>
+    <select id="p6_1a">
+      <option value="">Selecione...</option>
+      <option value="wa">wa</option>
+      <option value="ga">ga</option>
+      <option value="o">o</option>
+    </select>
+    <select id="p6_1b">
+      <option value="">Selecione...</option>
+      <option value="wa">wa</option>
+      <option value="o">o</option>
+      <option value="de">de</option>
+    </select>
+    <span id="p6_1Feedback" class="feedback"></span>
+    
+    <p><strong>2)</strong> どこ ___ 勉強(べんきょう)しますか？<br>
+    <em>Doko ___ benkyou shimasu ka?</em><br>
+    (Onde você estuda?)</p>
+    <select id="p6_2">
+      <option value="">Selecione...</option>
+      <option value="o">o</option>
+      <option value="de">de</option>
+      <option value="e">e</option>
+    </select>
+    <span id="p6_2Feedback" class="feedback"></span>
+
+    <p><strong>3)</strong> 田中さん ___ 行きます。<br>
+    <em>Tanaka-san ___ ikimasu.</em><br>
+    (Vou para o Tanaka-san / Vou encontrar o Tanaka-san / Dependendo do contexto.)</p>
+    <select id="p6_3">
+      <option value="">Selecione...</option>
+      <option value="ni">ni</option>
+      <option value="wa">wa</option>
+      <option value="o">o</option>
+    </select>
+    <span id="p6_3Feedback" class="feedback"></span>
+
+    <p><strong>4)</strong> 明日 ___ 友達 ___ カラオケに行きます。<br>
+    <em>Ashita ___ tomodachi ___ karaoke ni ikimasu.</em><br>
+    (Amanhã eu vou ao karaokê com um amigo.)</p>
+    <select id="p6_4a">
+      <option value="">Selecione...</option>
+      <option value="wa">wa</option>
+      <option value="o">o</option>
+      <option value="ni">ni</option>
+    </select>
+    <select id="p6_4b">
+      <option value="">Selecione...</option>
+      <option value="to">to</option>
+      <option value="wa">wa</option>
+      <option value="de">de</option>
+    </select>
+    <span id="p6_4Feedback" class="feedback"></span>
+
+    <p></p>
+
+    <button class="btn" onclick="checkP6()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 7: Pequeno Diálogo (Complete) -->
+    <h2>Exercício 6: Pequeno Diálogo</h2>
+    <p>
+      Abaixo há um diálogo simples. Complete os espaços com partículas adequadas em <strong>romaji</strong>:
+    </p>
+    <p>
+      A: どこ ___ 行(い)きますか？<br>
+      <em>Doko ___ ikimasu ka?</em>
+    </p>
+    <input type="text" id="pd_1">
+
+    <p>
+      B: 学校 ___ バス ___ 行(い)きます。<br>
+      <em>Gakkou ___ basu ___ ikimasu.</em>
+    </p>
+    <input type="text" id="pd_2"><br>
+    <input type="text" id="pd_3">
+
+    <p>
+      A: 何 ___ 勉強(べんきょう)しますか？<br>
+      <em>Nani ___ benkyou shimasu ka?</em>
+    </p>
+    <input type="text" id="pd_4">
+
+    <p>
+      B: 日本語(にほんご) ___ 勉強(べんきょう)します。<br>
+      <em>Nihongo ___ benkyou shimasu.</em>
+    </p>
+    <input type="text" id="pd_5">
+
+    <p></p>
+    
+    <button class="btn" onclick="checkDialogo()">Verificar Respostas</button>
+    
+    <hr>
+
+    <!-- Exercício 8: Mini-Diálogo com Rotina Diária -->
+    <h2>Exercício 7: Mini-Diálogo com Rotina Diária</h2>
+    <p>Crie duas perguntas sobre sua rotina diária e escreva as respostas correspondentes, usando forma ます e partículas básicas (em romaji).</p>
+    <ol>
+      <li>Pergunta 1: <input type="text" id="md_q1"></li>
+      <li>Resposta 1: <input type="text" id="md_a1"></li>
+      <li>Pergunta 2: <input type="text" id="md_q2"></li>
+      <li>Resposta 2: <input type="text" id="md_a2"></li>
+    </ol>
+
+    <hr>
+
+    <!-- Exercício 9: Tradução de Frases Simples -->
+    <h2>Exercício 8: Tradução de Frases</h2>
+    <p>Traduza as frases abaixo para o japonês (em romaji):</p>
+    <ol>
+      <li>Eu bebo água. <br><input type="text" id="tr_1"></li>
+      <li>Eu estudo japonês na escola. <br><input type="text" id="tr_2"></li>
+      <li>Eu vou para Tóquio amanhã. <br><input type="text" id="tr_3"></li>
+      <li>Eu como maçã e pão. <br><input type="text" id="tr_4"></li>
+      <li>Ele vem de trem às 8 horas. <br><input type="text" id="tr_5"></li>
+    </ol>
+    <button class="btn" onclick="checkTraducao()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 10: Partículas com Verbos Novos -->
+    <h2>Exercício 9: Partículas com Verbos Novos</h2>
+    <p>
+      Use os verbos abaixo e complete as frases com as partículas corretas em <strong>romaji</strong>. Cada verbo tem um tooltip explicando seu significado:
+    </p>
+    <ul>
+      <li><span class="tooltip">kaimasu<span class="tooltiptext">comprar</span></span></li>
+      <li><span class="tooltip">tsukurimasu<span class="tooltiptext">fazer, criar, preparar</span></span></li>
+      <li><span class="tooltip">benkyou shimasu<span class="tooltiptext">estudar</span></span></li>
+      <li><span class="tooltip">asobimasu<span class="tooltiptext">brincar, se divertir</span></span></li>
+      <li><span class="tooltip">aimasu<span class="tooltiptext">encontrar (pessoas)</span></span></li>
+    </ul>
+    <p>
+      <strong>1)</strong> 私(わたし) ___ 本(ほん)を <span class="tooltip">買います<span class="tooltiptext">comprar um livro</span></span>。<br>
+      <em>Watashi ___ hon o kaimasu.</em>
+    </p>
+    <input type="text" id="v10_1">
+    
+    <p>
+      <strong>2)</strong> 兄(あに) ___ パンを <span class="tooltip">作ります<span class="tooltiptext">fazer pão</span></span>。<br>
+      <em>Ani ___ pan o tsukurimasu.</em>
+    </p>
+    <input type="text" id="v10_2">
+    
+    <p>
+      <strong>3)</strong> 友達(ともだち) ___ 学校(がっこう) ___ <span class="tooltip">遊びます<span class="tooltiptext">se divertir na escola com amigo</span></span>。<br>
+      <em>Tomodachi ___ gakkou ___ asobimasu.</em>
+    </p>
+    <input type="text" id="v10_3a"><br>
+    <input type="text" id="v10_3b">
+    
+    <p>
+      <strong>4)</strong> 彼女(かのじょ) ___ 日本語(にほんご) ___ <span class="tooltip">勉強します<span class="tooltiptext">estudar japonês</span></span>。<br>
+      <em>Kanojo ___ nihongo ___ benkyou shimasu.</em>
+    </p>
+    <input type="text" id="v10_4a"><br>
+    <input type="text" id="v10_4b">
+    
+    <p>
+      <strong>5)</strong> 私(わたし) ___ 友達(ともだち) ___ <span class="tooltip">会います<span class="tooltiptext">encontrar um amigo</span></span>。<br>
+      <em>Watashi ___ tomodachi ___ aimasu.</em>
+    </p>
+    <input type="text" id="v10_5a"><br>
+    <input type="text" id="v10_5b">
+
+    <p></p>
+
+    <button class="btn" onclick="checkVocab10()">Verificar Respostas</button>
+
+  </div>
+  
+  <script>
+    // Toggle functions for dicas
+    function toggleDica(id) {
+      var el = document.getElementById(id);
+      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+    }
+    
+    // Exercício 1: Partículas (romaji)
+    function checkParticulas() {
+      const answers = {
+        p1_a: "wa",
+        p1_b1: "wa",
+        p1_b2: "o",
+        p1_c1: "de",
+        // p1_c2 will be handled separately
+        p1_d: "ga",
+        p1_e1: "wa",
+        p1_e2: "to"
+      };
+
+      // Loop over all keys except p1_c2
+      for (let key in answers) {
+        let inputElem = document.getElementById(key);
+        let userAns = inputElem.value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          inputElem.insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === answers[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + answers[key];
+          fb.style.color = "red";
+        }
+      }
+
+      // Handle p1_c2 with two acceptable answers: "e" or "ni"
+      let inputElem = document.getElementById("p1_c2");
+      let userAns = inputElem.value.trim().toLowerCase();
+      let fb = document.getElementById("p1_c2Feedback");
+      if (!fb) {
+        fb = document.createElement("span");
+        fb.id = "p1_c2Feedback";
+        inputElem.insertAdjacentElement('afterend', fb);
+      }
+      if (userAns === "e" || userAns === "ni") {
+        fb.textContent = " Correto!";
+        fb.style.color = "green";
+      } else {
+        fb.textContent = " Incorreto. Resposta: e ou ni";
+        fb.style.color = "red";
+      }
+    }
+    
+    // Exercício 2: Transformação Verbal (romaji)
+    function checkTransformacao() {
+      // Verbo em romaji (Forma ます) + significado em português
+      const answers = {
+        tv1_masu: "kakimasu",
+        tv1_meaning: "escrever",
+        tv2_masu: "mimasu",
+        tv2_meaning: "ver",
+        tv3_masu: "hanashimasu",
+        tv3_meaning: "falar",
+        tv4_masu: "kimasu",
+        tv4_meaning: "vir",
+        tv5_masu: "shimasu",
+        tv5_meaning: "fazer",
+        tv6_masu: "oyogimasu",
+        tv6_meaning: "nadar"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).parentNode.appendChild(fb);
+        }
+        if (userAns === answers[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + answers[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    function shuffleSelectOptions(selectId) {
+      const select = document.getElementById(selectId);
+      const options = Array.from(select.options);
+      // Remove the first option (placeholder)
+      const placeholder = options.shift();
+      // Shuffle remaining options (Fisher-Yates algorithm)
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+      let correctLetter = "";
+      // Reassign new letter labels and update option values
+      options.forEach((option, index) => {
+        const newLetter = String.fromCharCode(65 + index); // "A", "B", ...
+        // Store original text (remove existing letter label if present)
+        if (!option.hasAttribute("data-original")) {
+          option.setAttribute("data-original", option.textContent.replace(/^[A-Z]\)\s*/, ""));
+        }
+        const originalText = option.getAttribute("data-original");
+        option.textContent = newLetter + ") " + originalText;
+        // Update the option's value to the new letter in lowercase
+        option.value = newLetter.toLowerCase();
+        // If this option is marked as correct, store the new letter
+        if (option.getAttribute("data-correct") === "true") {
+          correctLetter = newLetter.toLowerCase();
+        }
+      });
+      // Clear the select element and add the placeholder back first
+      select.innerHTML = "";
+      select.add(placeholder);
+      // Add all the shuffled and relabeled options
+      options.forEach(option => select.add(option));
+      // Update the select's data-correct attribute to the new correct letter
+      select.setAttribute("data-correct", correctLetter);
+    }
+
+    // Shuffle options on page load for each multiple-choice question
+    window.addEventListener('load', function() {
+      shuffleSelectOptions("mc_q1");
+      shuffleSelectOptions("mc_q2");
+      shuffleSelectOptions("mc_q3");
+      shuffleSelectOptions("mc_q4");
+    });
+
+    // Updated checkPerguntaResposta function using data-correct attribute
+    function checkPerguntaResposta() {
+      const selectIds = ["mc_q1", "mc_q2", "mc_q3", "mc_q4"];
+      selectIds.forEach(id => {
+        const select = document.getElementById(id);
+        const correct = select.getAttribute("data-correct").toLowerCase();
+        const userAns = select.value.trim().toLowerCase();
+        let fb = document.getElementById(id + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = id + "Feedback";
+          select.insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct.toUpperCase();
+          fb.style.color = "red";
+        }
+      });
+    }
+    
+    // Exercício 5: Ordenação
+    function checkOrdenacao() {
+      const ansA = document.getElementById("ordA_sentence").value.trim().toLowerCase();
+      const ansA_tr = document.getElementById("ordA_translation").value.trim().toLowerCase();
+      const ansB = document.getElementById("ordB_sentence").value.trim().toLowerCase();
+      const ansB_tr = document.getElementById("ordB_translation").value.trim().toLowerCase();
+      
+      let fbA = document.getElementById("ordA_feedback");
+      if (!fbA) {
+        fbA = document.createElement("div");
+        fbA.id = "ordA_feedback";
+        document.getElementById("ordA_translation").parentNode.appendChild(fbA);
+      }
+      let fbB = document.getElementById("ordB_feedback");
+      if (!fbB) {
+        fbB = document.createElement("div");
+        fbB.id = "ordB_feedback";
+        document.getElementById("ordB_translation").parentNode.appendChild(fbB);
+      }
+      
+      // Expected answers in romaji
+      const expA = "watashi wa ringo o tabemasu";
+      const expA_tr = "eu como maçã";
+      const expB = "watashi wa tomodachi to eiga o mimasu";
+      const expB_tr = "eu assisto um filme com meu amigo";
+      
+      if (ansA === expA && ansA_tr === expA_tr) {
+        fbA.textContent = " Correto!";
+        fbA.style.color = "green";
+      } else {
+        fbA.textContent = " Incorreto. Respostas esperadas: " + expA + " / " + expA_tr;
+        fbA.style.color = "red";
+      }
+      if (ansB === expB && ansB_tr === expB_tr) {
+        fbB.textContent = " Correto!";
+        fbB.style.color = "green";
+      } else {
+        fbB.textContent = " Incorreto. Respostas esperadas: " + expB + " / " + expB_tr;
+        fbB.style.color = "red";
+      }
+    }
+    
+    // Exercício 6: Partículas (Escolha a Correta)
+    function checkP6() {
+      // Expected answers in romaji:
+      const correct = {
+        p6_1a: "wa",
+        p6_1b: "o",
+        p6_2: "de",
+        p6_3: "ni",
+        p6_4a: "wa",
+        p6_4b: "to"
+      };
+      for (let key in correct) {
+        let inputElem = document.getElementById(key);
+        let userAns = inputElem.value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          // Insert the feedback span immediately after the input element
+          inputElem.insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+
+    // Exercício 7: Pequeno Diálogo (Complete)
+    function checkDialogo() {
+      const answers = {
+        pd_1: "ni",
+        pd_2: "ni",
+        pd_3: "de",
+        pd_4: "o",
+        pd_5: "o"
+      };
+      for (let key in answers) {
+        let inputElem = document.getElementById(key);
+        let userAns = inputElem.value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          inputElem.insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === answers[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + answers[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    
+    // Exercício 8: Mini-Diálogo com Rotina Diária
+    function checkRotina() {
+      const q1 = document.getElementById("md_q1").value.trim();
+      const a1 = document.getElementById("md_a1").value.trim();
+      const q2 = document.getElementById("md_q2").value.trim();
+      const a2 = document.getElementById("md_a2").value.trim();
+      if (q1 === "" || a1 === "" || q2 === "" || a2 === "") {
+        alert("Preencha todas as respostas!");
+      } else {
+        alert("Respostas registradas!");
+      }
+    }
+    
+    // Exercício 9: Tradução de Frases Simples
+    function checkTraducao() {
+      // Compare in romaji
+      const answers = {
+        tr_1: "watashi wa mizu o nomimasu",
+        tr_2: "watashi wa gakkou de nihongo o benkyou shimasu",
+        tr_3: "watashi wa ashita toukyou ni ikimasu",
+        tr_4: "watashi wa ringo to pan o tabemasu",
+        tr_5: "kare wa hachiji ni densha de kimasu"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).parentNode.appendChild(fb);
+        }
+        if (userAns === answers[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + answers[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+    
+    // Exercício 10: Partículas com Verbos Novos (romaji)
+    function checkVocab10() {
+      // Expected answers in romaji:
+      // 1) watashi __ hon o kaimasu => "wa"
+      // 2) ani __ pan o tsukurimasu => "wa"
+      // 3) tomodachi __ gakkou __ asobimasu => "to", "de"
+      // 4) kanojo __ nihongo __ benkyou shimasu => "wa", "o"
+      // 5) watashi __ tomodachi __ aimasu => "wa", "ni"
+      const answers = {
+        v10_1: "wa",
+        v10_2: "wa",
+        v10_3a: "to",
+        v10_3b: "de",
+        v10_4a: "wa",
+        v10_4b: "o",
+        v10_5a: "wa",
+        v10_5b: "ni"
+      };
+      for (let key in answers) {
+        let inputElem = document.getElementById(key);
+        let userAns = inputElem.value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          inputElem.insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === answers[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + answers[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+  </script>
+</body>
+</html>

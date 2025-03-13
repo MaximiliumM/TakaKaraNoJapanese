@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios Interativos – Negativa e Passado</title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #4a148c;
+    }
+    p, li {
+      line-height: 1.6;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"], select, textarea {
+      width: 90%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .feedback {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    .dica {
+      background-color: #e8eaf6;
+      padding: 10px;
+      border-left: 4px solid #4a148c;
+      margin-bottom: 10px;
+      display: none;
+    }
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c;
+      background-color: rgba(74,20,140,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    @media (max-width: 600px) {
+      input[type="text"], select, textarea {
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Exercícios Interativos</h1>
+
+    <!-- Exercício 1: Complete com as Formas Negativas / Passadas -->
+    <h2>Exercício 1: Complete com as Formas Negativas / Passadas</h2>
+    <p>
+      Preencha as lacunas usando a forma curta adequada (negativa ou passada), em <strong>romaji</strong>.
+    </p>
+
+    <p>
+      1) 昨日(きのう)、映画(えいが)を見(み)____ 。<br>
+      <em>Kinou, eiga o mi____.</em><br>
+      (Ontem, assisti a um filme – passado afirmativo -MASU)
+    </p>
+    <input type="text" id="ex1_1">
+
+    <p>
+      2) でも、宿題(しゅくだい)はし____ 。<br>
+      <em>Demo, shukudai wa shi____.</em><br>
+      (Mas não fiz o dever de casa – passado negativo curto + DESU)
+    </p>
+    <input type="text" id="ex1_2">
+
+    <p>
+      3) 今日(きょう)はコーヒーを飲(の)ま____ 。<br>
+      <em>Kyou wa koohii o noma____.</em><br>
+      (Hoje, não bebo café – presente negativo curto + DESU)
+    </p>
+    <input type="text" id="ex1_3">
+
+    <p>
+      4) 私(わたし)は8時(はちじ)に起(お)き____ 。<br>
+      <em>Watashi wa hachiji ni oki____.</em><br>
+      (Eu acordei às 8h – passado afirmativo -MASU)
+    </p>
+    <input type="text" id="ex1_4">
+
+    <p></p>
+
+    <button class="btn" onclick="toggleDica('dicaNegativo')">Mostrar Dica</button>
+    <div id="dicaNegativo" class="dica">
+      <strong>Verbos do Grupo 1 (godan)</strong><br>
+      <em>Passado curto:</em> Geralmente muda a última sílaba para um dos padrões “<strong>んだ</strong>”, “<strong>った</strong>”, “<strong>した</strong>”, ou “<strong>いだ</strong>”.<br>
+      <ul>
+        <li>
+          <span class="tooltip">かく<span class="tooltiptext">escrever</span></span> (<strong>kaku</strong>) → かいた (<strong>kaita</strong>)<br>
+          Negativo curto: かかない (<strong>kakanai</strong>)
+        </li>
+        <li>
+          <span class="tooltip">のむ<span class="tooltiptext">beber</span></span> (<strong>nomu</strong>) → のんだ (<strong>nonda</strong>)<br>
+          Negativo curto: のまない (<strong>nomanai</strong>)
+        </li>
+        <li>
+          <span class="tooltip">およぐ<span class="tooltiptext">nadar</span></span> (<strong>oyogu</strong>) → およいだ (<strong>oyoida</strong>)<br>
+          Negativo curto: およがない (<strong>oyoganai</strong>)
+        </li>
+        <li>
+          <span class="tooltip">はなす<span class="tooltiptext">falar</span></span> (<strong>hanasu</strong>) → はなした (<strong>hanashita</strong>)<br>
+          Negativo curto: はなさない (<strong>hanasanai</strong>)
+        </li>
+      </ul>
+      
+      <strong>Verbos do Grupo 2 (ichidan)</strong><br>
+      <em>Passado curto:</em> Substitua る por <strong>た</strong> para o afirmativo ou remova る e adicione <strong>ない</strong> para o negativo.<br>
+      <ul>
+        <li>
+          <span class="tooltip">みる<span class="tooltiptext">ver</span></span> (<strong>miru</strong>) → みた (<strong>mita</strong>)<br>
+          Negativo curto: みない (<strong>minai</strong>)
+        </li>
+        <li>
+          <span class="tooltip">たべる<span class="tooltiptext">comer</span></span> (<strong>taberu</strong>) → たべた (<strong>tabeta</strong>)<br>
+          Negativo curto: たべない (<strong>tabenai</strong>)
+        </li>
+      </ul>
+      
+      <strong>Verbos Irregulares</strong><br>
+      <ul>
+        <li>
+          <span class="tooltip">する<span class="tooltiptext">fazer</span></span> (<strong>suru</strong>) → した (<strong>shita</strong>)<br>
+          Negativo curto: しない (<strong>shinai</strong>)
+        </li>
+        <li>
+          <span class="tooltip">くる<span class="tooltiptext">vir</span></span> (<strong>kuru</strong>) → きた (<strong>kita</strong>)<br>
+          Negativo curto: こない (<strong>konai</strong>)
+        </li>
+      </ul>
+      
+      <strong>Passado Negativo Curto</strong>: Formado trocando a forma negativa curta (<em>～ない</em>) por <strong>～なかった</strong>.<br>
+      Ex.: たべない → たべなかった (<em>tabenakatta</em>), のまない → のまなかった (<em>nomanakatta</em>)
+    </div>    
+    <button class="btn" onclick="checkEx1()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 2: Transforme na Forma Curta Negativa ou Passada -->
+    <h2>Exercício 2: Transforme na Forma Curta Negativa ou Passada</h2>
+    <p>
+      A seguir, há verbos na forma de dicionário ou na forma –ます. Transforme-os na forma curta pedida ao lado e escreva tudo em romaji.
+    </p>
+    <ol>
+      <li>
+        食べる (taberu) → <strong>Presente Negativo Curto</strong><br>
+        <input type="text" id="ex2_1">
+      </li>
+      <li>
+        飲みます (nomimasu) → <strong>Passado Afirmativo</strong><br>
+        <input type="text" id="ex2_2">
+      </li>
+      <li>
+        しません (shimasen) → <strong>Presente Negativo Curto</strong><br>
+        <input type="text" id="ex2_3">
+      </li>
+      <li>
+        行く (iku) → <strong>Passado Negativo Curto</strong><br>
+        <input type="text" id="ex2_4">
+      </li>
+      <li>
+        来ました (kimashita) → <strong>Passado Afirmativo Curto</strong><br>
+        <input type="text" id="ex2_5">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx2()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 3: Cenários Diários (Complete as Frases) -->
+    <h2>Exercício 3: Cenários Diários</h2>
+    <p>
+      Complete as frases com a forma curta negativa ou passada, conforme o contexto, em <strong>romaji</strong>.
+    </p>
+    <ol>
+      <li>
+        毎朝(まいあさ)7時(しちじ)に起(お)きるけど、今日は6時(ろくじ)に起き____ 。<br>
+        <em>
+          <span class="tooltip">maiasa<span class="tooltiptext">todas as manhãs</span></span> shichiji ni okiru kedo, kyou wa rokuji ni oki____.
+        </em><br>
+        (Geralmente acordo às 7h, mas hoje acordei às 6h – passado afirmativo curto)
+      </li>
+      <input type="text" id="ex3_1">
+      
+      <li>
+        母(はは)はお弁当(べんとう)を作(つく)ら____ 。<br>
+        <em>
+          <span class="tooltip">haha<span class="tooltiptext">mãe</span></span> wa <span class="tooltip">obentou<span class="tooltiptext">marmita</span></span> o tsukura____.
+        </em><br>
+        (Minha mãe não preparou marmita – passado negativo curto + desu)
+      </li>
+      <input type="text" id="ex3_2">
+      
+      <li>
+        友達(ともだち)にLINE(ライン)を送(おく)ったけど、返事(へんじ)が来(こ)な____ 。<br>
+        <em>
+          Tomodachi ni <span class="tooltip">LINE<span class="tooltiptext">aplicativo de mensagens</span></span> o okuttakedo, <span class="tooltip">henji<span class="tooltiptext">resposta</span></span> ga ko____.
+        </em><br>        
+        (Mandei mensagem para um amigo, mas ele não respondeu – passado negativo curto + desu)
+      </li>
+      <input type="text" id="ex3_3">
+      
+      <li>
+        明日(あした)、宿題(しゅくだい)をし____ つもりです。<br>
+        <em>
+          Ashita, <span class="tooltip">shukudai<span class="tooltiptext">dever de casa</span></span> o shi____ <span class="tooltip">tsumori<span class="tooltiptext">intenção</span></span> desu.
+        </em><br>
+        (Amanhã, pretendo não fazer o dever de casa… – presente negativo curto)
+      </li>
+      
+      <input type="text" id="ex3_4">
+    </ol>
+    <button class="btn" onclick="checkEx3()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 4: Diálogo Rápido (Negativa e Passada) -->
+    <h2>Exercício 4: Diálogo Simples</h2>
+    <p>
+      Complete o mini diálogo, usando forma curta negativa ou forma curta passada em <strong>romaji</strong>.
+    </p>
+
+    <p><strong>Amigo(a):</strong> 昨日(きのう)、ゲームをしましたか？<br>
+    <em>Kinou, geemu o shimashita ka?</em><br>
+    Você: いいえ、ゲームはし____ 。<br>
+    <em>Iie, geemu wa shi____.</em><br>
+    (“Não joguei videogame.” – passado negativo curto + DESU)
+    </p>
+    <input type="text" id="ex4_1">
+
+    <p>
+    <strong>Amigo(a):</strong> じゃあ、何(なに)を食(た)べましたか？<br>
+    <em>Jaa, nani o tabemashita ka?</em><br>
+    Você: 夜(よる)はカレーを食(た)べ____ 。<br>
+    <em>Yoru wa karee o tabe____.</em><br>
+    (“Comi curry de noite.” – passado afirmativo curto)
+    </p>
+    <input type="text" id="ex4_2">
+    <p></p>
+    <button class="btn" onclick="checkEx4()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 5: Mini Quiz de Respostas (Resposta Livre) -->
+<h2>Exercício 5: Mini Quiz de Respostas (Resposta Livre)</h2>
+<p>
+  Responda às seguintes perguntas de sim ou não, usando a forma curta (afirmativa ou negativa) em <strong>romaji</strong>.
+</p>
+<ol>
+  <!-- Exemplos de Respostas para Exercício 5 -->
+<div class="exemplo-respostas">
+  <p><strong>Resposta Positiva:</strong><br>
+  Senshuu, atarashii hon o yomimashita ka?<br>
+  <em class="tooltip">Hai, atarashii hon o yomimashita.<span class="tooltiptext">Sim, eu li um livro novo.</span></em></p>
+  
+  <p><strong>Resposta Negativa:</strong><br>
+  Kinou, kouen o hashirimashita ka?<br>
+  <em class="tooltip">Iie, kinou kouen o hashiranakatta desu.<span class="tooltiptext">Não, eu não corri no parque ontem.</span></em></p>
+</div>
+
+  <li>
+    昨日、映画を見ましたか？<br>
+    <em>
+      Kinou, eiga o <span class="tooltip">mimashita<span class="tooltiptext">assistir (vi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_1">
+  </li>
+  <li>
+    今日、朝ごはんを食べましたか？<br>
+    <em>
+      Kyou, asagohan o <span class="tooltip">tabemashita<span class="tooltiptext">comer (comi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_2">
+  </li>
+  <li>
+    先週、友達に電話しましたか？<br>
+    <em>
+      Senshuu, tomodachi ni <span class="tooltip">denwa shimashita<span class="tooltiptext">telefonar (liguei)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_3">
+  </li>
+  <li>
+    昨日、コーヒーを飲みましたか？<br>
+    <em>
+      Kinou, koohii o <span class="tooltip">nomimashita<span class="tooltiptext">beber (bebi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_4">
+  </li>
+  <li>
+    今日、宿題をしましたか？<br>
+    <em>
+      Kyou, shukudai o <span class="tooltip">shimashita<span class="tooltiptext">fazer (fiz)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_5">
+  </li>
+  <li>
+    先週、友達と公園へ行きましたか？<br>
+    <em>
+      Senshuu, tomodachi to kouen e <span class="tooltip">ikimashita<span class="tooltiptext">ir (fui)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_6">
+  </li>
+  <li>
+    昨日、音楽を聞きましたか？<br>
+    <em>
+      Kinou, ongaku o <span class="tooltip">kikimashita<span class="tooltiptext">ouvir (ouvi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_7">
+  </li>
+  <li>
+    昨日は早く寝ましたか？<br>
+    <em>
+      Kinou wa hayaku <span class="tooltip">nemashita<span class="tooltiptext">dormir (dormi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_8">
+  </li>
+  <li>
+    昨日、手紙を書きましたか？<br>
+    <em>
+      Kinou, tegami o <span class="tooltip">kakimashita<span class="tooltiptext">escrever (escrevi)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_9">
+  </li>
+  <li>
+    先週、雨が降りましたか？<br>
+    <em>
+      Senshuu, ame ga <span class="tooltip">furimashita<span class="tooltiptext">chover (choveu)</span></span> ka?
+    </em>
+    <br><input type="text" id="q5_10">
+  </li>
+</ol>
+
+
+  </div>
+  
+  <script>
+    function toggleDica(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+    }
+
+    // Exercício 1
+    function checkEx1() {
+      // Example expected answers in romaji:
+      // ex1_1 -> 'mita'
+      // ex1_2 -> 'shinakatta'
+      // ex1_3 -> 'nomanai'
+      // ex1_4 -> 'okita'
+      let correct = {
+        ex1_1: "mimashita",
+        ex1_2: "shinakatta desu",
+        ex1_3: "nomanai desu",
+        ex1_4: "okimashita"
+      };
+      for (let key in correct) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    // Exercício 2
+    function checkEx2() {
+      // ex2_1 (taberu -> tabenai)
+      // ex2_2 (nomimasu -> nonda)
+      // ex2_3 (shimasen -> shinai)
+      // ex2_4 (iku -> ikanakatta)
+      // ex2_5 (kimashita -> kita)
+      let correct = {
+        ex2_1: "tabenai",
+        ex2_2: "nonda",
+        ex2_3: "shinai",
+        ex2_4: "ikanakatta",
+        ex2_5: "kita"
+      };
+      for (let key in correct) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    // Exercício 3
+    function checkEx3() {
+      // ex3_1 -> okita
+      // ex3_2 -> tsukuranakatta
+      // ex3_3 -> konakatta
+      // ex3_4 -> shinai
+      let correct = {
+        ex3_1: "okita",
+        ex3_2: "tsukuranakatta desu",
+        ex3_3: "konakatta desu",
+        ex3_4: "shinai"
+      };
+      for (let key in correct) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    // Exercício 4
+    function checkEx4() {
+      // ex4_1 -> shinakatta
+      // ex4_2 -> tabeta
+      let correct = {
+        ex4_1: "shinakatta desu",
+        ex4_2: "tabeta"
+      };
+      for (let key in correct) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+    // Exercício 5
+    function checkEx5() {
+      // ex5_1 -> tabenakatta
+      // ex5_2 -> nomanai
+      let correct = {
+        ex5_1: "tabenakatta",
+        ex5_2: "nomanai"
+      };
+      for (let key in correct) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        let fb = document.getElementById(key + "Feedback");
+        if (!fb) {
+          fb = document.createElement("span");
+          fb.id = key + "Feedback";
+          document.getElementById(key).insertAdjacentElement('afterend', fb);
+        }
+        if (userAns === correct[key]) {
+          fb.textContent = " Correto!";
+          fb.style.color = "green";
+        } else {
+          fb.textContent = " Incorreto. Resposta: " + correct[key];
+          fb.style.color = "red";
+        }
+      }
+    }
+
+  </script>
+</body>
+</html>

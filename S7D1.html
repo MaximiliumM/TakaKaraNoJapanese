@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios Interativos</title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #4a148c;
+    }
+    p, li {
+      line-height: 1.6;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover { background-color: #6a1b9a; }
+    input[type="text"], select, textarea {
+      width: 90%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    .feedback { font-size: 14px; margin-left: 10px; }
+    hr { margin: 30px 0; border: none; border-top: 1px solid #ddd; }
+    .dica { background-color: #e8eaf6; padding: 10px; border-left: 4px solid #4a148c; margin-bottom: 10px; display: none; }
+    /* Tooltip styling */
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c;
+      background-color: rgba(74,20,140,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+    @media (max-width: 600px) {
+      input[type="text"], select, textarea { width: 100%; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Exercícios Interativos</h1>
+    
+    <!-- Exercício 1: Passado para Verbos Godan e Ichidan -->
+    <h2>Exercício 1: Passado para Verbos Godan e Ichidan</h2>
+    <p>
+      Converta os seguintes verbos para a forma passada (forma curta) em <strong>romaji</strong>.
+    </p>
+    <ol>
+      <li>
+        行く (iku) → ______ <br>
+        <em>
+          <span class="tooltip">iku<span class="tooltiptext">ir</span></span> (esperado: <strong>itta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_1">
+      
+      <li>
+        食べる (taberu) → ______ <br>
+        <em>
+          <span class="tooltip">taberu<span class="tooltiptext">comer</span></span> (esperado: <strong>tabeta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_2">
+      
+      <li>
+        書く (kaku) → ______ <br>
+        <em>
+          <span class="tooltip">kaku<span class="tooltiptext">escrever</span></span> (esperado: <strong>kaita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_3">
+      
+      <li>
+        飲む (nomu) → ______ <br>
+        <em>
+          <span class="tooltip">nomu<span class="tooltiptext">beber</span></span> (esperado: <strong>nonda</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_4">
+      
+      <li>
+        見る (miru) → ______ <br>
+        <em>
+          <span class="tooltip">miru<span class="tooltiptext">ver</span></span> (esperado: <strong>mita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_5">
+      
+      <li>
+        話す (hanasu) → ______ <br>
+        <em>
+          <span class="tooltip">hanasu<span class="tooltiptext">falar</span></span> (esperado: <strong>hanashita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_6">
+      
+      <li>
+        歩く (aruku) → ______ <br>
+        <em>
+          <span class="tooltip">aruku<span class="tooltiptext">andar, caminhar</span></span> (esperado: <strong>aruita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_7">
+      
+      <li>
+        買う (kau) → ______ <br>
+        <em>
+          <span class="tooltip">kau<span class="tooltiptext">comprar</span></span> (esperado: <strong>katta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_8">
+      
+      <li>
+        読む (yomu) → ______ <br>
+        <em>
+          <span class="tooltip">yomu<span class="tooltiptext">ler</span></span> (esperado: <strong>yonda</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_9">
+      
+      <li>
+        帰る (kaeru) → ______ <br>
+        <em>
+          <span class="tooltip">kaeru<span class="tooltiptext">voltar</span></span> (esperado: <strong>kaetta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_10">
+      
+      <li>
+        使う (tsukau) → ______ <br>
+        <em>
+          <span class="tooltip">tsukau<span class="tooltiptext">usar</span></span> (esperado: <strong>tsukatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_11">
+      
+      <li>
+        立つ (tatsu) → ______ <br>
+        <em>
+          <span class="tooltip">tatsu<span class="tooltiptext">ficar de pé</span></span> (esperado: <strong>tatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_12">
+      
+      <li>
+        待つ (matsu) → ______ <br>
+        <em>
+          <span class="tooltip">matsu<span class="tooltiptext">esperar</span></span> (esperado: <strong>matta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_13">
+      
+      <li>
+        泳ぐ (oyogu) → ______ <br>
+        <em>
+          <span class="tooltip">oyogu<span class="tooltiptext">nadar</span></span> (esperado: <strong>oyoida</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_14">
+      
+      <li>
+        切る (kiru) → ______ <br>
+        <em>
+          <span class="tooltip">kiru<span class="tooltiptext">cortar</span></span> (esperado: <strong>kitta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_15">
+      
+      <li>
+        取る (toru) → ______ <br>
+        <em>
+          <span class="tooltip">toru<span class="tooltiptext">pegar, tirar</span></span> (esperado: <strong>totta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_16">
+      
+      <li>
+        聞く (kiku) → ______ <br>
+        <em>
+          <span class="tooltip">kiku<span class="tooltiptext">ouvir</span></span> (esperado: <strong>kiita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_17">
+      
+      <li>
+        乗る (noru) → ______ <br>
+        <em>
+          <span class="tooltip">noru<span class="tooltiptext">embarcar, montar</span></span> (esperado: <strong>notta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_18">
+      
+      <li>
+        起きる (okiru) → ______ <br>
+        <em>
+          <span class="tooltip">okiru<span class="tooltiptext">acordar</span></span> (esperado: <strong>okita</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_19">
+      
+      <li>
+        降る (furu) → ______ <br>
+        <em>
+          <span class="tooltip">furu<span class="tooltiptext">chover</span></span> (esperado: <strong>futta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex1_20">
+    </ol>
+    <button class="btn" onclick="checkEx1()">Verificar Respostas</button>
+    <hr>
+
+    <!-- Exercício 2: Adjetivos -i (Forma Passada) -->
+    <h2>Exercício 2: Adjetivos -i (Forma Passada)</h2>
+    <p>
+      Converta os adjetivos abaixo para a forma passada em <strong>romaji</strong>.
+    </p>
+    <ol>
+      <li>
+        高い (takai) → ______ <br>
+        <em>
+          <span class="tooltip">takai<span class="tooltiptext">caro, alto</span></span> (esperado: <strong>takakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_1">
+      
+      <li>
+        おいしい (oishii) → ______ <br>
+        <em>
+          <span class="tooltip">oishii<span class="tooltiptext">delicioso</span></span> (esperado: <strong>oishikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_2">
+      
+      <li>
+        早い (hayai) → ______ <br>
+        <em>
+          <span class="tooltip">hayai<span class="tooltiptext">rápido, cedo</span></span> (esperado: <strong>hayakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_3">
+      
+      <li>
+        新しい (atarashii) → ______ <br>
+        <em>
+          <span class="tooltip">atarashii<span class="tooltiptext">novo</span></span> (esperado: <strong>atarashikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_4">
+      
+      <li>
+        寒い (samui) → ______ <br>
+        <em>
+          <span class="tooltip">samui<span class="tooltiptext">frio</span></span> (esperado: <strong>samukatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_5">
+      
+      <li>
+        暑い (atsui) → ______ <br>
+        <em>
+          <span class="tooltip">atsui<span class="tooltiptext">quente</span></span> (esperado: <strong>atsukatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_6">
+      
+      <li>
+        面白い (omoshiroi) → ______ <br>
+        <em>
+          <span class="tooltip">omoshiroi<span class="tooltiptext">interessante, divertido</span></span> (esperado: <strong>omoshirokatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_7">
+      
+      <li>
+        楽しい (tanoshii) → ______ <br>
+        <em>
+          <span class="tooltip">tanoshii<span class="tooltiptext">divertido</span></span> (esperado: <strong>tanoshikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_8">
+      
+      <li>
+        忙しい (isogashii) → ______ <br>
+        <em>
+          <span class="tooltip">isogashii<span class="tooltiptext">ocupado</span></span> (esperado: <strong>isogashikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_9">
+      
+      <li>
+        美しい (utsukushii) → ______ <br>
+        <em>
+          <span class="tooltip">utsukushii<span class="tooltiptext">belo</span></span> (esperado: <strong>utsukushikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_10">
+      
+      <li>
+        優しい (yasashii) → ______ <br>
+        <em>
+          <span class="tooltip">yasashii<span class="tooltiptext">gentil, amável</span></span> (esperado: <strong>yasashikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_11">
+      
+      <li>
+        嬉しい (ureshii) → ______ <br>
+        <em>
+          <span class="tooltip">ureshii<span class="tooltiptext">feliz</span></span> (esperado: <strong>ureshikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_12">
+      
+      <li>
+        悲しい (kanashii) → ______ <br>
+        <em>
+          <span class="tooltip">kanashii<span class="tooltiptext">triste</span></span> (esperado: <strong>kanashikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_13">
+      
+      <li>
+        大きい (ookii) → ______ <br>
+        <em>
+          <span class="tooltip">ookii<span class="tooltiptext">grande</span></span> (esperado: <strong>ookikatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_14">
+      
+      <li>
+        小さい (chiisai) → ______ <br>
+        <em>
+          <span class="tooltip">chiisai<span class="tooltiptext">pequeno</span></span> (esperado: <strong>chiisakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_15">
+      
+      <li>
+        長い (nagai) → ______ <br>
+        <em>
+          <span class="tooltip">nagai<span class="tooltiptext">longo</span></span> (esperado: <strong>nagakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_16">
+      
+      <li>
+        短い (mijikai) → ______ <br>
+        <em>
+          <span class="tooltip">mijikai<span class="tooltiptext">curto</span></span> (esperado: <strong>mijikakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_17">
+      
+      <li>
+        うるさい (urusai) → ______ <br>
+        <em>
+          <span class="tooltip">urusai<span class="tooltiptext">barulhento, chato</span></span> (esperado: <strong>urusakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_18">
+      
+      <li>
+        安い (yasui) → ______ <br>
+        <em>
+          <span class="tooltip">yasui<span class="tooltiptext">barato</span></span> (esperado: <strong>yasukatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_19">
+      
+      <li>
+        深い (fukai) → ______ <br>
+        <em>
+          <span class="tooltip">fukai<span class="tooltiptext">profundo</span></span> (esperado: <strong>fukakatta</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex2_20">
+    </ol>
+    <button class="btn" onclick="checkEx2()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Exercício 3: Forma -TE (Novos Verbos) -->
+    <h2>Exercício 3: Forma -TE</h2>
+    <p>
+      Converta os seguintes verbos para a forma -TE em <strong>romaji</strong>.
+    </p>
+    <ol>
+      <li>
+        歩く (aruku) → ______ <br>
+        <em>
+          <span class="tooltip">aruku<span class="tooltiptext">andar, caminhar</span></span>
+          (esperado: <strong>aruite</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex3_1">
+      
+      <li>
+        読む (yomu) → ______ <br>
+        <em>
+          <span class="tooltip">yomu<span class="tooltiptext">ler</span></span>
+          (esperado: <strong>yonde</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex3_2">
+      
+      <li>
+        話す (hanasu) → ______ <br>
+        <em>
+          <span class="tooltip">hanasu<span class="tooltiptext">falar</span></span>
+          (esperado: <strong>hanashite</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex3_3">
+      
+      <li>
+        帰る (kaeru) → ______ <br>
+        <em>
+          <span class="tooltip">kaeru<span class="tooltiptext">voltar, regressar</span></span>
+          (esperado: <strong>kaette</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex3_4">
+      
+      <li>
+        起きる (okiru) → ______ <br>
+        <em>
+          <span class="tooltip">okiru<span class="tooltiptext">acordar</span></span>
+          (esperado: <strong>okite</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex3_5">
+    </ol>
+    <button class="btn" onclick="checkEx3()">Verificar Respostas</button>
+    <hr>
+
+    <!-- Exercício 4: Forma -TAI (Novos Verbos) -->
+    <h2>Exercício 4: Forma -TAI</h2>
+    <p>
+      Converta os seguintes verbos para a forma –TAI (expressão de desejo) em <strong>romaji</strong>.
+    </p>
+    <ol>
+      <li>
+        買う (kau) → ______ <br>
+        <em>
+          <span class="tooltip">kau<span class="tooltiptext">comprar</span></span>
+          (esperado: <strong>kaitai</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex4_1">
+      
+      <li>
+        泳ぐ (oyogu) → ______ <br>
+        <em>
+          <span class="tooltip">oyogu<span class="tooltiptext">nadar</span></span>
+          (esperado: <strong>oyogitai</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex4_2">
+      
+      <li>
+        遊ぶ (asobu) → ______ <br>
+        <em>
+          <span class="tooltip">asobu<span class="tooltiptext">brincar, se divertir</span></span>
+          (esperado: <strong>asobitai</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex4_3">
+      
+      <li>
+        聞く (kiku) → ______ <br>
+        <em>
+          <span class="tooltip">kiku<span class="tooltiptext">ouvir, escutar</span></span>
+          (esperado: <strong>kikitai</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex4_4">
+      
+      <li>
+        会う (au) → ______ <br>
+        <em>
+          <span class="tooltip">au<span class="tooltiptext">encontrar</span></span>
+          (esperado: <strong>aitai</strong>)
+        </em>
+      </li>
+      <input type="text" id="ex4_5">
+    </ol>
+    <button class="btn" onclick="checkEx4()">Verificar Respostas</button>
+    <hr>
+
+    <!-- Exercício 5: Conjugue os Verbos no Passado (Forma Curta) -->
+    <h2>Exercício 5: Conjugue os Verbos no Passado (Forma Curta)</h2>
+    <p>
+      Complete as frases abaixo com a forma passada (curta) em <strong>romaji</strong> do verbo indicado entre parênteses.
+    </p>
+    <ol>
+      <li>
+        昨日、私はテレビを (みる) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            Ontem, eu assisti televisão.
+          </span>
+        </span><br>
+        <em>Kinou, watashi wa terebi o (miru) ______.</em><br>
+        <input type="text" id="ex5_1">
+      </li>
+      <li>
+        先週、日記を (かく) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            Semana passada, eu escrevi (um) diário.
+          </span>
+        </span><br>
+        <em>Senshuu, nikki o (kaku) ______.</em><br>
+        <input type="text" id="ex5_2">
+      </li>
+      <li>
+        朝にコーヒーを (のむ) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            De manhã, eu bebi café.
+          </span>
+        </span><br>
+        <em>Asa ni koohii o (nomu) ______.</em><br>
+        <input type="text" id="ex5_3">
+      </li>
+      <li>
+        友達と電話で (はなす) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            Eu conversei com um(a) amigo(a) por telefone.
+          </span>
+        </span><br>
+        <em>Tomodachi to denwa de (hanasu) ______.</em><br>
+        <input type="text" id="ex5_4">
+      </li>
+      <li>
+        昨日、海で (およぐ) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            Ontem, nadei no mar.
+          </span>
+        </span><br>
+        <em>Kinou, umi de (oyogu) ______.</em><br>
+        <input type="text" id="ex5_5">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx5()">Verificar Respostas</button>
+    <hr>
+
+    <!-- Exercício 6: Conjugue os Adjetivos -i no Passado -->
+    <h2>Exercício 6: Conjugue os Adjetivos -i no Passado</h2>
+    <p>
+      Complete as frases abaixo com a forma passada (curta) em <strong>romaji</strong> do adjetivo -i indicado entre parênteses.
+    </p>
+    <ol>
+      <li>
+        きのうのテストは (むずかしい) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            O teste de ontem foi difícil.
+          </span>
+        </span><br>
+        <em>Kinou no tesuto wa (muzukashii) ______.</em><br>
+        <input type="text" id="ex6_1">
+      </li>
+      <li>
+        きのうの夜は (さむい) ______ です。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            A noite de ontem foi fria.
+          </span>
+        </span><br>
+        <em>Kinou no yoru wa (samui) ______ desu.</em><br>
+        <input type="text" id="ex6_2">
+      </li>
+      <li>
+        あの映画は (おもしろい) ______ ね。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            Aquele filme foi interessante/divertido.
+          </span>
+        </span><br>
+        <em>Ano eiga wa (omoshiroi) ______ ne.</em><br>
+        <input type="text" id="ex6_3">
+      </li>
+      <li>
+        旅行は (きつい) ______ から、ゆっくり休みたいです。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            A viagem foi exaustiva, então quero descansar.
+          </span>
+        </span><br>
+        <em>Ryokou wa (kitsui) ______ kara, yukkuri yasumitai desu.</em><br>
+        <input type="text" id="ex6_4">
+      </li>
+      <li>
+        先週買ったバッグは (たかい) ______。
+        <span class="tooltip">? 
+          <span class="tooltiptext">
+            A bolsa que comprei semana passada foi cara.
+          </span>
+        </span><br>
+        <em>Senshuu katta baggu wa (takai) ______.</em><br>
+        <input type="text" id="ex6_5">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx6()">Verificar Respostas</button>
+    <hr>
+    
+  </div>
+  
+  <script>
+    // Helper: Inserts feedback immediately after each input
+    function insertFeedback(inputId, message, color) {
+      let inputElem = document.getElementById(inputId);
+      let fb = document.getElementById(inputId + "Feedback");
+      if (!fb) {
+        fb = document.createElement("span");
+        fb.id = inputId + "Feedback";
+        inputElem.insertAdjacentElement('afterend', fb);
+      }
+      fb.textContent = message;
+      fb.style.color = color;
+    }
+
+    // Exercício 1: Passado para Verbos Godan e Ichidan
+    function checkEx1() {
+      const answers = {
+        ex1_1: "itta",
+        ex1_2: "tabeta",
+        ex1_3: "kaita",
+        ex1_4: "nonda",
+        ex1_5: "mita",
+        ex1_6: "hanashita",
+        ex1_7: "aruita",
+        ex1_8: "katta",
+        ex1_9: "yonda",
+        ex1_10: "kaetta",
+        ex1_11: "tsukatta",
+        ex1_12: "tatta",
+        ex1_13: "matta",
+        ex1_14: "oyoida",
+        ex1_15: "kitta",
+        ex1_16: "totta",
+        ex1_17: "kiita",
+        ex1_18: "notta",
+        ex1_19: "okita",
+        ex1_20: "futta"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+    // Exercício 2: Adjetivos -i (Forma Passada)
+    function checkEx2() {
+      const answers = {
+        ex2_1: "takakatta",
+        ex2_2: "oishikatta",
+        ex2_3: "hayakatta",
+        ex2_4: "atarashikatta",
+        ex2_5: "samukatta",
+        ex2_6: "atsukatta",
+        ex2_7: "omoshirokatta",
+        ex2_8: "tanoshikatta",
+        ex2_9: "isogashikatta",
+        ex2_10: "utsukushikatta",
+        ex2_11: "yasashikatta",
+        ex2_12: "ureshikatta",
+        ex2_13: "kanashikatta",
+        ex2_14: "ookikatta",
+        ex2_15: "chiisakatta",
+        ex2_16: "nagakatta",
+        ex2_17: "mijikakatta",
+        ex2_18: "urusakatta",
+        ex2_19: "yasukatta",
+        ex2_20: "fukakatta"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+
+    // Exercício 3: Forma -TE
+    function checkEx3() {
+      const answers = {
+        ex3_1: "aruite",
+        ex3_2: "yonde",
+        ex3_3: "hanashite",
+        ex3_4: "kaette",
+        ex3_5: "okite"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+    // Exercício 4: Forma -TAI
+    function checkEx4() {
+      const answers = {
+        ex4_1: "kaitai",
+        ex4_2: "oyogitai",
+        ex4_3: "asobitai",
+        ex4_4: "kikitai",
+        ex4_5: "aitai"
+      };
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+    // EXERCÍCIO 5: Conjugue os Verbos no Passado (Forma Curta)
+    function checkEx5() {
+      const answers = {
+        ex5_1: "mita",      // みる -> みた
+        ex5_2: "kaita",     // かく -> かいた
+        ex5_3: "nonda",     // のむ -> のんだ
+        ex5_4: "hanashita", // はなす -> はなした
+        ex5_5: "oyoida"     // およぐ -> およいだ
+      };
+
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+    // EXERCÍCIO 6: Conjugue os Adjetivos -i no Passado
+    function checkEx6() {
+      const answers = {
+        ex6_1: "muzukashikatta", // むずかしい -> むずかしかった
+        ex6_2: "samukatta",      // さむい -> さむかった
+        ex6_3: "omoshirokatta",  // おもしろい -> おもしろかった
+        ex6_4: "kitsukatta",     // きつい -> きつかった
+        ex6_5: "takakatta"       // たかい -> たかかった
+      };
+
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, " Correto!", "green");
+        } else {
+          insertFeedback(key, " Incorreto. Resposta: " + answers[key], "red");
+        }
+      }
+    }
+
+
+  </script>
+</body>
+</html>

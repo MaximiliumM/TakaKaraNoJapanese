@@ -848,6 +848,28 @@
       }
     }
 
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.tooltip').forEach(el => {
+        el.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevents click from bubbling up
+          // Remove active class from all other tooltips
+          document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+            if (activeEl !== this) {
+              activeEl.classList.remove('active');
+            }
+          });
+          // Toggle active class for this tooltip
+          this.classList.toggle('active');
+        });
+      });
+      
+      // Hide any active tooltip when tapping outside
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+          activeEl.classList.remove('active');
+        });
+      });
+    }
 
   </script>
 </body>

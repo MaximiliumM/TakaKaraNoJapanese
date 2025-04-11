@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Exercícios Interativos - Turismo e Gramática</title>
+  <style>
+    /* Reset básico */
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      text-align: center;
+      color: #4a148c;
+    }
+    p, li {
+      line-height: 1.6;
+    }
+    .btn {
+      background-color: #4a148c;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 10px 0;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #6a1b9a;
+    }
+    input[type="text"], select, textarea {
+      width: 90%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .feedback {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    hr {
+      margin: 30px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c;
+      background-color: rgba(74,20,140,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+    }
+    .tooltip.active .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    @media (max-width:600px) {
+      input[type="text"], select, textarea {
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Exercícios Interativos</h1>
+    <!-- Ex 1: ～たことがある -->
+    <h2>Exercício 1: Experiências Passadas (～たことがある)</h2>
+    <p>
+      Complete as frases usando a forma afirmativa ou negativa de <strong>…ta koto ga arimasu/arimasen</strong> em romaji.  
+      <br>Exemplo: ブラジルへ行く (burajiru e iku) → burajiru e <strong>itta koto ga arimasu</strong> (ou arimasen).
+    </p>
+    <ol>
+      <li>
+        フランスへ行く (furansu e iku)  
+        <br><input type="text" id="ex1_1" placeholder="Sua resposta">
+      </li>
+      <li>
+        地元の料理を食べる (jimoto no ryouri o taberu)  
+        <br><input type="text" id="ex1_2" placeholder="Sua resposta">
+      </li>
+      <li>
+        富士山に登る (fujisan ni noboru)  
+        <br><input type="text" id="ex1_3" placeholder="Sua resposta">
+      </li>
+      <li>
+        お祭りに参加する (omatsuri ni sanka suru)  
+        <br><input type="text" id="ex1_4" placeholder="Sua resposta">
+      </li>
+      <li>
+        お寺を見学する (o-tera o kengaku suru)  
+        <br><input type="text" id="ex1_5" placeholder="Sua resposta">
+      </li>
+      <li>
+        東京ディズニーランドで遊ぶ (toukyou dizuniirando de asobu)  
+        <br><input type="text" id="ex1_6" placeholder="Sua resposta">
+      </li>
+      <li>
+        日本の温泉に入る (nihon no onsen ni hairu)  
+        <br><input type="text" id="ex1_7" placeholder="Sua resposta">
+      </li>
+      <li>
+        一人で旅行する (hitori de ryokou suru)  
+        <br><input type="text" id="ex1_8" placeholder="Sua resposta">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx1()">Verificar Respostas</button>
+    <hr>
+
+    <!-- Begin Exercise 2: Conjunções Coordenativas (AND / BUT) -->
+    <h2>Exercício 2: Conjunções Coordenativas (E / MAS)</h2>
+    <p>
+      Complete as lacunas usando “soshite” (そして para E) ou “demo” (でも para MAS) em romaji, de acordo com o sentido de cada frase.
+    </p>
+    <ol>
+      <li>
+        りんごを食べました。 ______ バナナも食べました。  
+        <br>(ringo o tabemashita. ______ banana mo tabemashita.)
+        <br><input type="text" id="ex2_1" placeholder="Sua resposta">
+      </li>
+      <li>
+        彼は学生です、 ______ 勉強するのが好きじゃありません。  
+        <br>(kare wa gakusei desu, ______ benkyou suru no ga suki ja arimasen.)
+        <br><input type="text" id="ex2_2" placeholder="Sua resposta">
+      </li>
+      <li>
+        このパンは美味しい、 ______ ちょっと高い。  
+        <br>(kono pan wa oishii, ______ chotto takai.)
+        <br><input type="text" id="ex2_3" placeholder="Sua resposta">
+      </li>
+      <li>
+        来週テストがある、 ______ 彼はまだ勉強していません。  
+        <br>(raishuu tesuto ga aru, ______ kare wa mada benkyou shite imasen.)
+        <br><input type="text" id="ex2_4" placeholder="Sua resposta">
+      </li>
+      <li>
+        自分でやってみた。 ______ 結果は良くなかった。  
+        <br>(jibun de yatte mita. ______ kekka wa yokunakatta.)
+        <br><input type="text" id="ex2_5" placeholder="Sua resposta">
+      </li>
+      <li>
+        このかばんは軽い、 ______ 安いです。  
+        <br>(kono kaban wa karui, ______ yasui desu.)
+        <br><input type="text" id="ex2_6" placeholder="Sua resposta">
+      </li>
+      <li>
+        彼は弁護士だ、 ______ 彼女は医者です。  
+        <br>(kare wa bengoshi da, ______ kanojo wa isha desu.)
+        <br><input type="text" id="ex2_7" placeholder="Sua resposta">
+      </li>
+      <li>
+        感謝の気持ちを伝えたい、 ______ 言葉が見つからない。  
+        <br>(kansha no kimochi o tsutaetai, ______ kotoba ga mitsukaranai.)
+        <br><input type="text" id="ex2_8" placeholder="Sua resposta">
+      </li>
+      <li>
+        この本は面白い、 ______ 自分には難しい。  
+        <br>(kono hon wa omoshiroi, ______ jibun ni wa muzukashii.)
+        <br><input type="text" id="ex2_9" placeholder="Sua resposta">
+      </li>
+      <li>
+        スミスさんは書くのが遅い、 ______ 彼はよく間違いをします。  
+        <br>(sumisu-san wa kaku no ga osoi, ______ kare wa yoku machigai o shimasu.)
+        <br><input type="text" id="ex2_10" placeholder="Sua resposta">
+      </li>
+      <li>
+        先週は運動した、 ______ 新しい友達も作りました。  
+        <br>(senshuu wa undou shita, ______ atarashii tomodachi mo tsukurimashita.)
+        <br><input type="text" id="ex2_11" placeholder="Sua resposta">
+      </li>
+      <li>
+        お店に行きたかった、 ______ 閉まっていた。  
+        <br>(omise ni ikitakatta, ______ shimatte ita.)
+        <br><input type="text" id="ex2_12" placeholder="Sua resposta">
+      </li>
+      <li>
+        彼は宿題を忘れた、 ______ 先生に注意された。  
+        <br>(kare wa shukudai o wasureta, ______ sensei ni chuui sareta.)
+        <br><input type="text" id="ex2_13" placeholder="Sua resposta">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx2()">Verificar Respostas</button>
+
+    <hr>
+
+    <!-- Ex 3: Forma -ませんか (Convite) - Expanded with Contextual Scenarios -->
+    <h2>Exercício 3: Forma -ませんか (Convite)</h2>
+    <p>
+      Complete as frases abaixo para convidar alguém a fazer algo, usando a estrutura <strong>…masen ka?</strong> em romaji.
+    </p>
+    <ol>
+      <li>
+        今日は新しいメニューがあります。お腹がすいていますね。<br>
+        一緒にレストランで ______?  
+        <span class="tooltip">? <span class="tooltiptext">taberu</span></span>
+        <br>(kyou wa atarashii menyuu ga arimasu. onaka ga suite imasu ne. issho ni resutoran de ______?)<br>
+        <input type="text" id="ex3_1" placeholder="Sua resposta">
+      </li>
+      <li>
+        この景色は本当に素晴らしいです。一緒に写真を ______?  
+        <span class="tooltip">? <span class="tooltiptext">toru</span></span>
+        <br>(kono keshiki wa hontou ni subarashii desu. issho ni shashin o ______?)<br>
+        <input type="text" id="ex3_2" placeholder="Sua resposta">
+      </li>
+      <li>
+        今日はとても暑いですね。冷たいビールを ______?  
+        <span class="tooltip">? <span class="tooltiptext">nomu</span></span>
+        <br>(kyou wa totemo atsui desu ne. tsumetai biiru o ______?)<br>
+        <input type="text" id="ex3_3" placeholder="Sua resposta">
+      </li>
+      <li>
+        明日は週末です。一緒に ______?  
+        <span class="tooltip">? <span class="tooltiptext">dekakeru</span></span>
+        <br>(ashita wa shuumatsu desu. issho ni ______?)<br>
+        <input type="text" id="ex3_4" placeholder="Sua resposta">
+      </li>
+      <li>
+        今日は特別な体験イベントがあります。一緒に ______?  
+        <span class="tooltip">? <span class="tooltiptext">iku</span></span>
+        <br>(kyou wa tokubetsuna taiken ibento ga arimasu. issho ni ______?)<br>
+        <input type="text" id="ex3_5" placeholder="Sua resposta">
+      </li>
+      <li>
+        今日は公園でリラックスしたいです。外で少し ______?  
+        <span class="tooltip">? <span class="tooltiptext">asobu</span></span>
+        <br>(kyou wa kouen de rirakkusu shitai desu. soto de sukoshi ______?)<br>
+        <input type="text" id="ex3_7" placeholder="Sua resposta">
+      </li>
+      <li>
+        新しい服を見に行きたいです。ショッピングモールへ ______?  
+        <span class="tooltip">? <span class="tooltiptext">kaimono suru</span></span>
+        <br>(atarashii fuku o mi ni ikitai desu. shoppingu mooru e ______?)<br>
+        <input type="text" id="ex3_8" placeholder="Sua resposta">
+      </li>
+      <li>
+        今度の映画はとても面白いと聞きました。週末に一緒に ______?  
+        <span class="tooltip">? <span class="tooltiptext">miru</span></span>
+        <br>(kondo no eiga wa totemo omoshiroi to kikimashita. shuumatsu ni issho ni ______?)<br>
+        <input type="text" id="ex3_9" placeholder="Sua resposta">
+      </li>
+    </ol>
+    <button class="btn" onclick="checkEx3()">Verificar Respostas</button>
+    <hr>
+  </div>
+
+  <script>
+    // Helper: Inserts feedback immediately after each input
+    function insertFeedback(inputId, message, color) {
+      let inputElem = document.getElementById(inputId);
+      let fb = document.getElementById(inputId + "Feedback");
+      if (!fb) {
+        fb = document.createElement("span");
+        fb.id = inputId + "Feedback";
+        inputElem.insertAdjacentElement('afterend', fb);
+      }
+      fb.textContent = message;
+      fb.style.color = color;
+    }
+
+    // Exercício 1: ～たことがある
+    function checkEx1() {
+      // Define acceptable answers for each exercise item.
+      const answers = {
+        ex1_1: ["furansu e itta koto ga arimasu", "furansu e itta koto ga arimasen"],
+        ex1_2: ["jimoto no ryouri o tabeta koto ga arimasu", "jimoto no ryouri o tabeta koto ga arimasen"],
+        ex1_3: ["fujisan ni nobotta koto ga arimasu", "fujisan ni nobotta koto ga arimasen"],
+        ex1_4: ["omatsuri ni sanka shita koto ga arimasu", "omatsuri ni sanka shita koto ga arimasen"],
+        ex1_5: ["o-tera o kengaku shita koto ga arimasu", "o-tera o kengaku shita koto ga arimasen"],
+        ex1_6: ["toukyou dizuniirando de asonda koto ga arimasu", "toukyou dizuniirando de asonda koto ga arimasen"],
+        ex1_7: ["nihon no onsen ni haitta koto ga arimasu", "nihon no onsen ni haitta koto ga arimasen"],
+        ex1_8: ["hitori de ryokou shita koto ga arimasu", "hitori de ryokou shita koto ga arimasen"]
+      };
+
+      // Loop through each exercise item to check the answer.
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (answers[key].includes(userAns)) {
+          insertFeedback(key, "Correto!", "green");
+        } else {
+          insertFeedback(key, `Incorreto. Resposta: ${answers[key][0]}`, "red");
+        }
+      }
+    }
+
+    // Exercício 2: Conjunções Simples
+    function checkEx2() {
+      // Correct answers according to the sentences:
+      const answers = {
+        ex2_1: "soshite",  // りんごを食べました。 そして バナナも食べました。
+        ex2_2: "demo",     // 彼は学生です、 でも 勉強するのが好きじゃありません。
+        ex2_3: "demo",     // このパンは美味しい、 でも ちょっと高い。
+        ex2_4: "demo",     // 来週テストがある、 でも 彼はまだ勉強していません。
+        ex2_5: "demo",     // 自分でやってみた。 でも 結果は良くなかった。
+        ex2_6: "soshite",  // このかばんは軽い、 そして 安いです。
+        ex2_7: "soshite",  // 彼は弁護士だ、 そして 彼女は医者です。
+        ex2_8: "demo",     // 感謝の気持ちを伝えたい、 でも 言葉が見つからない。
+        ex2_9: "demo",     // この本は面白い、 でも 自分には難しい。
+        ex2_10: "soshite", // スミスさんは書くのが遅い、 そして 彼はよく間違いをします。
+        ex2_11: "soshite", // 先週は運動した、 そして 新しい友達も作りました。
+        ex2_12: "demo",    // お店に行きたかった、 でも 閉まっていた。
+        ex2_13: "soshite"  // 彼は宿題を忘れた、 そして 先生に注意された。
+      };
+
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, "Correto!", "green");
+        } else {
+          insertFeedback(key, `Incorreto. Resposta: "${answers[key]}"`, "red");
+        }
+      }
+    }
+
+    // Exercício 3: Forma -ませんか (Convite)
+    function checkEx3() {
+      // Define expected answers (in romaji) for each item.
+      const answers = {
+        ex3_1: "tabemasen ka", 
+        ex3_2: "torimasen ka", 
+        ex3_3: "nomimasen ka", 
+        ex3_4: "dekakemasen ka",
+        ex3_5: "ikimasen ka",  
+        ex3_7: "asobimasen ka", 
+        ex3_8: "kaimono shimasen ka",
+        ex3_9: "mimasen ka"
+      };
+
+      for (let key in answers) {
+        let userAns = document.getElementById(key).value.trim().toLowerCase();
+        if (userAns === answers[key]) {
+          insertFeedback(key, "Correto!", "green");
+        } else {
+          insertFeedback(key, `Incorreto. Resposta: ${answers[key]}`, "red");
+        }
+      }
+    }
+
+    // Tooltip handling for mobile devices
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.tooltip').forEach(el => {
+        el.addEventListener('click', function(e) {
+          e.stopPropagation();
+          document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+            if (activeEl !== this) activeEl.classList.remove('active');
+          });
+          this.classList.toggle('active');
+        });
+      });
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+          activeEl.classList.remove('active');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

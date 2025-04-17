@@ -8,73 +8,61 @@
     *{box-sizing:border-box}
     body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5ff;margin:0;padding:20px;color:#333}
     .container{max-width:930px;margin:auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
-    h1,h2{color:#512da8;text-align:center;margin:0 0 18px}
-    p,li{line-height:1.6;font-size:17px}
-    input[type=text],select{width:90%;padding:8px;margin-top:4px;border:1px solid #bbb;border-radius:6px;font-size:16px}
-    .btn{background:#512da8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin:16px 0;transition:.2s}
-    .btn:hover{background:#6d48c7}
-    details{margin:12px 0}
-    summary{cursor:pointer;font-weight:bold;color:#512da8}
-    hr{border:none;border-top:1px solid #ddd;margin:34px 0}
-    @media(max-width:600px){select, .btn{width:100%}}
+    h1{color:#512da8;text-align:center;margin:0 0 18px}
+    .buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .btn-link {
+      display: block;
+      text-align: center;
+      background: #512da8;
+      color: #fff;
+      padding: 12px 8px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: .2s;
+    }
+    .btn-link:hover {
+      background: #6d48c7;
+    }
+    @media(max-width:600px){
+      .buttons-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Exercícios Disponíveis</h1>
-    <p>Selecione o arquivo que deseja abrir:</p>
-    <select id="fileSelect" class="storySel">
-      <option value="">-- Selecione um exercício --</option>
-    </select>
-    <button type="button" class="btn" onclick="goToFile()">Ir</button>
-
-    <hr>
-
-    <h2>Links Diretos</h2>
-    <ul id="linksList">
-      <!-- itens serão preenchidos via JavaScript -->
-    </ul>
+    <div id="buttonsGrid" class="buttons-grid">
+      <!-- os botões serão gerados aqui -->
+    </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const repoApi = 'https://api.github.com/repos/Maximiliumm/TakaKaraNoJapanese/contents/';
-      const select = document.getElementById('fileSelect');
-      const linksUl = document.getElementById('linksList');
+      const grid = document.getElementById('buttonsGrid');
 
       fetch(repoApi)
         .then(res => res.json())
         .then(files => {
-          // filtra só .html e ignora index.html
-          const htmls = files
+          files
             .filter(f => f.name.endsWith('.html') && f.name !== 'index.html')
-            .sort((a, b) => a.name.localeCompare(b.name));
-
-          htmls.forEach(f => {
-            // popula o <select>
-            const opt = document.createElement('option');
-            opt.value = f.name;
-            opt.textContent = f.name.replace('.html', '');
-            select.appendChild(opt);
-
-            // popula a lista de links diretos
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = f.name;
-            a.textContent = f.name;
-            li.appendChild(a);
-            linksUl.appendChild(li);
-          });
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .forEach(f => {
+              const link = document.createElement('a');
+              link.href = f.name;
+              link.className = 'btn-link';
+              link.textContent = f.name.replace('.html', '');
+              grid.appendChild(link);
+            });
         })
         .catch(err => console.error('Erro ao listar arquivos:', err));
     });
-
-    function goToFile() {
-      const sel = document.getElementById('fileSelect');
-      if (sel.value) {
-        window.location.href = sel.value;
-      }
-    }
   </script>
 </body>
 </html>

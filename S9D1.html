@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Adjetivos -na & -i</title>
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5ff;margin:0;padding:20px;color:#333}
+    .container{max-width:930px;margin:auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+    h1,h2{color:#512da8;text-align:center;margin:0 0 18px}
+    p,li{line-height:1.6;font-size:17px}
+    .romaji{display:block;font-style:italic;color:#666;font-size:15px;margin-bottom:6px}
+    input[type=text],select{width:90%;padding:8px;margin-top:4px;border:1px solid #bbb;border-radius:6px;font-size:16px}
+    .btn{background:#512da8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin:16px 0;transition:.2s}
+    .btn:hover{background:#6d48c7}
+    .multiple-choice label{display:block;margin:4px 0;cursor:pointer}
+    .feedback{font-weight:bold;margin-left:6px}
+    .storySel{width:auto;min-width:120px;padding:6px 8px}
+    details{margin:12px 0}
+    summary{cursor:pointer;font-weight:bold;color:#512da8}
+    hr{border:none;border-top:1px solid #ddd;margin:34px 0}
+    @media(max-width:600px){input[type=text],select{width:100%}.btn{width:100%}}
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <h1>Adjetivos -na & -i</h1>
+
+  <!-- EX1 -->
+  <h2>1 • Diário de Viagem – Complete a Conjugação</h2>
+  <details><summary>Dica</summary>
+    <p><strong>-na</strong> 便利です / 便利じゃないです / 便利でした / 便利じゃなかったです<br>
+      <span class="romaji">benri desu / benri ja nai desu / benri deshita / benri ja nakatta desu</span></p>
+    <p><strong>-i</strong> 楽しい → 楽しいです / 楽しくないです / 楽しかったです / 楽しくなかったです<br>
+      <span class="romaji">tanoshii desu / tanoshiku nai desu / tanoshikatta desu / tanoshiku nakatta desu</span></p>
+  </details>
+
+  <ol>
+    <li>昨日泊まった温泉旅館は __________
+      <span class="romaji">kinō tomatta onsen ryokan wa __________</span>
+      <small>(kirei)</small><br>
+      <input type="text" id="ex1_1">
+    </li>
+    <li>東京駅はいつも __________ から待ち合わせは大変
+      <span class="romaji">tōkyō‑eki wa itsumo __________ kara machiawase wa taihen</span>
+      <small>(nigiyaka)</small><br>
+      <input type="text" id="ex1_2">
+    </li>
+    <li>この美術館は昔は __________ けど今は人気
+      <span class="romaji">kono bijutsukan wa mukashi wa __________ kedo ima wa ninki</span>
+      <small>(shizuka ­– passado neg.)</small><br>
+      <input type="text" id="ex1_3">
+    </li>
+    <li>このアプリは海外旅行中に __________ よ
+      <span class="romaji">kono apuri wa kaigai ryokō‑chū ni __________ yo</span>
+      <small>(benri)</small><br>
+      <input type="text" id="ex1_4">
+    </li>
+    <li>子どもの頃は __________ ですが今は元気
+      <span class="romaji">kodomo no koro wa __________ desu ga ima wa genki</span>
+      <small>(genki – passado neg.)</small><br>
+      <input type="text" id="ex1_5">
+    </li>
+  </ol>
+  <button class="btn" onclick="checkEx1()">Verificar</button>
+
+  <hr>
+
+  <!-- EX2 -->
+  <h2>2 • Qual soa natural?</h2>
+  <p>Escolha a opção que melhor se encaixa.</p>
+
+  <div class="multiple-choice">
+    <p><strong>A</strong> ここはとても _________ ね 落ち着く
+      <span class="romaji">koko wa totemo ________ ne ochitsuku</span></p>
+    <label><input type="radio" name="q1" value="a">1) 静かなです</label>
+    <label><input type="radio" name="q1" value="b">2) 静かですね</label>
+    <label><input type="radio" name="q1" value="c">3) 静かじゃなかったです</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>B</strong> 京都の紅葉は本当に _________ よ 写真を見て
+      <span class="romaji">kyōto no kōyō wa hontō ni ________ yo shashin o mite</span></p>
+    <label><input type="radio" name="q2" value="a">1) きれいな</label>
+    <label><input type="radio" name="q2" value="b">2) きれいです</label>
+    <label><input type="radio" name="q2" value="c">3) きれいじゃありません</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>C</strong> この駅は _________ のでご注意ください
+      <span class="romaji">kono eki wa ________ no de go‑chūi kudasai</span></p>
+    <label><input type="radio" name="q3" value="a">1) 便利な</label>
+    <label><input type="radio" name="q3" value="b">2) 便利じゃありません</label>
+    <label><input type="radio" name="q3" value="c">3) 便利でした</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>D</strong> この料理は _________ ね もう一皿頼もう
+      <span class="romaji">kono ryōri wa ________ ne mō hitotsu tanomō</span></p>
+    <label><input type="radio" name="q4" value="a">1) おいしいです</label>
+    <label><input type="radio" name="q4" value="b">2) おいしいな</label>
+    <label><input type="radio" name="q4" value="c">3) おいしいでした</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>E</strong> この部屋は _________ からスーツケースが楽に置ける
+      <span class="romaji">shibafu wa ________ kara pikunikku ni saiteki</span></p>
+    <label><input type="radio" name="q5" value="a">1) 広いです</label>
+    <label><input type="radio" name="q5" value="b">2) 広いな</label>
+    <label><input type="radio" name="q5" value="c">3) 広いでした</label>
+  </div>
+  <button class="btn" onclick="checkEx2()">Verificar</button>
+
+  <hr>
+
+  <!-- EX3 -->
+  <h2>3 • Correção de Chat – Ajude o Turista</h2>
+  <p>Seu amigo mandou frases no grupo. Clique se está correto ou não.</p>
+
+  <div id="chatArea">
+    <p><strong>1.</strong> これはとても <mark>便利のアプリ</mark> だよ
+      <span class="romaji">kore wa totemo benri no apuri da yo</span>
+      <label><input type="radio" name="fix1" value="ok">Correto</label>
+      <label><input type="radio" name="fix1" value="ng">Corrigir</label>
+    </p>
+
+    <p><strong>2.</strong> 富士山は <mark>有名なです</mark> ね
+      <span class="romaji">fujisan wa yūmei na desu ne</span>
+      <label><input type="radio" name="fix2" value="ok">Correto</label>
+      <label><input type="radio" name="fix2" value="ng">Corrigir</label>
+    </p>
+
+    <p><strong>3.</strong> この町は夜 <mark>静か</mark> です
+      <span class="romaji">kono machi wa yoru shizuka desu</span>
+      <label><input type="radio" name="fix3" value="ok">Correto</label>
+      <label><input type="radio" name="fix3" value="ng">Corrigir</label>
+    </p>
+  </div>
+  <button class="btn" onclick="checkEx3()">Verificar</button>
+
+  <hr>
+
+  <!-- EX4 -->
+  <h2>4 • -i ou -na? Complete</h2>
+  <p>Escolha a forma correta para cada contexto.</p>
+
+  <ol>
+    <li>北海道の冬はとても __________
+      <span class="romaji">hokkaidō no fuyu wa totemo __________</span>
+      <select id="ex4_1">
+        <option value="">--selecione--</option>
+        <option value="samui">寒い (samui)</option>
+        <option value="samuna">寒な (samuna)</option>
+      </select>
+    </li>
+    <li>渋谷は __________ 街でショッピングが楽しい
+      <span class="romaji">shibuya wa __________ machi de shoppingu ga tanoshii</span>
+      <select id="ex4_2">
+        <option value="">--selecione--</option>
+        <option value="nigiyaka">にぎやかな (nigiyaka na)</option>
+        <option value="nigiyakii">にぎやかい (nigiyakai)</option>
+      </select>
+    </li>
+    <li>このカフェは __________ から作業しやすい
+      <span class="romaji">kono kafe wa __________ kara sagyō shi‑yasui</span>
+      <select id="ex4_3">
+        <option value="">--selecione--</option>
+        <option value="shizuka">静かな (shizuka na)</option>
+        <option value="shizukii">静かい (shizukai)</option>
+      </select>
+    </li>
+  </ol>
+  <button class="btn" onclick="checkEx4()">Verificar</button>
+
+  <hr>
+
+  <!-- EX5 -->
+  <h2>5 • Mini‑História – Preencha os espaços</h2>
+  <p>Complete a narrativa escolhendo o adjetivo adequado.</p>
+
+  <ol>
+    <li>
+    <p>
+      昨日、友達と
+      <select id="ex5_1" class="storySel">
+        <option value="">--</option>
+        <option value="kireide">きれいで (kirei de)</option>
+        <option value="kireina">きれいな (kirei na)</option>
+      </select>
+      カフェで朝ごはんを食べて、そのあと
+      <select id="ex5_2" class="storySel">
+        <option value="">--</option>
+        <option value="yumeina">有名な (yūmei na)</option>
+        <option value="yumeide">有名で (yūmei de)</option>
+      </select>
+      寺で写真を撮った。夜はホテルの部屋で
+      <select id="ex5_3" class="storySel">
+        <option value="">--</option>
+        <option value="shizukani">静かに (shizuka ni)</option>
+        <option value="shizukade">静かで (shizuka de)</option>
+      </select>
+      休んだ
+    </p>
+  </li>
+  <span class="romaji">
+    kinō, tomodachi to ___ kafe de asagohan o tabete, sono ato ___ tera de shashin o totta.
+    yoru wa hoteru no heya de ___ yasunda
+  </span>
+
+  <!-- História 2 -->
+  <li>
+<p>
+  午後は
+  <select id="ex5_4" class="storySel">
+    <option value="">--</option>
+    <option value="nigiyakana">にぎやかな (nigiyaka na)</option>
+    <option value="nigiyakade">にぎやかで (nigiyaka de)</option>
+  </select>
+  デパートで買い物をして、その後
+  <select id="ex5_5" class="storySel">
+    <option value="">--</option>
+    <option value="benrina">便利な (benri na)</option>
+    <option value="benride">便利で (benri de)</option>
+  </select>
+  アプリで道を調べた。夜はホテルの部屋が
+  <select id="ex5_6" class="storySel">
+    <option value="">--</option>
+    <option value="hirokute">広くて (hirokute)</option>
+    <option value="hiroi">広い (hiroi)</option>
+  </select>
+  ぐっすり眠れた
+</p>
+<span class="romaji">
+  gogo wa ___ depāto de kaimono o shite, sono ato ___ apuri de michi o shirabeta.
+  yoru wa hoteru no heya ga ___ gussuri nemureta
+</span>
+</li>
+
+<!-- História 3 -->
+<li>
+<p>
+  朝は市場で
+  <select id="ex5_7" class="storySel">
+    <option value="">--</option>
+    <option value="oishii">おいしい (oishii)</option>
+    <option value="oishiikute">おいしくて (oishikute)</option>
+  </select>
+  魚を食べて、午後は
+  <select id="ex5_8" class="storySel">
+    <option value="">--</option>
+    <option value="omoshiroi">面白い (omoshiroi)</option>
+    <option value="omoshiroina">面白いな (omoshiroi na)</option>
+  </select>
+  博物館を見学した。夜は港の景色が
+  <select id="ex5_9" class="storySel">
+    <option value="">--</option>
+    <option value="utsukushikute">美しくて (utsukushikute)</option>
+    <option value="utsukushii">美しい (utsukushii)</option>
+  </select>
+  感動した
+</p>
+<span class="romaji">
+  asa wa ichiba de ___ sakana o tabete, gogo wa ___ hakubutsukan o kengaku shita.
+  yoru wa minato no keshiki ga ___ kandō shita
+</span>
+</li>
+</ol>
+  <br>
+  <button class="btn" onclick="checkEx5()">Verificar</button>
+
+  <hr>
+
+  <h2 id="scoreTitle" style="display:none">Pontuação total</h2>
+  <p id="finalScore" style="font-size:22px;font-weight:bold"></p>
+</div>
+
+<script>
+/* util */
+let total=0, correct=0;
+function addResult(ok){total++; if(ok) correct++;}
+function feedback(el,ok){
+  let fb=el.nextElementSibling;
+  if(!fb || !fb.classList.contains('feedback')){
+    fb=document.createElement('span'); fb.className='feedback';
+    el.insertAdjacentElement('afterend',fb);
+  }
+  fb.textContent=ok?' ✔️':' ❌';
+  fb.style.color=ok?'green':'red';
+}
+function showScore(){
+  document.getElementById('scoreTitle').style.display='block';
+  document.getElementById('finalScore').textContent=`${correct}/${total} corretas`;
+}
+
+/* EX1 */
+function checkEx1(){
+  const ans={
+    ex1_1:['kirei deshita','kireiでした'],
+    ex1_2:['nigiyaka desu','nigiyakaです'],
+    ex1_3:['shizuka janakatta desu','shizukaじゃなかったです'],
+    ex1_4:['benri desu','benriです'],
+    ex1_5:['genki janakatta desu','genkiじゃなかったです']
+  };
+  for(const id in ans){
+    const val=document.getElementById(id).value.trim().toLowerCase();
+    const ok=ans[id].some(x=>x.toLowerCase()===val);
+    addResult(ok); feedback(document.getElementById(id),ok);
+  }
+  showScore();
+}
+
+/* EX2 */
+function checkEx2(){
+  const key={q1:'b',q2:'b',q3:'a',q4:'a',q5:'a'};
+  ['q1','q2','q3','q4','q5'].forEach(q=>{
+    const selected=[...document.getElementsByName(q)].find(r=>r.checked)?.value||'';
+    const ok=selected===key[q];
+    addResult(ok);
+    const parent=document.getElementsByName(q)[0].closest('.multiple-choice');
+    feedback(parent,ok);
+  });
+  showScore();
+}
+
+/* EX3 */
+function checkEx3(){
+  const correctAns={fix1:'ng',fix2:'ng',fix3:'ok'};
+  ['fix1','fix2','fix3'].forEach(f=>{
+    const chosen=[...document.getElementsByName(f)].find(r=>r.checked)?.value||'';
+    const ok=chosen===correctAns[f];
+    addResult(ok);
+    const p=document.getElementsByName(f)[0].parentElement;
+    feedback(p,ok);
+  });
+  showScore();
+}
+
+/* EX4 */
+function checkEx4(){
+  const ans={ex4_1:'samui',ex4_2:'nigiyaka',ex4_3:'shizuka'};
+  ['ex4_1','ex4_2','ex4_3'].forEach(id=>{
+    const val=document.getElementById(id).value;
+    const ok=val===ans[id];
+    addResult(ok); feedback(document.getElementById(id),ok);
+  });
+  showScore();
+}
+
+/* EX5 */
+function checkEx5(){
+  const ans={
+  ex5_1:'kireide', ex5_2:'yumeina', ex5_3:'shizukani',
+  ex5_4:'nigiyakana', ex5_5:'benrina', ex5_6:'hirokute',
+  ex5_7:'oishii',    ex5_8:'omoshiroi', ex5_9:'utsukushikute'
+};
+['ex5_1','ex5_2','ex5_3','ex5_4','ex5_5','ex5_6','ex5_7','ex5_8','ex5_9'].forEach(id=>{
+    const val=document.getElementById(id).value;
+    const ok=val===ans[id];
+    addResult(ok); feedback(document.getElementById(id),ok);
+  });
+}
+</script>
+</body>
+</html>

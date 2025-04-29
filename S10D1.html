@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Nihongo – Exercícios Interativos</title>
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5ff;margin:0;padding:20px;color:#333}
+    .container{max-width:960px;margin:auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+    h1,h2{color:#512da8;text-align:center;margin:0 0 20px}
+    p,li{line-height:1.6;font-size:17px}
+    .romaji{display:block;font-style:italic;color:#666;font-size:15px;margin-bottom:6px}
+    input[type=text],select{width:92%;padding:8px;margin-top:4px;border:1px solid #bbb;border-radius:6px;font-size:16px}
+    .btn{background:#512da8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin:18px 0;transition:.2s}
+    .btn:hover{background:#6d48c7}
+    .multiple-choice label{display:block;margin:4px 0;cursor:pointer}
+    .feedback{font-weight:bold;margin-left:6px}
+    .storySel{width:auto;min-width:130px;padding:6px 8px}
+    .kBtn{
+      display:inline-block;margin:4px;border:1px solid #512da8;border-radius:6px;
+      padding:8px 12px;font-size:20px;cursor:pointer;background:#ede7f6;color:#512da8;
+      transition:.2s;
+    }
+    .kBtn:hover{background:#d1c4e9}
+    .tooltip {
+      position: relative;
+      cursor: pointer;
+      color: #4a148c;
+      background-color: rgba(74,20,140,0.1);
+      border-radius: 3px;
+      padding: 2px 4px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      width: 220px;
+      background-color: #4a148c;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      margin-left: -110px;
+    }
+    .tooltip.active .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    details{margin:12px 0}
+    summary{cursor:pointer;font-weight:bold;color:#512da8}
+    hr{border:none;border-top:1px solid #ddd;margin:36px 0}
+    @media(max-width:600px){input[type=text],select{width:100%}.btn{width:100%}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Exercícios Interativos</h1>
+
+  <!-- 1. PREÇO RELÂMPAGO -->
+  <h2>1 • Preço Relâmpago</h2>
+  <details><summary>Dica – Numerais em kanji</summary>
+    <p><strong>1‑10</strong> 一 ichi, 二 ni, 三 san, 四 yon, 五 go, 六 roku, 七 nana, 八 hachi, 九 kyū, 十 jū<br>
+    <strong>Dezenas</strong> 二十 ni‑jū, 四十 yon‑jū, etc.<br>
+    <strong>100‑10000</strong> 百 hyaku, 二百 ni‑hyaku, 三百 san‑byaku, 六百 roppyaku, 千 sen, 二千 ni‑sen, 三千 san‑zen, 万 man (10 000)<br>
+    Ex.: 2300 → 二千三百 (ni sen sanbyaku)</p>
+  </details>
+  <p>Digite <strong>apenas em romaji</strong> e termine com <code>en desu</code>.</p>
+  <ol>
+    <li>このマグカップは ________
+        <span class="romaji">kono magu kappu wa — (¥2 300)</span><br><input type="text" id="ex1_1"></li>
+    <li>そのＴシャツは ________
+        <span class="romaji">sono tīshatsu wa — (¥540)</span><br><input type="text" id="ex1_2"></li>
+    <li>あのホテルの一泊は ________
+        <span class="romaji">ano hoteru no ippaku wa — (¥12 000)</span><br><input type="text" id="ex1_3"></li>
+    <li>このイヤホンは ________
+        <span class="romaji">kono iyahon wa — (¥987)</span><br><input type="text" id="ex1_4"></li>
+    <li>地下鉄の一日券は ________
+        <span class="romaji">chikatetsu no ichinichi-ken wa — (¥1 600)</span><br><input type="text" id="ex1_5"></li>
+    <li>このリュックは ________
+        <span class="romaji">kono ryukku wa — (¥18 000)</span><br><input type="text" id="ex1_6"></li>
+    <li>映画のチケットは ________
+        <span class="romaji">eiga no chiketto wa — (¥1 600)</span><br><input type="text" id="ex1_7"></li>
+    <li>その傘は ________
+        <span class="romaji">sono kasa wa — (¥3 650)</span><br><input type="text" id="ex1_8"></li>
+  </ol>
+  <button class="btn" onclick="checkEx1()">Verificar</button>
+
+  <hr>
+
+  <!-- 2. FLEXÃO NINJA -->
+  <h2>2 • Flexões</h2>
+  <p>Escreva em <strong>romaji</strong>. As formas japonesas aparecem para referência.</p>
+  <ol>
+    <li>高い（たかい） <span class="romaji">takai</span> → passado afirm.: <input type="text" id="ex2_1"></li>
+    <li>静か（しずか） <span class="romaji">shizuka</span> → presente neg.: <input type="text" id="ex2_2"></li>
+    <li>食べる（たべる） <span class="romaji">taberu</span> → passado neg.: <input type="text" id="ex2_3"></li>
+    <li>試す（ためす） <span class="romaji">tamesu</span> → forma -tai: <input type="text" id="ex2_4"></li>
+    <li>行く（いく） <span class="romaji">iku</span> → forma -te: <input type="text" id="ex2_5"></li>
+    <li>便利（べんり） <span class="romaji">benri</span> → passado neg.: <input type="text" id="ex2_6"></li>
+  </ol>
+  <button class="btn" onclick="checkEx2()">Verificar</button>
+
+  <hr>
+
+  <!-- 3. CULTURA FLASH -->
+  <h2>3 • Cultura Flash – Verdadeiro ou Falso</h2>
+  <p>Marque ○ (verdadeiro) ou × (falso).</p>
+
+  <div class="multiple-choice">
+    <p><strong>1.</strong> 日本では電車が１分遅れても会社が謝ります。
+       <span class="romaji">Nihon de wa densha ga ichi-pun okurete mo kaisha ga ayamarimasu.</span></p>
+    <label><input type="radio" name="c1" value="true">○</label>
+    <label><input type="radio" name="c1" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>2.</strong> 温泉では水着を着るのが普通です。
+       <span class="romaji">Onsen de wa mizugi o kiru no ga futsū desu.</span></p>
+    <label><input type="radio" name="c2" value="true">○</label>
+    <label><input type="radio" name="c2" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>3.</strong> ４と９は縁起がいい数字です。
+       <span class="romaji">Yon to kyū wa engi ga ii sūji desu.</span></p>
+    <label><input type="radio" name="c3" value="true">○</label>
+    <label><input type="radio" name="c3" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>4.</strong> お土産は旅行から帰るときに友達へ渡します。
+       <span class="romaji">Omiyage wa ryokō kara kaeru toki ni tomodachi e watashimasu.</span></p>
+    <label><input type="radio" name="c4" value="true">○</label>
+    <label><input type="radio" name="c4" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>5.</strong> 日本の夏は涼しいです。
+       <span class="romaji">Nihon no natsu wa suzushii desu.</span></p>
+    <label><input type="radio" name="c5" value="true">○</label>
+    <label><input type="radio" name="c5" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>6.</strong> 箸でご飯を刺してはいけません。
+       <span class="romaji">Hashi de gohan o sashite wa ikemasen.</span></p>
+    <label><input type="radio" name="c6" value="true">○</label>
+    <label><input type="radio" name="c6" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>7.</strong> 日本のタクシーのドアは自分で開けます。
+       <span class="romaji">Nihon no takushī no doa wa jibun de akemasu.</span></p>
+    <label><input type="radio" name="c7" value="true">○</label>
+    <label><input type="radio" name="c7" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>8.</strong> 日本人はエスカレーターで必ず左側に立ちます。
+       <span class="romaji">Nihon-jin wa esukarētā de kanarazu hidari-gawa ni tachimasu.</span></p>
+    <label><input type="radio" name="c8" value="true">○</label>
+    <label><input type="radio" name="c8" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>9.</strong> レストランで食べ歩きしても大丈夫です。
+       <span class="romaji">Resutoran de tabe-aruki shite mo daijōbu desu.</span></p>
+    <label><input type="radio" name="c9" value="true">○</label>
+    <label><input type="radio" name="c9" value="false">×</label>
+  </div>
+
+  <div class="multiple-choice">
+    <p><strong>10.</strong> 日本人は公共の場で大声で電話するのが好きです。
+       <span class="romaji">Nihon-jin wa kōkyō no ba de ō-goe de denwa suru no ga suki desu.</span></p>
+    <label><input type="radio" name="c10" value="true">○</label>
+    <label><input type="radio" name="c10" value="false">×</label>
+  </div>
+
+  <button class="btn" onclick="checkEx3()">Verificar</button>
+
+  <hr>
+
+  <!-- 4. MINI-HISTÓRIA -->
+<h2>4 • Mini-História – Preencha os espaços</h2>
+
+<!-- DICA sobre formas -->
+<details>
+  <summary>Dica – Como usar adjetivos-i e adjetivos-na (+ formas conectivas)</summary>
+  <p>
+    <strong>1. Adjetivos-i (～い)</strong><br>
+    • Forma “sozinho” (descreve um estado):<br>
+    &nbsp;&nbsp;<code>おいしい</code> (oishii) = “delicioso”<br>
+    • Exemplo:<br>
+    &nbsp;&nbsp;このケーキは<strong>おいしい</strong>です。<br>
+    &nbsp;&nbsp;<span class="romaji">Kono kēki wa <strong>oishii</strong> desu.</span><br><br>
+
+    <strong>2. Conectando com ～くて</strong><br>
+    • Forma “‐kute” liga duas ideias:<br>
+    &nbsp;&nbsp;<code>おいしくて</code> = “é delicioso e…” ou “porque é delicioso…”<br>
+    • Exemplo:<br>
+    &nbsp;&nbsp;このケーキは<strong>おいしくて</strong>幸せです。<br>
+    &nbsp;&nbsp;<span class="romaji">Kono kēki wa <strong>oishikute</strong> shiawase desu.</span><br><br>
+
+    <strong>3. Adjetivos-na (～な)</strong><br>
+    • Forma “sozinho” antes de substantivo:<br>
+    &nbsp;&nbsp;<code>静かな</code> (shizuka na) = “tranquilo”<br>
+    • Exemplo:<br>
+    &nbsp;&nbsp;静かな<strong>公園</strong> (shizukana kōen) = “parque tranquilo”<br><br>
+
+    <strong>4. Conectando com ～で</strong><br>
+    • Forma “‐de” liga ideias:<br>
+    &nbsp;&nbsp;<code>静かで</code> = “é tranquilo e…”<br>
+    • Exemplo:<br>
+    &nbsp;&nbsp;この町は<strong>静かで</strong>安全です。<br>
+    &nbsp;&nbsp;<span class="romaji">Kono machi wa <strong>shizukade</strong> anzen desu.</span><br><br>
+  </p>
+</details>
+
+<p>Escolha o adjetivo (romaji) para cada lacuna.</p>
+
+<!-- Story 1 -->
+<p>
+  朝、市場で
+  <select id="ex4_1" class="storySel">
+    <option value="">--</option>
+    <option value="oishikute">おいしくて (oishikute)</option>
+    <option value="oishii">おいしい (oishii)</option>
+  </select>
+  パンを食べて、そのあと
+  <select id="ex4_2" class="storySel">
+    <option value="">--</option>
+    <option value="omoshiroina">面白いな (omoshiroi na)</option>
+    <option value="omoshiroi">面白い (omoshiroi)</option>
+  </select>
+  博物館へ行った。夜は景色が
+  <select id="ex4_3" class="storySel">
+    <option value="">--</option>
+    <option value="utsukushikute">美しくて (utsukushikute)</option>
+    <option value="utsukushii">美しい (utsukushii)</option>
+  </select>
+  感動した。
+</p>
+<span class="romaji">
+  Asa, ichiba de ___ pan o tabete, sono ato ___ hakubutsukan e itta.<br>
+  Yoru wa keshiki ga ___ kandō shita.
+  <span class="tooltip"><strong>?</strong><span class="tooltiptext">De manhã, comi pão delicioso no mercado; depois fui a um museu interessante. À noite a paisagem estava tão linda que me emocionou.</span></span>
+</span>
+
+<!-- Story 2 -->
+<p>
+  午前中は
+  <select id="ex4_4" class="storySel">
+    <option value="">--</option>
+    <option value="shizukade">静かで (shizuka de)</option>
+    <option value="shizukana">静かな (shizuka na)</option>
+  </select>
+  図書館で勉強した。午後は
+  <select id="ex4_5" class="storySel">
+    <option value="">--</option>
+    <option value="nigiyakade">にぎやかで (nigiyaka de)</option>
+    <option value="nigiyakana">にぎやかな (nigiyaka na)</option>
+  </select>
+  カフェで友達と話した。夜はホテルが
+  <select id="ex4_6" class="storySel">
+    <option value="">--</option>
+    <option value="takakute">高くて (takakute)</option>
+    <option value="takai">高い (takai)</option>
+  </select>
+  ちょっとショック！
+</p>
+<span class="romaji">
+  Gozen-chū wa ___ toshokan de benkyō shita.<br>
+  Gogo wa ___ kafe de tomodachi to hanashita.<br>
+  Yoru wa hoteru ga ___ chotto shokku!
+  <span class="tooltip"><strong>?</strong><span class="tooltiptext">De manhã estudei numa biblioteca silenciosa. À tarde conversei num café animado. À noite o hotel era caro e (por isso) levei choque!</span></span>
+</span>
+
+<!-- Story 3 -->
+<p>
+  午後は
+  <select id="ex4_7" class="storySel">
+    <option value="">--</option>
+    <option value="benride">便利で (benri de)</option>
+    <option value="benrina">便利な (benri na)</option>
+  </select>
+  アプリで道を調べた。夜は部屋が
+  <select id="ex4_8" class="storySel">
+    <option value="">--</option>
+    <option value="hirokute">広くて (hirokute)</option>
+    <option value="hiroi">広い (hiroi)</option>
+  </select>
+  リラックスできた。
+</p>
+<span class="romaji">
+  Gogo wa ___ apuri de michi o shirabeta.<br>
+  Yoru wa heya ga ___ rirakkusu dekita.
+  <span class="tooltip"><strong>?</strong><span class="tooltiptext">À tarde usei um app prático para ver o caminho. À noite relaxei num quarto bem amplo.</span></span>
+</span>
+
+<!-- Story 4 -->
+<p>
+  朝は天気が
+  <select id="ex4_9" class="storySel">
+    <option value="">--</option>
+    <option value="atsukute">暑くて (atsukute)</option>
+    <option value="atsui">暑い (atsui)</option>
+  </select>
+  、海は
+  <select id="ex4_10" class="storySel">
+    <option value="">--</option>
+    <option value="kireide">きれいで (kirei de)</option>
+    <option value="kireina">きれいな (kirei na)</option>
+  </select>
+  楽しかった！
+</p>
+<span class="romaji">
+  Asa wa tenki ga ___ , umi wa ___ tanoshikatta!
+  <span class="tooltip"><strong>?</strong><span class="tooltiptext">De manhã estava quente, mas o mar estava lindo e foi divertido!</span></span>
+</span>
+
+<button class="btn" onclick="checkEx4()">Verificar</button>
+
+<!-- 5. Jogo dos Números Kanji -->
+<hr>
+<h2>5 • Mini-Game – Monte o número em kanji!</h2>
+
+<div id="gameBox" style="text-align:center">
+  <p><span id="targetNum" style="font-weight:bold;font-size:24px">---</span></p>
+
+  <p>Kanji: <span id="currentOut" style="font-weight:bold;font-size:24px"></span></p>
+
+  <!-- Botões de kanji -->
+  <div id="kanjiPad" style="margin:10px 0"></div>
+
+  <button class="btn" id="back">← Apagar</button>
+  <button class="btn" id="clear">Limpar</button>
+  <button class="btn" id="next">Gerar número</button>
+
+  <p id="feedback" style="font-size:20px;height:28px"></p>
+</div>
+
+  <hr>
+
+  <button class="btn" onclick="exportAnswers()">Exportar Respostas</button>
+</div>
+
+<script>
+/* === Autosave & Export === */
+const LS_KEY = 'module2_answers';
+
+function save(){
+  const o = {};
+  // agora incluímos também todos os <select>
+  document.querySelectorAll('input[type="text"], select').forEach(el => {
+    o[el.id] = el.value;
+  });
+  // mantém o salvamento dos radios
+  [...new Set([...document.querySelectorAll('input[type="radio"]')].map(r=>r.name))]
+    .forEach(name => {
+      const checked = [...document.getElementsByName(name)].find(r=>r.checked);
+      if(checked) o[name] = checked.value;
+    });
+  localStorage.setItem(LS_KEY, JSON.stringify(o));
+}
+
+function exportAnswers(){
+  save();
+  const d = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+  const lines = [];
+
+  for(const [k, v] of Object.entries(d)){
+    if(!v) continue;
+
+    const el = document.getElementById(k);
+    // dropdowns: exporta o texto visível da opção selecionada
+    if(el && el.tagName === 'SELECT'){
+      const txt = el.options[el.selectedIndex].text;
+      lines.push(`${k}: ${txt}`);
+    }
+    // radios continuam como antes
+    else if(k.startsWith('c')){
+      const r = [...document.getElementsByName(k)].find(x=>x.value===v);
+      lines.push(`${k}: ${r ? r.parentElement.textContent.trim() : v}`);
+    }
+    // inputs de texto
+    else {
+      lines.push(`${k}: ${v}`);
+    }
+  }
+
+  const blob = new Blob([lines.join('\n')], {type:'text/plain'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'respostas_S10D1.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* === Feedback helpers === */
+let total=0,correct=0;
+function resetScore(){total=0;correct=0;}
+function add(ok){total++;if(ok)correct++;}
+function mark(el,ok){let fb=el.nextElementSibling;if(!fb||!fb.classList.contains('feedback')){fb=document.createElement('span');fb.className='feedback';el.insertAdjacentElement('afterend',fb);}fb.textContent=ok?' ✔️':' ❌';fb.style.color=ok?'green':'red';}
+function show(){document.getElementById('scoreTitle').style.display='block';document.getElementById('finalScore').textContent=`${correct}/${total} corretas`;}
+
+/* === Exercício 1 === */
+function checkEx1(){
+  resetScore();
+  const ans={
+    ex1_1:'ni sen sanbyaku en desu',
+    ex1_2:'go hyaku yonjū en desu',
+    ex1_3:'ichi man ni sen en desu',
+    ex1_4:'kyū hyaku hachijū nana en desu',
+    ex1_5:'sen roppyaku en desu',
+    ex1_6:'ichi man hassen en desu',
+    ex1_7:'sen roppyaku en desu',
+    ex1_8:'san zen roppyaku gojū en desu'
+  };
+  for(const id in ans){
+    const val=document.getElementById(id).value.trim().toLowerCase();
+    const ok=val===ans[id];
+    add(ok); mark(document.getElementById(id),ok);
+  }
+  show();
+}
+
+/* === Exercício 2 === */
+function checkEx2(){
+  resetScore();
+  const ans={
+    ex2_1:'takakatta',
+    ex2_2:'shizuka janai',
+    ex2_3:'tabenakatta',
+    ex2_4:'tameshite mitai',
+    ex2_5:'itte',
+    ex2_6:'benri janakatta'
+  };
+  for(const id in ans){
+    const val=document.getElementById(id).value.trim().toLowerCase();
+    const ok=val===ans[id];
+    add(ok); mark(document.getElementById(id),ok);
+  }
+  show();
+}
+
+/* === Exercício 3 (Cultura) === */
+function checkEx3(){
+  resetScore();
+  const key={c1:'true',c2:'false',c3:'false',c4:'true',c5:'false',c6:'true',c7:'false',c8:'true',c9:'false',c10:'false'};
+  Object.keys(key).forEach(name=>{
+    const sel=[...document.getElementsByName(name)].find(r=>r.checked)?.value||'';
+    const ok=sel===key[name];
+    add(ok);
+    const box=document.getElementsByName(name)[0].closest('.multiple-choice');
+    mark(box,ok);
+  });
+  show();
+}
+
+/* 4. Mini-História */
+function checkEx4(){
+  resetScore();
+  const ans={
+    ex4_1:'oishii',        ex4_2:'omoshiroi',     ex4_3:'utsukushikute',
+    ex4_4:'shizukana',     ex4_5:'nigiyakana',    ex4_6:'takakute',
+    ex4_7:'benrina',       ex4_8:'hirokute',
+    ex4_9:'atsukute',      ex4_10:'kireide'
+  };
+  Object.keys(ans).forEach(id=>{
+    const v=document.getElementById(id).value;
+    const ok=v===ans[id];add(ok);mark(document.getElementById(id),ok);
+  });
+  show();
+}
+
+/* --- Conversão até 99 999 (inclui 万) --- */
+function toKanji(num){
+  if(num===0) return '零';
+  const u=['','一','二','三','四','五','六','七','八','九'];
+  let k='';
+
+  const man=Math.floor(num/10000);
+  if(man){ k+=(man>1?u[man]:'')+'万'; num%=10000; }
+
+  const sen=Math.floor(num/1000);
+  if(sen){ k+=(sen>1?u[sen]:'')+'千'; num%=1000; }
+
+  const hyaku=Math.floor(num/100);
+  if(hyaku){ k+=(hyaku>1?u[hyaku]:'')+'百'; num%=100; }
+
+  const juu=Math.floor(num/10);
+  if(juu){ k+=(juu>1?u[juu]:'')+'十'; num%=10; }
+
+  if(num) k+=u[num];
+  return k;
+}
+
+/* --- Mini-game --- */
+const kanjiChars=['一','二','三','四','五','六','七','八','九','十','百','千','万'];
+const pad=document.getElementById('kanjiPad');
+pad.innerHTML='';      // limpamos se havia algo antigo
+kanjiChars.forEach(c=>{
+  const b=document.createElement('span');
+  b.textContent=c; b.className='kBtn';
+  b.onclick=()=>addKanji(c);
+  pad.appendChild(b);
+});
+
+document.getElementById('back').onclick=()=>{cur=cur.slice(0,-1); render();};
+document.getElementById('clear').onclick=()=>{cur=''; render();};
+document.getElementById('next').onclick=newNumber;
+
+let target=0, answer='', cur='';
+function newNumber(){
+  cur=''; document.getElementById('feedback').textContent='';
+  const r=Math.random();       // 0–1
+  if(r < 0.60){                // 60 %  (pequenos)
+    target = Math.floor(Math.random()*999)+1;              // 1–999
+  }else if(r < 0.70){          // 10 %  (médios)
+    target = Math.floor(Math.random()*9000)+1000;          // 1000–9999
+  }else{                       // 30 %  (grandes)
+    target = Math.floor(Math.random()*90000)+10000;        // 10000–99999
+  }
+  answer = toKanji(target);
+  document.getElementById('targetNum').textContent = target;
+  render();
+}
+function addKanji(c){
+  if(!target) return;
+  cur+=c; render();
+  if(answer.startsWith(cur)){
+    if(cur===answer){ document.getElementById('feedback').textContent='✔️ Correto!'; setTimeout(newNumber,1200); }
+  }else{
+    document.getElementById('feedback').textContent='❌ Tente de novo!';
+  }
+}
+function render(){
+  document.getElementById('currentOut').textContent=cur;
+  document.getElementById('feedback').textContent='';
+}
+newNumber();    // inicia o jogo
+
+// Tooltip handling for mobile devices
+if ('ontouchstart' in window) {
+      document.querySelectorAll('.tooltip').forEach(el => {
+        el.addEventListener('click', function(e) {
+          e.stopPropagation();
+          document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+            if (activeEl !== this) activeEl.classList.remove('active');
+          });
+          this.classList.toggle('active');
+        });
+      });
+      document.addEventListener('click', function() {
+        document.querySelectorAll('.tooltip.active').forEach(activeEl => {
+          activeEl.classList.remove('active');
+        });
+      });
+    }
+</script>
+</body>
+</html>

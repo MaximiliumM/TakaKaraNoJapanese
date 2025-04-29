@@ -52,7 +52,18 @@
         .then(files => {
           files
             .filter(f => f.name.endsWith('.html') && f.name !== 'index.html')
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => {
+              const parse = name => {
+                const match = name.match(/^S(\d+)D(\d+)\.html$/);
+                return match
+                  ? { season: parseInt(match[1], 10), day: parseInt(match[2], 10) }
+                  : { season: Infinity, day: Infinity };
+              };
+              const x = parse(a.name);
+              const y = parse(b.name);
+              if (x.season !== y.season) return x.season - y.season;
+              return x.day - y.day;
+            })
             .forEach(f => {
               const link = document.createElement('a');
               link.href = f.name;

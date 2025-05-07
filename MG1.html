@@ -97,7 +97,2080 @@
 
   <script>
   /* ========== Banco de questões (120) ========== */
-  const questionsData = [{"kanji":"死ぬ","kana":"しぬ","romaji":"shinu","translation":"morrer","form":"Forma volitiva","answer":"shinou","pieces":["shin","ou","ka","ku"]},{"kanji":"きれい","kana":"きれい","romaji":"kirei","translation":"bonito / limpo","form":"Adjetivo‑na Passado","answer":"kireidatta","pieces":["kirei","datta","ru","shi"]},{"kanji":"起きる","kana":"おきる","romaji":"okiru","translation":"acordar","form":"Forma polida (passado)","answer":"okimashita","pieces":["oki","mashita","da","ka"]},{"kanji":"する","kana":"する","romaji":"suru","translation":"fazer","form":"Forma negativa (informal)","answer":"shinai","pieces":["shi","nai","ru","i"]},{"kanji":"暑い","kana":"あつい","romaji":"atsui","translation":"quente","form":"Adjetivo‑i Passado","answer":"atsukatta","pieces":["atsu","katta","nai","da"]},{"kanji":"大きい","kana":"おおきい","romaji":"ookii","translation":"grande","form":"Adjetivo‑i Passado","answer":"ookikatta","pieces":["ooki","katta","ra","re"]},{"kanji":"便利","kana":"べんり","romaji":"benri","translation":"conveniente","form":"Adjetivo‑na Passado","answer":"benridatta","pieces":["benri","datta","nai","i"]},{"kanji":"見る","kana":"みる","romaji":"miru","translation":"ver","form":"Forma negativa passada (informal)","answer":"minakatta","pieces":["mi","nakatta","i","ru"]},{"kanji":"する","kana":"する","romaji":"suru","translation":"fazer","form":"Forma negativa (polida)","answer":"shimasen","pieces":["shi","masen","te","i"]},{"kanji":"見せる","kana":"みせる","romaji":"miseru","translation":"mostrar","form":"Forma negativa (polida)","answer":"misemasen","pieces":["mise","masen","shi","te"]}/* … ✂️ ≈ 110 linhas a mais … */];
+  const questionsData = [
+  {
+    "kanji": "嫌い",
+    "kana": "きらい",
+    "romaji": "kirai",
+    "translation": "desgostar",
+    "form": "Adjetivo‑na Presente",
+    "answer": "kiraida",
+    "pieces": [
+      "kirai",
+      "da",
+      "yo",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "起きる",
+    "kana": "おきる",
+    "romaji": "okiru",
+    "translation": "acordar",
+    "form": "Forma volitiva",
+    "answer": "okiyou",
+    "pieces": [
+      "oki",
+      "you",
+      "re",
+      "da"
+    ]
+  },
+  {
+    "kanji": "決める",
+    "kana": "きめる",
+    "romaji": "kimeru",
+    "translation": "decidir",
+    "form": "Forma te",
+    "answer": "kimete",
+    "pieces": [
+      "kime",
+      "te",
+      "ku",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "大きい",
+    "kana": "おおきい",
+    "romaji": "ookii",
+    "translation": "grande",
+    "form": "Adjetivo‑i Passado",
+    "answer": "ookikatta",
+    "pieces": [
+      "ooki",
+      "katta",
+      "yo",
+      "da"
+    ]
+  },
+  {
+    "kanji": "話す",
+    "kana": "はなす",
+    "romaji": "hanasu",
+    "translation": "falar",
+    "form": "Forma polida (presente)",
+    "answer": "hanasimasu",
+    "pieces": [
+      "hanasi",
+      "masu",
+      "te",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "寒い",
+    "kana": "さむい",
+    "romaji": "samui",
+    "translation": "frio",
+    "form": "Adjetivo‑i Passado",
+    "answer": "samukatta",
+    "pieces": [
+      "samu",
+      "katta",
+      "da",
+      "te"
+    ]
+  },
+  {
+    "kanji": "簡単",
+    "kana": "かんたん",
+    "romaji": "kantan",
+    "translation": "fácil",
+    "form": "Adjetivo‑na Presente",
+    "answer": "kantanda",
+    "pieces": [
+      "kantan",
+      "da",
+      "nai",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "賑やか",
+    "kana": "にぎやか",
+    "romaji": "nigiyaka",
+    "translation": "animado",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "nigiyakajanai",
+    "pieces": [
+      "nigiyakaja",
+      "nai",
+      "ru",
+      "te"
+    ]
+  },
+  {
+    "kanji": "見る",
+    "kana": "みる",
+    "romaji": "miru",
+    "translation": "ver",
+    "form": "Forma volitiva",
+    "answer": "miyou",
+    "pieces": [
+      "mi",
+      "you",
+      "shi",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "賑やか",
+    "kana": "にぎやか",
+    "romaji": "nigiyaka",
+    "translation": "animado",
+    "form": "Adjetivo‑na Passado",
+    "answer": "nigiyakadatta",
+    "pieces": [
+      "nigiyaka",
+      "datta",
+      "shi",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "買う",
+    "kana": "かう",
+    "romaji": "kau",
+    "translation": "comprar",
+    "form": "Forma negativa (polida)",
+    "answer": "kaimasen",
+    "pieces": [
+      "kai",
+      "masen",
+      "ku",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "有名",
+    "kana": "ゆうめい",
+    "romaji": "yuumei",
+    "translation": "famoso",
+    "form": "Adjetivo‑na Passado",
+    "answer": "yuumeidatta",
+    "pieces": [
+      "yuumei",
+      "datta",
+      "masu",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "暇",
+    "kana": "ひま",
+    "romaji": "hima",
+    "translation": "livre / tempo",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "himajanai",
+    "pieces": [
+      "himaja",
+      "nai",
+      "yo",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "考える",
+    "kana": "かんがえる",
+    "romaji": "kangaeru",
+    "translation": "pensar",
+    "form": "Forma negativa (polida)",
+    "answer": "kangaemasen",
+    "pieces": [
+      "kangae",
+      "masen",
+      "desu",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "上手",
+    "kana": "じょうず",
+    "romaji": "jouzu",
+    "translation": "habilidoso",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "jouzujanai",
+    "pieces": [
+      "jouzuja",
+      "nai",
+      "masu",
+      "re"
+    ]
+  },
+  {
+    "kanji": "新しい",
+    "kana": "あたらしい",
+    "romaji": "atarashii",
+    "translation": "novo",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "atarashikunai",
+    "pieces": [
+      "atarashiku",
+      "nai",
+      "te",
+      "re"
+    ]
+  },
+  {
+    "kanji": "決める",
+    "kana": "きめる",
+    "romaji": "kimeru",
+    "translation": "decidir",
+    "form": "Forma polida (passado)",
+    "answer": "kimemashita",
+    "pieces": [
+      "kime",
+      "mashita",
+      "ru",
+      "da"
+    ]
+  },
+  {
+    "kanji": "高い",
+    "kana": "たかい",
+    "romaji": "takai",
+    "translation": "caro / alto",
+    "form": "Adjetivo‑i Presente",
+    "answer": "takai",
+    "pieces": [
+      "ta",
+      "kai",
+      "nai",
+      "te"
+    ]
+  },
+  {
+    "kanji": "開ける",
+    "kana": "あける",
+    "romaji": "akeru",
+    "translation": "abrir",
+    "form": "Forma negativa passada (informal)",
+    "answer": "akenakatta",
+    "pieces": [
+      "ake",
+      "nakatta",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "元気",
+    "kana": "げんき",
+    "romaji": "genki",
+    "translation": "saudável / disposto",
+    "form": "Adjetivo‑na Presente",
+    "answer": "genkida",
+    "pieces": [
+      "genki",
+      "da",
+      "masu",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "賑やか",
+    "kana": "にぎやか",
+    "romaji": "nigiyaka",
+    "translation": "animado",
+    "form": "Adjetivo‑na Presente",
+    "answer": "nigiyakada",
+    "pieces": [
+      "nigiyaka",
+      "da",
+      "re",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "暇",
+    "kana": "ひま",
+    "romaji": "hima",
+    "translation": "livre / tempo",
+    "form": "Adjetivo‑na Passado",
+    "answer": "himadatta",
+    "pieces": [
+      "hima",
+      "datta",
+      "ka",
+      "re"
+    ]
+  },
+  {
+    "kanji": "死ぬ",
+    "kana": "しぬ",
+    "romaji": "shinu",
+    "translation": "morrer",
+    "form": "Forma polida (presente)",
+    "answer": "shinimasu",
+    "pieces": [
+      "shini",
+      "masu",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "上手",
+    "kana": "じょうず",
+    "romaji": "jouzu",
+    "translation": "habilidoso",
+    "form": "Adjetivo‑na Passado",
+    "answer": "jouzudatta",
+    "pieces": [
+      "jouzu",
+      "datta",
+      "yo",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "上手",
+    "kana": "じょうず",
+    "romaji": "jouzu",
+    "translation": "habilidoso",
+    "form": "Adjetivo‑na Presente",
+    "answer": "jouzuda",
+    "pieces": [
+      "jouzu",
+      "da",
+      "ka",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "寝る",
+    "kana": "ねる",
+    "romaji": "neru",
+    "translation": "dormir",
+    "form": "Forma negativa (informal)",
+    "answer": "nenai",
+    "pieces": [
+      "ne",
+      "nai",
+      "ru",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "小さい",
+    "kana": "ちいさい",
+    "romaji": "chiisai",
+    "translation": "pequeno",
+    "form": "Adjetivo‑i Presente",
+    "answer": "chiisai",
+    "pieces": [
+      "chi",
+      "isai",
+      "re",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "面白い",
+    "kana": "おもしろい",
+    "romaji": "omoshiroi",
+    "translation": "interessante",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "omoshirokunai",
+    "pieces": [
+      "omoshiroku",
+      "nai",
+      "ka",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "来る",
+    "kana": "くる",
+    "romaji": "kuru",
+    "translation": "vir",
+    "form": "Forma polida (passado)",
+    "answer": "kimashita",
+    "pieces": [
+      "ki",
+      "mashita",
+      "ka",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "嫌い",
+    "kana": "きらい",
+    "romaji": "kirai",
+    "translation": "desgostar",
+    "form": "Adjetivo‑na Passado",
+    "answer": "kiraidatta",
+    "pieces": [
+      "kirai",
+      "datta",
+      "nai",
+      "re"
+    ]
+  },
+  {
+    "kanji": "遊ぶ",
+    "kana": "あそぶ",
+    "romaji": "asobu",
+    "translation": "brincar",
+    "form": "Forma negativa (informal)",
+    "answer": "asobanai",
+    "pieces": [
+      "asoba",
+      "nai",
+      "re",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "元気",
+    "kana": "げんき",
+    "romaji": "genki",
+    "translation": "saudável / disposto",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "genkijanai",
+    "pieces": [
+      "genkija",
+      "nai",
+      "ka",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "待つ",
+    "kana": "まつ",
+    "romaji": "matsu",
+    "translation": "esperar",
+    "form": "Forma negativa (polida)",
+    "answer": "matsimasen",
+    "pieces": [
+      "matsi",
+      "masen",
+      "nai",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "遊ぶ",
+    "kana": "あそぶ",
+    "romaji": "asobu",
+    "translation": "brincar",
+    "form": "Forma te",
+    "answer": "asobtte",
+    "pieces": [
+      "asob",
+      "tte",
+      "desu",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "泳ぐ",
+    "kana": "およぐ",
+    "romaji": "oyogu",
+    "translation": "nadar",
+    "form": "Forma te",
+    "answer": "oyogtte",
+    "pieces": [
+      "oyog",
+      "tte",
+      "masu",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "泳ぐ",
+    "kana": "およぐ",
+    "romaji": "oyogu",
+    "translation": "nadar",
+    "form": "Forma negativa (polida)",
+    "answer": "oyogimasen",
+    "pieces": [
+      "oyogi",
+      "masen",
+      "ra",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "書く",
+    "kana": "かく",
+    "romaji": "kaku",
+    "translation": "escrever",
+    "form": "Forma polida (presente)",
+    "answer": "kakimasu",
+    "pieces": [
+      "kaki",
+      "masu",
+      "shi",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "小さい",
+    "kana": "ちいさい",
+    "romaji": "chiisai",
+    "translation": "pequeno",
+    "form": "Adjetivo‑i Passado",
+    "answer": "chiisakatta",
+    "pieces": [
+      "chiisa",
+      "katta",
+      "desu",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "新しい",
+    "kana": "あたらしい",
+    "romaji": "atarashii",
+    "translation": "novo",
+    "form": "Adjetivo‑i Passado",
+    "answer": "atarashikatta",
+    "pieces": [
+      "atarashi",
+      "katta",
+      "nai",
+      "re"
+    ]
+  },
+  {
+    "kanji": "書く",
+    "kana": "かく",
+    "romaji": "kaku",
+    "translation": "escrever",
+    "form": "Forma volitiva",
+    "answer": "kakou",
+    "pieces": [
+      "ka",
+      "kou",
+      "nai",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "手伝う",
+    "kana": "てつだう",
+    "romaji": "tetsudau",
+    "translation": "ajudar",
+    "form": "Forma volitiva",
+    "answer": "tetsudaou",
+    "pieces": [
+      "tetsuda",
+      "ou",
+      "shi",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "飲む",
+    "kana": "のむ",
+    "romaji": "nomu",
+    "translation": "beber",
+    "form": "Forma negativa (informal)",
+    "answer": "nomanai",
+    "pieces": [
+      "noma",
+      "nai",
+      "desu",
+      "te"
+    ]
+  },
+  {
+    "kanji": "嫌い",
+    "kana": "きらい",
+    "romaji": "kirai",
+    "translation": "desgostar",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "kiraijanai",
+    "pieces": [
+      "kiraija",
+      "nai",
+      "da",
+      "te"
+    ]
+  },
+  {
+    "kanji": "見る",
+    "kana": "みる",
+    "romaji": "miru",
+    "translation": "ver",
+    "form": "Forma polida (passado)",
+    "answer": "mimashita",
+    "pieces": [
+      "mi",
+      "mashita",
+      "te",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "見せる",
+    "kana": "みせる",
+    "romaji": "miseru",
+    "translation": "mostrar",
+    "form": "Forma negativa (informal)",
+    "answer": "misenai",
+    "pieces": [
+      "mise",
+      "nai",
+      "ta",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "待つ",
+    "kana": "まつ",
+    "romaji": "matsu",
+    "translation": "esperar",
+    "form": "Forma negativa (informal)",
+    "answer": "matsanai",
+    "pieces": [
+      "matsa",
+      "nai",
+      "shi",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "泳ぐ",
+    "kana": "およぐ",
+    "romaji": "oyogu",
+    "translation": "nadar",
+    "form": "Forma negativa (informal)",
+    "answer": "oyoganai",
+    "pieces": [
+      "oyoga",
+      "nai",
+      "re",
+      "da"
+    ]
+  },
+  {
+    "kanji": "静か",
+    "kana": "しずか",
+    "romaji": "shizuka",
+    "translation": "silencioso",
+    "form": "Adjetivo‑na Passado",
+    "answer": "shizukadatta",
+    "pieces": [
+      "shizuka",
+      "datta",
+      "nai",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "面白い",
+    "kana": "おもしろい",
+    "romaji": "omoshiroi",
+    "translation": "interessante",
+    "form": "Adjetivo‑i Passado",
+    "answer": "omoshirokatta",
+    "pieces": [
+      "omoshiro",
+      "katta",
+      "nai",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "有名",
+    "kana": "ゆうめい",
+    "romaji": "yuumei",
+    "translation": "famoso",
+    "form": "Adjetivo‑na Presente",
+    "answer": "yuumeida",
+    "pieces": [
+      "yuumei",
+      "da",
+      "masu",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "開ける",
+    "kana": "あける",
+    "romaji": "akeru",
+    "translation": "abrir",
+    "form": "Forma te",
+    "answer": "akete",
+    "pieces": [
+      "ake",
+      "te",
+      "ku",
+      "re"
+    ]
+  },
+  {
+    "kanji": "暇",
+    "kana": "ひま",
+    "romaji": "hima",
+    "translation": "livre / tempo",
+    "form": "Adjetivo‑na Presente",
+    "answer": "himada",
+    "pieces": [
+      "hima",
+      "da",
+      "masu",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "元気",
+    "kana": "げんき",
+    "romaji": "genki",
+    "translation": "saudável / disposto",
+    "form": "Adjetivo‑na Passado",
+    "answer": "genkidatta",
+    "pieces": [
+      "genki",
+      "datta",
+      "yo",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "古い",
+    "kana": "ふるい",
+    "romaji": "furui",
+    "translation": "antigo",
+    "form": "Adjetivo‑i Presente",
+    "answer": "furui",
+    "pieces": [
+      "fu",
+      "rui",
+      "ta",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "食べる",
+    "kana": "たべる",
+    "romaji": "taberu",
+    "translation": "comer",
+    "form": "Forma te",
+    "answer": "tabete",
+    "pieces": [
+      "tabe",
+      "te",
+      "yo",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "する",
+    "kana": "する",
+    "romaji": "suru",
+    "translation": "fazer",
+    "form": "Forma polida (passado)",
+    "answer": "shimashita",
+    "pieces": [
+      "shi",
+      "mashita",
+      "desu",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "飲む",
+    "kana": "のむ",
+    "romaji": "nomu",
+    "translation": "beber",
+    "form": "Forma polida (presente)",
+    "answer": "nomimasu",
+    "pieces": [
+      "nomi",
+      "masu",
+      "ru",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "考える",
+    "kana": "かんがえる",
+    "romaji": "kangaeru",
+    "translation": "pensar",
+    "form": "Forma polida (passado)",
+    "answer": "kangaemashita",
+    "pieces": [
+      "kangae",
+      "mashita",
+      "masu",
+      "re"
+    ]
+  },
+  {
+    "kanji": "大きい",
+    "kana": "おおきい",
+    "romaji": "ookii",
+    "translation": "grande",
+    "form": "Adjetivo‑i Presente",
+    "answer": "ookii",
+    "pieces": [
+      "oo",
+      "kii",
+      "nai",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "古い",
+    "kana": "ふるい",
+    "romaji": "furui",
+    "translation": "antigo",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "furukunai",
+    "pieces": [
+      "furuku",
+      "nai",
+      "da",
+      "te"
+    ]
+  },
+  {
+    "kanji": "おいしい",
+    "kana": "おいしい",
+    "romaji": "oishii",
+    "translation": "delicioso",
+    "form": "Adjetivo‑i Presente",
+    "answer": "oishii",
+    "pieces": [
+      "ois",
+      "hii",
+      "ku",
+      "re"
+    ]
+  },
+  {
+    "kanji": "新しい",
+    "kana": "あたらしい",
+    "romaji": "atarashii",
+    "translation": "novo",
+    "form": "Adjetivo‑i Presente",
+    "answer": "atarashii",
+    "pieces": [
+      "atar",
+      "ashii",
+      "nai",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "食べる",
+    "kana": "たべる",
+    "romaji": "taberu",
+    "translation": "comer",
+    "form": "Forma volitiva",
+    "answer": "tabeyou",
+    "pieces": [
+      "tabe",
+      "you",
+      "da",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "古い",
+    "kana": "ふるい",
+    "romaji": "furui",
+    "translation": "antigo",
+    "form": "Adjetivo‑i Passado",
+    "answer": "furukatta",
+    "pieces": [
+      "furu",
+      "katta",
+      "desu",
+      "da"
+    ]
+  },
+  {
+    "kanji": "する",
+    "kana": "する",
+    "romaji": "suru",
+    "translation": "fazer",
+    "form": "Forma negativa passada (informal)",
+    "answer": "shinakatta",
+    "pieces": [
+      "shi",
+      "nakatta",
+      "da",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "死ぬ",
+    "kana": "しぬ",
+    "romaji": "shinu",
+    "translation": "morrer",
+    "form": "Forma negativa (informal)",
+    "answer": "shinanai",
+    "pieces": [
+      "shina",
+      "nai",
+      "te",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "手伝う",
+    "kana": "てつだう",
+    "romaji": "tetsudau",
+    "translation": "ajudar",
+    "form": "Forma negativa (informal)",
+    "answer": "tetsudaanai",
+    "pieces": [
+      "tetsudaa",
+      "nai",
+      "re",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "書く",
+    "kana": "かく",
+    "romaji": "kaku",
+    "translation": "escrever",
+    "form": "Forma negativa (informal)",
+    "answer": "kakanai",
+    "pieces": [
+      "kaka",
+      "nai",
+      "re",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "高い",
+    "kana": "たかい",
+    "romaji": "takai",
+    "translation": "caro / alto",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "takakunai",
+    "pieces": [
+      "takaku",
+      "nai",
+      "yo",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "静か",
+    "kana": "しずか",
+    "romaji": "shizuka",
+    "translation": "silencioso",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "shizukajanai",
+    "pieces": [
+      "shizukaja",
+      "nai",
+      "da",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "暑い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translation": "quente",
+    "form": "Adjetivo‑i Passado",
+    "answer": "atsukatta",
+    "pieces": [
+      "atsu",
+      "katta",
+      "ra",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "行く",
+    "kana": "いく",
+    "romaji": "iku",
+    "translation": "ir",
+    "form": "Forma volitiva",
+    "answer": "ikou",
+    "pieces": [
+      "i",
+      "kou",
+      "ta",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "安い",
+    "kana": "やすい",
+    "romaji": "yasui",
+    "translation": "barato",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "yasukunai",
+    "pieces": [
+      "yasuku",
+      "nai",
+      "ru",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "おいしい",
+    "kana": "おいしい",
+    "romaji": "oishii",
+    "translation": "delicioso",
+    "form": "Adjetivo‑i Passado",
+    "answer": "oishikatta",
+    "pieces": [
+      "oishi",
+      "katta",
+      "yo",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "する",
+    "kana": "する",
+    "romaji": "suru",
+    "translation": "fazer",
+    "form": "Forma te",
+    "answer": "shite",
+    "pieces": [
+      "shi",
+      "te",
+      "ka",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "起きる",
+    "kana": "おきる",
+    "romaji": "okiru",
+    "translation": "acordar",
+    "form": "Forma negativa (polida)",
+    "answer": "okimasen",
+    "pieces": [
+      "oki",
+      "masen",
+      "te",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "手伝う",
+    "kana": "てつだう",
+    "romaji": "tetsudau",
+    "translation": "ajudar",
+    "form": "Forma negativa passada (informal)",
+    "answer": "tetsudaanakatta",
+    "pieces": [
+      "tetsudaa",
+      "nakatta",
+      "desu",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "話す",
+    "kana": "はなす",
+    "romaji": "hanasu",
+    "translation": "falar",
+    "form": "Forma polida (passado)",
+    "answer": "hanasimashita",
+    "pieces": [
+      "hanasi",
+      "mashita",
+      "masu",
+      "te"
+    ]
+  },
+  {
+    "kanji": "行く",
+    "kana": "いく",
+    "romaji": "iku",
+    "translation": "ir",
+    "form": "Forma polida (presente)",
+    "answer": "ikimasu",
+    "pieces": [
+      "iki",
+      "masu",
+      "nai",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "買う",
+    "kana": "かう",
+    "romaji": "kau",
+    "translation": "comprar",
+    "form": "Forma volitiva",
+    "answer": "kaou",
+    "pieces": [
+      "ka",
+      "ou",
+      "te",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "安い",
+    "kana": "やすい",
+    "romaji": "yasui",
+    "translation": "barato",
+    "form": "Adjetivo‑i Passado",
+    "answer": "yasukatta",
+    "pieces": [
+      "yasu",
+      "katta",
+      "shi",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "出る",
+    "kana": "でる",
+    "romaji": "deru",
+    "translation": "sair",
+    "form": "Forma negativa passada (informal)",
+    "answer": "denakatta",
+    "pieces": [
+      "de",
+      "nakatta",
+      "nai",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "起きる",
+    "kana": "おきる",
+    "romaji": "okiru",
+    "translation": "acordar",
+    "form": "Forma polida (presente)",
+    "answer": "okimasu",
+    "pieces": [
+      "oki",
+      "masu",
+      "re",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "死ぬ",
+    "kana": "しぬ",
+    "romaji": "shinu",
+    "translation": "morrer",
+    "form": "Forma volitiva",
+    "answer": "shinou",
+    "pieces": [
+      "shin",
+      "ou",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "暑い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translation": "quente",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "atsukunai",
+    "pieces": [
+      "atsuku",
+      "nai",
+      "ta",
+      "da"
+    ]
+  },
+  {
+    "kanji": "見る",
+    "kana": "みる",
+    "romaji": "miru",
+    "translation": "ver",
+    "form": "Forma negativa passada (informal)",
+    "answer": "minakatta",
+    "pieces": [
+      "mi",
+      "nakatta",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "する",
+    "kana": "する",
+    "romaji": "suru",
+    "translation": "fazer",
+    "form": "Forma volitiva",
+    "answer": "shiyou",
+    "pieces": [
+      "shi",
+      "you",
+      "nai",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "教える",
+    "kana": "おしえる",
+    "romaji": "oshieru",
+    "translation": "ensinar",
+    "form": "Forma polida (presente)",
+    "answer": "oshiemasu",
+    "pieces": [
+      "oshie",
+      "masu",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "決める",
+    "kana": "きめる",
+    "romaji": "kimeru",
+    "translation": "decidir",
+    "form": "Forma negativa (polida)",
+    "answer": "kimemasen",
+    "pieces": [
+      "kime",
+      "masen",
+      "masu",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "有名",
+    "kana": "ゆうめい",
+    "romaji": "yuumei",
+    "translation": "famoso",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "yuumeijanai",
+    "pieces": [
+      "yuumeija",
+      "nai",
+      "re",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "待つ",
+    "kana": "まつ",
+    "romaji": "matsu",
+    "translation": "esperar",
+    "form": "Forma polida (presente)",
+    "answer": "matsimasu",
+    "pieces": [
+      "matsi",
+      "masu",
+      "desu",
+      "da"
+    ]
+  },
+  {
+    "kanji": "出る",
+    "kana": "でる",
+    "romaji": "deru",
+    "translation": "sair",
+    "form": "Forma te",
+    "answer": "dete",
+    "pieces": [
+      "de",
+      "te",
+      "re",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "教える",
+    "kana": "おしえる",
+    "romaji": "oshieru",
+    "translation": "ensinar",
+    "form": "Forma te",
+    "answer": "oshiete",
+    "pieces": [
+      "oshie",
+      "te",
+      "ku",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "寒い",
+    "kana": "さむい",
+    "romaji": "samui",
+    "translation": "frio",
+    "form": "Adjetivo‑i Presente",
+    "answer": "samui",
+    "pieces": [
+      "sa",
+      "mui",
+      "ka",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "静か",
+    "kana": "しずか",
+    "romaji": "shizuka",
+    "translation": "silencioso",
+    "form": "Adjetivo‑na Presente",
+    "answer": "shizukada",
+    "pieces": [
+      "shizuka",
+      "da",
+      "nai",
+      "re"
+    ]
+  },
+  {
+    "kanji": "遊ぶ",
+    "kana": "あそぶ",
+    "romaji": "asobu",
+    "translation": "brincar",
+    "form": "Forma polida (passado)",
+    "answer": "asobimashita",
+    "pieces": [
+      "asobi",
+      "mashita",
+      "te",
+      "re"
+    ]
+  },
+  {
+    "kanji": "食べる",
+    "kana": "たべる",
+    "romaji": "taberu",
+    "translation": "comer",
+    "form": "Forma polida (presente)",
+    "answer": "tabemasu",
+    "pieces": [
+      "tabe",
+      "masu",
+      "ka",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "高い",
+    "kana": "たかい",
+    "romaji": "takai",
+    "translation": "caro / alto",
+    "form": "Adjetivo‑i Passado",
+    "answer": "takakatta",
+    "pieces": [
+      "taka",
+      "katta",
+      "shi",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "寝る",
+    "kana": "ねる",
+    "romaji": "neru",
+    "translation": "dormir",
+    "form": "Forma polida (presente)",
+    "answer": "nemasu",
+    "pieces": [
+      "ne",
+      "masu",
+      "ra",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "出る",
+    "kana": "でる",
+    "romaji": "deru",
+    "translation": "sair",
+    "form": "Forma negativa (polida)",
+    "answer": "demasen",
+    "pieces": [
+      "de",
+      "masen",
+      "nai",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "話す",
+    "kana": "はなす",
+    "romaji": "hanasu",
+    "translation": "falar",
+    "form": "Forma te",
+    "answer": "hanastte",
+    "pieces": [
+      "hanas",
+      "tte",
+      "ka",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "教える",
+    "kana": "おしえる",
+    "romaji": "oshieru",
+    "translation": "ensinar",
+    "form": "Forma negativa (informal)",
+    "answer": "oshienai",
+    "pieces": [
+      "oshie",
+      "nai",
+      "ru",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "飲む",
+    "kana": "のむ",
+    "romaji": "nomu",
+    "translation": "beber",
+    "form": "Forma negativa passada (informal)",
+    "answer": "nomanakatta",
+    "pieces": [
+      "noma",
+      "nakatta",
+      "shi",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "便利",
+    "kana": "べんり",
+    "romaji": "benri",
+    "translation": "conveniente",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "benrijanai",
+    "pieces": [
+      "benrija",
+      "nai",
+      "ta",
+      "te"
+    ]
+  },
+  {
+    "kanji": "小さい",
+    "kana": "ちいさい",
+    "romaji": "chiisai",
+    "translation": "pequeno",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "chiisakunai",
+    "pieces": [
+      "chiisaku",
+      "nai",
+      "re",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "寒い",
+    "kana": "さむい",
+    "romaji": "samui",
+    "translation": "frio",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "samukunai",
+    "pieces": [
+      "samuku",
+      "nai",
+      "re",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "決める",
+    "kana": "きめる",
+    "romaji": "kimeru",
+    "translation": "decidir",
+    "form": "Forma polida (presente)",
+    "answer": "kimemasu",
+    "pieces": [
+      "kime",
+      "masu",
+      "ta",
+      "shi"
+    ]
+  },
+  {
+    "kanji": "見せる",
+    "kana": "みせる",
+    "romaji": "miseru",
+    "translation": "mostrar",
+    "form": "Forma negativa passada (informal)",
+    "answer": "misenakatta",
+    "pieces": [
+      "mise",
+      "nakatta",
+      "da",
+      "te"
+    ]
+  },
+  {
+    "kanji": "話す",
+    "kana": "はなす",
+    "romaji": "hanasu",
+    "translation": "falar",
+    "form": "Forma negativa (informal)",
+    "answer": "hanasanai",
+    "pieces": [
+      "hanasa",
+      "nai",
+      "re",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "寝る",
+    "kana": "ねる",
+    "romaji": "neru",
+    "translation": "dormir",
+    "form": "Forma volitiva",
+    "answer": "neyou",
+    "pieces": [
+      "ne",
+      "you",
+      "ka",
+      "da"
+    ]
+  },
+  {
+    "kanji": "飲む",
+    "kana": "のむ",
+    "romaji": "nomu",
+    "translation": "beber",
+    "form": "Forma volitiva",
+    "answer": "nomou",
+    "pieces": [
+      "nom",
+      "ou",
+      "ku",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "教える",
+    "kana": "おしえる",
+    "romaji": "oshieru",
+    "translation": "ensinar",
+    "form": "Forma volitiva",
+    "answer": "oshieyou",
+    "pieces": [
+      "oshie",
+      "you",
+      "ra",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "簡単",
+    "kana": "かんたん",
+    "romaji": "kantan",
+    "translation": "fácil",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "kantanjanai",
+    "pieces": [
+      "kantanja",
+      "nai",
+      "te",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "安い",
+    "kana": "やすい",
+    "romaji": "yasui",
+    "translation": "barato",
+    "form": "Adjetivo‑i Presente",
+    "answer": "yasui",
+    "pieces": [
+      "ya",
+      "sui",
+      "ka",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "泳ぐ",
+    "kana": "およぐ",
+    "romaji": "oyogu",
+    "translation": "nadar",
+    "form": "Forma volitiva",
+    "answer": "oyogou",
+    "pieces": [
+      "oyog",
+      "ou",
+      "re",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "面白い",
+    "kana": "おもしろい",
+    "romaji": "omoshiroi",
+    "translation": "interessante",
+    "form": "Adjetivo‑i Presente",
+    "answer": "omoshiroi",
+    "pieces": [
+      "omos",
+      "hiroi",
+      "re",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "待つ",
+    "kana": "まつ",
+    "romaji": "matsu",
+    "translation": "esperar",
+    "form": "Forma polida (passado)",
+    "answer": "matsimashita",
+    "pieces": [
+      "matsi",
+      "mashita",
+      "masu",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "おいしい",
+    "kana": "おいしい",
+    "romaji": "oishii",
+    "translation": "delicioso",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "oishikunai",
+    "pieces": [
+      "oishiku",
+      "nai",
+      "te",
+      "da"
+    ]
+  },
+  {
+    "kanji": "買う",
+    "kana": "かう",
+    "romaji": "kau",
+    "translation": "comprar",
+    "form": "Forma polida (presente)",
+    "answer": "kaimasu",
+    "pieces": [
+      "kai",
+      "masu",
+      "da",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "開ける",
+    "kana": "あける",
+    "romaji": "akeru",
+    "translation": "abrir",
+    "form": "Forma polida (passado)",
+    "answer": "akemashita",
+    "pieces": [
+      "ake",
+      "mashita",
+      "ra",
+      "re"
+    ]
+  },
+  {
+    "kanji": "遊ぶ",
+    "kana": "あそぶ",
+    "romaji": "asobu",
+    "translation": "brincar",
+    "form": "Forma negativa (polida)",
+    "answer": "asobimasen",
+    "pieces": [
+      "asobi",
+      "masen",
+      "re",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "手伝う",
+    "kana": "てつだう",
+    "romaji": "tetsudau",
+    "translation": "ajudar",
+    "form": "Forma polida (presente)",
+    "answer": "tetsudaimasu",
+    "pieces": [
+      "tetsudai",
+      "masu",
+      "re",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "便利",
+    "kana": "べんり",
+    "romaji": "benri",
+    "translation": "conveniente",
+    "form": "Adjetivo‑na Passado",
+    "answer": "benridatta",
+    "pieces": [
+      "benri",
+      "datta",
+      "ku",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "出る",
+    "kana": "でる",
+    "romaji": "deru",
+    "translation": "sair",
+    "form": "Forma polida (passado)",
+    "answer": "demashita",
+    "pieces": [
+      "de",
+      "mashita",
+      "ru",
+      "da"
+    ]
+  },
+  {
+    "kanji": "食べる",
+    "kana": "たべる",
+    "romaji": "taberu",
+    "translation": "comer",
+    "form": "Forma negativa (polida)",
+    "answer": "tabemasen",
+    "pieces": [
+      "tabe",
+      "masen",
+      "ra",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "行く",
+    "kana": "いく",
+    "romaji": "iku",
+    "translation": "ir",
+    "form": "Forma negativa passada (informal)",
+    "answer": "ikanakatta",
+    "pieces": [
+      "ika",
+      "nakatta",
+      "re",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "見る",
+    "kana": "みる",
+    "romaji": "miru",
+    "translation": "ver",
+    "form": "Forma negativa (informal)",
+    "answer": "minai",
+    "pieces": [
+      "mi",
+      "nai",
+      "te",
+      "da"
+    ]
+  },
+  {
+    "kanji": "買う",
+    "kana": "かう",
+    "romaji": "kau",
+    "translation": "comprar",
+    "form": "Forma te",
+    "answer": "katte",
+    "pieces": [
+      "ka",
+      "tte",
+      "ku",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "行く",
+    "kana": "いく",
+    "romaji": "iku",
+    "translation": "ir",
+    "form": "Forma te",
+    "answer": "itte",
+    "pieces": [
+      "i",
+      "tte",
+      "ru",
+      "re"
+    ]
+  },
+  {
+    "kanji": "考える",
+    "kana": "かんがえる",
+    "romaji": "kangaeru",
+    "translation": "pensar",
+    "form": "Forma volitiva",
+    "answer": "kangaeyou",
+    "pieces": [
+      "kangae",
+      "you",
+      "da",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "起きる",
+    "kana": "おきる",
+    "romaji": "okiru",
+    "translation": "acordar",
+    "form": "Forma te",
+    "answer": "okite",
+    "pieces": [
+      "oki",
+      "te",
+      "yo",
+      "desu"
+    ]
+  },
+  {
+    "kanji": "考える",
+    "kana": "かんがえる",
+    "romaji": "kangaeru",
+    "translation": "pensar",
+    "form": "Forma te",
+    "answer": "kangaete",
+    "pieces": [
+      "kangae",
+      "te",
+      "shi",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "大きい",
+    "kana": "おおきい",
+    "romaji": "ookii",
+    "translation": "grande",
+    "form": "Adjetivo‑i Negativa",
+    "answer": "ookikunai",
+    "pieces": [
+      "ookiku",
+      "nai",
+      "ra",
+      "ta"
+    ]
+  },
+  {
+    "kanji": "書く",
+    "kana": "かく",
+    "romaji": "kaku",
+    "translation": "escrever",
+    "form": "Forma negativa passada (informal)",
+    "answer": "kakanakatta",
+    "pieces": [
+      "kaka",
+      "nakatta",
+      "desu",
+      "re"
+    ]
+  },
+  {
+    "kanji": "開ける",
+    "kana": "あける",
+    "romaji": "akeru",
+    "translation": "abrir",
+    "form": "Forma negativa (polida)",
+    "answer": "akemasen",
+    "pieces": [
+      "ake",
+      "masen",
+      "ku",
+      "da"
+    ]
+  },
+  {
+    "kanji": "来る",
+    "kana": "くる",
+    "romaji": "kuru",
+    "translation": "vir",
+    "form": "Forma volitiva",
+    "answer": "koyou",
+    "pieces": [
+      "ko",
+      "you",
+      "ka",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "死ぬ",
+    "kana": "しぬ",
+    "romaji": "shinu",
+    "translation": "morrer",
+    "form": "Forma te",
+    "answer": "shintte",
+    "pieces": [
+      "shin",
+      "tte",
+      "ra",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "寝る",
+    "kana": "ねる",
+    "romaji": "neru",
+    "translation": "dormir",
+    "form": "Forma te",
+    "answer": "nete",
+    "pieces": [
+      "ne",
+      "te",
+      "ta",
+      "yo"
+    ]
+  },
+  {
+    "kanji": "暑い",
+    "kana": "あつい",
+    "romaji": "atsui",
+    "translation": "quente",
+    "form": "Adjetivo‑i Presente",
+    "answer": "atsui",
+    "pieces": [
+      "at",
+      "sui",
+      "ta",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "便利",
+    "kana": "べんり",
+    "romaji": "benri",
+    "translation": "conveniente",
+    "form": "Adjetivo‑na Presente",
+    "answer": "benrida",
+    "pieces": [
+      "benri",
+      "da",
+      "te",
+      "ka"
+    ]
+  },
+  {
+    "kanji": "見せる",
+    "kana": "みせる",
+    "romaji": "miseru",
+    "translation": "mostrar",
+    "form": "Forma negativa (polida)",
+    "answer": "misemasen",
+    "pieces": [
+      "mise",
+      "masen",
+      "te",
+      "masu"
+    ]
+  },
+  {
+    "kanji": "きれい",
+    "kana": "きれい",
+    "romaji": "kirei",
+    "translation": "bonito / limpo",
+    "form": "Adjetivo‑na Passado",
+    "answer": "kireidatta",
+    "pieces": [
+      "kirei",
+      "datta",
+      "ku",
+      "nai"
+    ]
+  },
+  {
+    "kanji": "見せる",
+    "kana": "みせる",
+    "romaji": "miseru",
+    "translation": "mostrar",
+    "form": "Forma polida (passado)",
+    "answer": "misemashita",
+    "pieces": [
+      "mise",
+      "mashita",
+      "re",
+      "da"
+    ]
+  },
+  {
+    "kanji": "来る",
+    "kana": "くる",
+    "romaji": "kuru",
+    "translation": "vir",
+    "form": "Forma negativa (polida)",
+    "answer": "kimasen",
+    "pieces": [
+      "ki",
+      "masen",
+      "yo",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "来る",
+    "kana": "くる",
+    "romaji": "kuru",
+    "translation": "vir",
+    "form": "Forma te",
+    "answer": "kite",
+    "pieces": [
+      "ki",
+      "te",
+      "ka",
+      "ru"
+    ]
+  },
+  {
+    "kanji": "きれい",
+    "kana": "きれい",
+    "romaji": "kirei",
+    "translation": "bonito / limpo",
+    "form": "Adjetivo‑na Presente",
+    "answer": "kireida",
+    "pieces": [
+      "kirei",
+      "da",
+      "yo",
+      "ku"
+    ]
+  },
+  {
+    "kanji": "きれい",
+    "kana": "きれい",
+    "romaji": "kirei",
+    "translation": "bonito / limpo",
+    "form": "Adjetivo‑na Negativa",
+    "answer": "kireijanai",
+    "pieces": [
+      "kireija",
+      "nai",
+      "ru",
+      "ra"
+    ]
+  },
+  {
+    "kanji": "簡単",
+    "kana": "かんたん",
+    "romaji": "kantan",
+    "translation": "fácil",
+    "form": "Adjetivo‑na Passado",
+    "answer": "kantandatta",
+    "pieces": [
+      "kantan",
+      "datta",
+      "te",
+      "ku"
+    ]
+  }
+];
 
   /* ====== Utilidades ====== */
   const shuffle = arr => [...arr].sort(()=>Math.random()-0.5);

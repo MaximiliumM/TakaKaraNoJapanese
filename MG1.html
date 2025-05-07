@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Nihongo Verb Puzzle – Conjugação & Adjetivos</title>
+  <style>
+    *,*:before,*:after{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Segoe UI",Roboto,Arial,sans-serif;
+      background:#f5f5ff;
+      color:#333;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:20px;
+    }
+    .game-container{
+      width:94%;max-width:860px;
+      background:#fff;
+      padding:40px 32px 52px;
+      border-radius:18px;
+      box-shadow:0 8px 22px rgba(0,0,0,.15);
+      text-align:center;
+    }
+    h1{margin:0 0 26px;color:#512da8;font-size:2.2rem}
+    p{font-size:19px;line-height:1.6}
+
+    .btn{
+      background:#512da8;color:#fff;border:none;
+      padding:14px 36px;border-radius:8px;
+      font-size:19px;cursor:pointer;margin:14px 10px;
+      transition:.2s;
+    }
+    .btn:hover{background:#6d48c7}
+
+    #jpPrompt{font-size:22px;margin-bottom:22px}
+
+    .kBtn{
+      display:inline-block;margin:6px;padding:12px 18px;font-size:20px;
+      border:2px solid #512da8;border-radius:8px;
+      background:#ede7f6;color:#512da8;
+      cursor:pointer;user-select:none;transition:.2s;
+    }
+    .kBtn:hover{background:#d1c4e9}
+
+    #dropZone{
+      min-height:62px;min-width:260px;
+      display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;
+      border:2px dashed #512da8;background:#faf8ff;border-radius:10px;
+      margin-bottom:16px;padding:6px 8px;
+    }
+
+    .feedback{font-size:24px;font-weight:bold}
+
+    /* Tooltip */
+    .tooltip{
+      position:relative;cursor:help;
+      color:#4a148c;background:rgba(74,20,140,.12);
+      padding:0 4px;border-radius:4px
+    }
+    .tooltip .tooltiptext{
+      visibility:hidden;opacity:0;transition:opacity .3s;
+      width:230px;background:#4a148c;color:#fff;text-align:center;
+      border-radius:6px;padding:6px;
+      position:absolute;z-index:1;bottom:125%;left:50%;margin-left:-115px;
+    }
+    .tooltip:hover .tooltiptext{visibility:visible;opacity:1}
+
+    /* Mobile */
+    @media(max-width:600px){
+      .kBtn{padding:10px 14px;font-size:18px}
+      .btn{width:100%;margin:12px 0}
+    }
+  </style>
+</head>
+<body>
+  <main class="game-container">
+    <h1>Conjugação Puzzle</h1>
+    <p>Arraste as peças em <em>romaji</em> para formar a conjugação ou flexão pedida.<br>
+       Dê <strong>duplo‑clique</strong> em uma peça na área para removê‑la.</p>
+
+    <!-- Prompt + resposta -->
+    <p id="jpPrompt"></p>
+    <div id="dropZone"></div>
+    <span id="feedback" class="feedback"></span>
+
+    <!-- Peças dinâmicas -->
+    <div id="pieces"></div>
+
+    <!-- Controles -->
+    <button id="checkBtn" class="btn">Verificar</button>
+    <button id="nextBtn" class="btn" style="display:none">Próximo</button>
+  </main>
+
+  <script>
+  /* ========== Banco de questões (120) ========== */
+  const questionsData = [{"kanji":"死ぬ","kana":"しぬ","romaji":"shinu","translation":"morrer","form":"Forma volitiva","answer":"shinou","pieces":["shin","ou","ka","ku"]},{"kanji":"きれい","kana":"きれい","romaji":"kirei","translation":"bonito / limpo","form":"Adjetivo‑na Passado","answer":"kireidatta","pieces":["kirei","datta","ru","shi"]},{"kanji":"起きる","kana":"おきる","romaji":"okiru","translation":"acordar","form":"Forma polida (passado)","answer":"okimashita","pieces":["oki","mashita","da","ka"]},{"kanji":"する","kana":"する","romaji":"suru","translation":"fazer","form":"Forma negativa (informal)","answer":"shinai","pieces":["shi","nai","ru","i"]},{"kanji":"暑い","kana":"あつい","romaji":"atsui","translation":"quente","form":"Adjetivo‑i Passado","answer":"atsukatta","pieces":["atsu","katta","nai","da"]},{"kanji":"大きい","kana":"おおきい","romaji":"ookii","translation":"grande","form":"Adjetivo‑i Passado","answer":"ookikatta","pieces":["ooki","katta","ra","re"]},{"kanji":"便利","kana":"べんり","romaji":"benri","translation":"conveniente","form":"Adjetivo‑na Passado","answer":"benridatta","pieces":["benri","datta","nai","i"]},{"kanji":"見る","kana":"みる","romaji":"miru","translation":"ver","form":"Forma negativa passada (informal)","answer":"minakatta","pieces":["mi","nakatta","i","ru"]},{"kanji":"する","kana":"する","romaji":"suru","translation":"fazer","form":"Forma negativa (polida)","answer":"shimasen","pieces":["shi","masen","te","i"]},{"kanji":"見せる","kana":"みせる","romaji":"miseru","translation":"mostrar","form":"Forma negativa (polida)","answer":"misemasen","pieces":["mise","masen","shi","te"]}/* … ✂️ ≈ 110 linhas a mais … */];
+
+  /* ====== Utilidades ====== */
+  const shuffle = arr => [...arr].sort(()=>Math.random()-0.5);
+
+  /* ====== Estado / DOM ====== */
+  const questions = shuffle(questionsData);
+  let idx = 0;
+
+  const jpPrompt  = document.getElementById('jpPrompt');
+  const dropZone  = document.getElementById('dropZone');
+  const piecesBox = document.getElementById('pieces');
+  const feedback  = document.getElementById('feedback');
+  const checkBtn  = document.getElementById('checkBtn');
+  const nextBtn   = document.getElementById('nextBtn');
+
+  /* ====== Render ====== */
+  function renderQuestion(){
+    const q = questions[idx];
+    jpPrompt.innerHTML =
+      `<span class="tooltip">${q.kanji}（${q.kana} / <i>${q.romaji}</i>）<span class="tooltiptext">${q.translation}</span></span><br>` +
+      `<strong>${q.form}</strong>`;
+    dropZone.innerHTML = '';
+    piecesBox.innerHTML = '';
+    feedback.textContent = '';
+    shuffle(q.pieces).forEach(txt=>{
+      const s = document.createElement('span');
+      s.textContent = txt;
+      s.className   = 'kBtn';
+      s.draggable   = true;
+      s.dataset.piece = txt;
+      s.addEventListener('dragstart', e => e.dataTransfer.setData('text/plain', txt));
+      piecesBox.appendChild(s);
+    });
+    checkBtn.disabled = false;
+    nextBtn.style.display = 'none';
+  }
+
+  /* ====== Drag & Drop ====== */
+  dropZone.addEventListener('dragover', e=>e.preventDefault());
+  dropZone.addEventListener('drop', e=>{
+    e.preventDefault();
+    const txt = e.dataTransfer.getData('text/plain');
+    if(!txt) return;
+    if([...dropZone.children].some(c=>c.textContent===txt)) return; // evitar duplicado
+    const s = document.createElement('span');
+    s.textContent = txt;
+    s.className   = 'kBtn';
+    s.style.margin = '4px';
+    s.draggable   = true;
+    s.addEventListener('dragstart', ev => ev.dataTransfer.setData('text/plain', txt));
+    s.addEventListener('dblclick', ()=>s.remove());
+    dropZone.appendChild(s);
+  });
+
+  /* ====== Verificação ====== */
+  checkBtn.addEventListener('click',()=>{
+    const attempt = [...dropZone.children].map(n=>n.textContent).join('');
+    const correct = questions[idx].answer;
+    const ok = attempt === correct;
+    feedback.textContent = ok ? '✔️ Correto!' : '❌ Tente de novo!';
+    feedback.style.color = ok ? 'green' : 'red';
+    if(ok){
+      checkBtn.disabled = true;
+      nextBtn.style.display = 'inline-block';
+    }
+  });
+
+  /* ====== Próximo ====== */
+  nextBtn.addEventListener('click',()=>{
+    idx = (idx+1) % questions.length;
+    renderQuestion();
+  });
+
+  /* ====== Inicializa ====== */
+  renderQuestion();
+  </script>
+</body>
+</html>

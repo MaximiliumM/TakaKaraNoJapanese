@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Music Vocabulary Game</title>
+<style>
+*,*:before,*:after{box-sizing:border-box}
+body{
+  margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;
+  background:#f5f5ff;color:#333;
+  display:flex;justify-content:center;align-items:flex-start;
+  min-height:100vh;padding:20px;
+}
+.game-container{
+  width:94%;max-width:860px;background:#fff;
+  padding:40px 32px 52px;border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,.15);text-align:center;
+}
+h1{margin:0 0 26px;color:#512da8;font-size:2.2rem}
+p{font-size:19px;line-height:1.6}
+.btn{
+  background:#512da8;color:#fff;border:none;
+  padding:14px 36px;border-radius:8px;font-size:19px;cursor:pointer;
+  margin:14px 10px;transition:.2s;
+}
+.btn:hover{background:#6d48c7}
+input[type="file"]{
+  margin:12px 0;font-size:17px;
+}
+.kBtn{
+  display:inline-block;margin:6px;padding:12px 18px;font-size:20px;
+  border:2px solid #512da8;border-radius:8px;
+  background:#ede7f6;color:#512da8;cursor:pointer;user-select:none;transition:.2s;
+}
+.kBtn.selected{background:#d1c4e9}
+.kBtn.correct{background:#c8e6c9;border-color:#2e7d32;color:#2e7d32}
+.kBtn.incorrect{background:#ffebee;border-color:#c62828;color:#c62828}
+.kBtn.missed{background:#fff9c4;border-color:#f9a825;color:#f57f17}
+.kBtn:hover{background:#d1c4e9}
+select.wordSelect{font-size:18px;padding:4px 6px;margin:2px 1px;
+  border-radius:6px;border:2px solid #512da8;background:#ede7f6;color:#512da8}
+select.wordSelect.correct{background:#c8e6c9;border-color:#2e7d32;color:#2e7d32}
+select.wordSelect.incorrect{background:#ffebee;border-color:#c62828;color:#c62828}
+.feedback{font-size:22px;font-weight:bold;margin-top:10px}
+@media(max-width:600px){
+  .kBtn{padding:10px 14px;font-size:18px}
+  .btn{width:100%;margin:12px 0}
+}
+</style>
+</head>
+<body>
+<div class="game-container">
+  <h1>Music Vocabulary Game</h1>
+
+  <!-- Upload prompt -->
+  <div id="uploadSection">
+    <p>Faça upload do JSON para começar:</p>
+    <input type="file" id="configFile" accept=".json">
+    <div id="fileError" class="feedback" style="color:#c62828"></div>
+  </div>
+
+  <!-- STAGE 1 -->
+  <div id="stage1" style="display:none;">
+    <p>Stage 1: Clique nas palavras que você ouvir na música.</p>
+    <div id="wordGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;"></div>
+    <div>
+      <button id="checkStage1" class="btn">Verificar</button>
+      <button id="nextToStage2" class="btn" style="display:none;">Próximo</button>
+    </div>
+    <div id="feedback1" class="feedback"></div>
+    <div style="margin-top:20px;">
+      <iframe id="yt1" width="100%" height="166" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- STAGE 2 -->
+  <div id="stage2" style="display:none;">
+    <p>Stage 2: Preencha os campos com as palavras corretas:</p>
+    <div id="lyricsContainer" style="text-align:left;margin-bottom:20px;white-space:pre-wrap;"></div>
+    <button id="checkStage2" class="btn">Verificar Respostas</button>
+    <div id="feedback2" class="feedback"></div>
+    <div style="margin-top:20px;">
+      <iframe id="yt2" width="100%" height="166" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+// Fisher–Yates shuffle
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+let correctWords=[], wrongWords=[], lyrics="", youtubeURL="";
+const selectedWords = new Set();
+
+function escapeRegex(str){return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+document.getElementById("configFile").addEventListener("change", function(){
+  const file = this.files[0];
+  if(!file){return;}
+  const reader = new FileReader();
+  reader.onload = e=>{
+    try{
+      const data = JSON.parse(e.target.result);
+      if(!data.youtubeURL||!data.correctWords||!data.wrongWords||!data.lyrics){
+        throw new Error("Missing keys in JSON.");
+      }
+      if(data.correctWords.length + data.wrongWords.length !== 16){
+        throw new Error("Total words must be exactly 16.");
+      }
+      correctWords = data.correctWords.map(w => w.toLowerCase());
+      wrongWords   = data.wrongWords  .map(w => w.toLowerCase());
+      lyrics = data.lyrics;
+      youtubeURL = data.youtubeURL;
+      initGame();
+    }catch(err){
+      document.getElementById("fileError").textContent = "Error: " + err.message;
+    }
+  };
+  reader.readAsText(file);
+});
+
+function initGame(){
+  document.getElementById("fileError").textContent="";
+  document.getElementById("uploadSection").style.display="none";
+  buildGrid();
+  buildLyrics();
+  document.getElementById("yt1").src=youtubeURL;
+  document.getElementById("yt2").src=youtubeURL;
+  document.getElementById("stage1").style.display="block";
+}
+
+/* ===== Stage 1 ===== */
+function buildGrid(){
+  selectedWords.clear();
+  const grid = document.getElementById("wordGrid");
+  grid.innerHTML="";
+  const allWords = [...correctWords, ...wrongWords];
+  shuffle(allWords);
+  allWords.forEach(w=>{
+    const div=document.createElement("div");
+    div.className="kBtn";
+    div.textContent=w;
+    div.dataset.word=w;
+    div.addEventListener("click",()=>{
+      if(div.classList.contains("selected")){
+        div.classList.remove("selected"); selectedWords.delete(w);
+      }else{
+        div.classList.add("selected"); selectedWords.add(w);
+      }
+    });
+    grid.appendChild(div);
+  });
+}
+document.getElementById("checkStage1").addEventListener("click",()=>{
+  let correctSel=0,wrongSel=0,missed=0;
+  document.querySelectorAll(".kBtn").forEach(btn=>{
+    const w=btn.dataset.word;
+    btn.classList.remove("selected");
+    if(selectedWords.has(w)&&correctWords.includes(w)){
+      btn.classList.add("correct"); correctSel++;
+    }else if(selectedWords.has(w)&&wrongWords.includes(w)){
+      btn.classList.add("incorrect"); wrongSel++;
+    }else if(!selectedWords.has(w)&&correctWords.includes(w)){
+      btn.classList.add("missed"); missed++;
+    }
+  });
+  document.getElementById("feedback1").textContent=
+     `Corretas: ${correctSel}, Erradas: ${wrongSel}, Não Marcadas: ${missed}`;
+  document.getElementById("nextToStage2").style.display="inline-block";
+});
+document.getElementById("nextToStage2").addEventListener("click",()=>{
+  document.getElementById("stage1").style.display="none";
+  document.getElementById("stage2").style.display="block";
+});
+
+/* ===== Stage 2 ===== */
+function buildLyrics(){
+  const container=document.getElementById("lyricsContainer");
+  container.innerHTML="";
+  const regex=new RegExp("\\b("+correctWords.map(escapeRegex).join("|")+")\\b","gi");
+  const parts=lyrics.split(regex);
+  parts.forEach(part=>{
+    if(correctWords.some(w=>w.toLowerCase()===part.toLowerCase())){
+      const sel=document.createElement("select");
+      sel.className="wordSelect";
+      sel.dataset.answer=part.toLowerCase();
+      const optBlank=document.createElement("option"); optBlank.value=""; optBlank.textContent="...";
+      sel.appendChild(optBlank);
+      correctWords.forEach(w=>{
+        const o=document.createElement("option"); o.value=w; o.textContent=w;
+        sel.appendChild(o);
+      });
+      container.appendChild(sel);
+    }else{
+      container.appendChild(document.createTextNode(part));
+    }
+  });
+}
+document.getElementById("checkStage2").addEventListener("click",()=>{
+  const selects=document.querySelectorAll("select.wordSelect");
+  let correct=0;
+  selects.forEach(sel=>{
+    if(sel.value===sel.dataset.answer){sel.classList.add("correct"); correct++;}
+    else sel.classList.add("incorrect");
+    sel.disabled=true;
+  });
+  document.getElementById("feedback2").textContent=`Score: ${correct} / ${selects.length}`;
+});
+</script>
+</body>
+</html>

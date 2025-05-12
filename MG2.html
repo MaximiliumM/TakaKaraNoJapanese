@@ -78,6 +78,7 @@ select.wordSelect.incorrect{background:#ffebee;border-color:#c62828;color:#c6282
   <div id="stage2" style="display:none;">
     <p>Stage 2: Preencha os campos com as palavras corretas:</p>
     <div id="lyricsContainer" style="text-align:left;margin-bottom:20px;white-space:pre-wrap;"></div>
+    <button id="backToStage1" class="btn" style="display:none;">Voltar</button>
     <button id="checkStage2" class="btn">Verificar Respostas</button>
     <div id="feedback2" class="feedback"></div>
     <div style="margin-top:20px;">
@@ -87,6 +88,13 @@ select.wordSelect.incorrect{background:#ffebee;border-color:#c62828;color:#c6282
 </div>
 
 <script>
+function stopVideo(id) {
+  document.getElementById(id).src = "";
+}
+function playVideo(id) {
+  document.getElementById(id).src = youtubeURL;
+}
+
 // Fisher–Yates shuffle
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -177,6 +185,18 @@ document.getElementById("checkStage1").addEventListener("click",()=>{
 document.getElementById("nextToStage2").addEventListener("click",()=>{
   document.getElementById("stage1").style.display="none";
   document.getElementById("stage2").style.display="block";
+  // stop stage1 audio
+  stopVideo("yt1");
+
+  // switch views
+  document.getElementById("stage1").style.display = "none";
+  document.getElementById("stage2").style.display = "block";
+
+  // start stage2 audio
+  playVideo("yt2");
+
+  // show Back button
+  document.getElementById("backToStage1").style.display = "inline-block";
 });
 
 /* ===== Stage 2 ===== */
@@ -211,6 +231,22 @@ document.getElementById("checkStage2").addEventListener("click",()=>{
     sel.disabled=true;
   });
   document.getElementById("feedback2").textContent=`Score: ${correct} / ${selects.length}`;
+});
+
+document.getElementById("backToStage1")
+  .addEventListener("click", () => {
+    // stop stage2 audio
+    stopVideo("yt2");
+
+    // switch views
+    document.getElementById("stage2").style.display = "none";
+    document.getElementById("stage1").style.display = "block";
+
+    // restart stage1 audio
+    playVideo("yt1");
+
+    // hide Back button again
+    document.getElementById("backToStage1").style.display = "none";
 });
 </script>
 </body>

@@ -13,6 +13,7 @@ body{
   min-height:100vh;padding:20px;
 }
 .game-container{
+  position: relative;
   width:94%;max-width:860px;background:#fff;
   padding:40px 32px 52px;border-radius:18px;
   box-shadow:0 8px 22px rgba(0,0,0,.15);text-align:center;
@@ -27,6 +28,96 @@ p{font-size:19px;line-height:1.6}
 .btn:hover{background:#6d48c7}
 input[type="file"]{
   margin:12px 0;font-size:17px;
+}
+.fileListBtn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 6px 0;
+  padding: 14px 20px;
+  font-size: 19px;
+}
+/* Container for each row */
+.fileListRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* “Load” button: takes up all available space */
+.fileListRow .fileListBtn {
+  flex: 1;
+  margin-right: 8px;
+}
+
+/* “Delete” button: smaller, in a danger color */
+.deleteBtn {
+  background: #e53935;         /* bright red */
+  color: #fff;
+  border: none;
+  width: 32px;                 /* square button */
+  height: 32px;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  border-radius: 50%;          /* circle */
+  cursor: pointer;
+  flex: none;
+  padding: 0;
+  margin-left: 8px;
+  transition: background .2s;
+}
+.deleteBtn:hover {
+  background: #d32f2f;         /* darker red */
+}
+/* Home icon button */
+#homeBtn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+#homeBtn svg {
+  width: 28px;
+  height: 28px;
+  fill: #512da8;
+  transition: fill .2s;
+}
+#homeBtn:hover svg {
+  fill: #6d48c7;
+}
+.control-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e8d9ff;        /* light lilac */
+  border-radius: 24px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  z-index: 1000;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+.icon-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: #512da8;
+  transition: fill .2s;
+}
+.icon-btn:hover svg {
+  fill: #6d48c7;
 }
 .kBtn{
   display:inline-block;margin:6px;padding:12px 18px;font-size:20px;
@@ -48,16 +139,34 @@ select.wordSelect.incorrect{background:#ffebee;border-color:#c62828;color:#c6282
   .btn{width:100%;margin:12px 0}
 }
 </style>
+<script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 <div class="game-container">
+
+  <button id="homeBtn" style="display:none;" aria-label="Home">
+    <!-- simple house icon SVG -->
+    <svg viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>
+
   <h1>Music Vocabulary Game</h1>
 
-  <!-- Upload prompt -->
-  <div id="uploadSection">
-    <p>Faça upload do JSON para começar:</p>
-    <input type="file" id="configFile" accept=".json">
-    <div id="fileError" class="feedback" style="color:#c62828"></div>
+  <!-- FILE‐LIST & UPLOAD SECTION -->
+  <div id="fileListSection">
+    <h2>Escolha uma música para começar:</h2>
+    <div id="fileList" style="margin-bottom:24px;"></div>
+    <div id="fileListError" class="feedback" style="color:#c62828"></div>
+
+    <hr style="margin:24px 0;">
+
+    <h2>Faça upload de uma nova música (.json):</h2>
+    <div id="githubUploadSection">
+      <input type="file" id="uploadLessonInput" accept=".json" style="margin-bottom:12px;" />
+      <div id="uploadError"   class="feedback" style="color:#c62828"></div>
+      <div id="uploadSuccess" class="feedback" style="color:#2e7d32"></div>
+    </div>
   </div>
 
   <!-- STAGE 1 -->
@@ -86,167 +195,482 @@ select.wordSelect.incorrect{background:#ffebee;border-color:#c62828;color:#c6282
     </div>
   </div>
 </div>
-
+<div id="controlBar" class="control-bar" style="display:none;">
+  <button id="rewindBtn" class="icon-btn" aria-label="Rewind 10 seconds">
+    <svg viewBox="0 0 24 24"><path d="M11 19l-8-6 8-6v12zm8 0l-8-6 8-6v12z"/></svg>
+  </button>
+  <button id="playPauseBtn" class="icon-btn" aria-label="Play/Pause">
+    <svg id="iconPlay"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="iconPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+</div>
 <script>
-function stopVideo(id) {
-  document.getElementById(id).src = "";
-}
-function playVideo(id) {
-  document.getElementById(id).src = youtubeURL;
-}
+window.addEventListener('DOMContentLoaded', () => {
+    // ==== GLOBALS & HELPERS ====
+    let player1, player2, currentPlayer;
+    const controlBar   = document.getElementById('controlBar');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const rewindBtn    = document.getElementById('rewindBtn');
+    const iconPlay     = document.getElementById('iconPlay');
+    const iconPause    = document.getElementById('iconPause');
 
-// Fisher–Yates shuffle
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-let correctWords=[], wrongWords=[], lyrics="", youtubeURL="";
-const selectedWords = new Set();
-
-function escapeRegex(str){return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
-
-document.getElementById("configFile").addEventListener("change", function(){
-  const file = this.files[0];
-  if(!file){return;}
-  const reader = new FileReader();
-  reader.onload = e=>{
-    try{
-      const data = JSON.parse(e.target.result);
-      if(!data.youtubeURL||!data.correctWords||!data.wrongWords||!data.lyrics){
-        throw new Error("Missing keys in JSON.");
-      }
-      if(data.correctWords.length + data.wrongWords.length !== 16){
-        throw new Error("Total words must be exactly 16.");
-      }
-      correctWords = data.correctWords.map(w => w.toLowerCase());
-      wrongWords   = data.wrongWords  .map(w => w.toLowerCase());
-      lyrics = data.lyrics;
-      youtubeURL = data.youtubeURL;
-      initGame();
-    }catch(err){
-      document.getElementById("fileError").textContent = "Error: " + err.message;
+    function extractVideoID(url) {
+      const m = url.match(/embed\/([^?]+)/);
+      return m ? m[1] : '';
     }
-  };
-  reader.readAsText(file);
-});
 
-function initGame(){
-  document.getElementById("fileError").textContent="";
-  document.getElementById("uploadSection").style.display="none";
-  buildGrid();
-  buildLyrics();
-  document.getElementById("yt1").src=youtubeURL;
-  document.getElementById("yt2").src=youtubeURL;
-  document.getElementById("stage1").style.display="block";
-}
+    function showControls(player) {
+      currentPlayer = player;
 
-/* ===== Stage 1 ===== */
-function buildGrid(){
-  selectedWords.clear();
-  const grid = document.getElementById("wordGrid");
-  grid.innerHTML="";
-  const allWords = [...correctWords, ...wrongWords];
-  shuffle(allWords);
-  allWords.forEach(w=>{
-    const div=document.createElement("div");
-    div.className="kBtn";
-    div.textContent=w;
-    div.dataset.word=w;
-    div.addEventListener("click",()=>{
-      if(div.classList.contains("selected")){
-        div.classList.remove("selected"); selectedWords.delete(w);
-      }else{
-        div.classList.add("selected"); selectedWords.add(w);
+      // local flag lives in this closure – one per player
+      let firstKick = true;
+
+      // reset icons
+      iconPlay.style.display  = '';
+      iconPause.style.display = 'none';
+
+      playPauseBtn.onclick = () => {
+        const state = currentPlayer.getPlayerState();
+
+        if (state === YT.PlayerState.PLAYING) {
+          currentPlayer.pauseVideo();
+          iconPlay.style.display  = '';
+          iconPause.style.display = 'none';
+          return;
+        }
+
+        // ----- PLAY branch -----
+        currentPlayer.playVideo();       // user gesture #1
+        if (firstKick) {
+          firstKick = false;
+          /* give the iframe a single extra nudge on the very first click.
+            A short 100 ms delay is enough to get past YouTube’s
+            UNSTARTED/CUED state that needs a second gesture.             */
+          setTimeout(() => {
+            const s = currentPlayer.getPlayerState();
+            if (s === YT.PlayerState.UNSTARTED || s === YT.PlayerState.CUED) {
+              currentPlayer.playVideo(); // automatic "second click"
+            }
+          }, 100);
+        }
+
+        iconPlay.style.display  = 'none';
+        iconPause.style.display = '';
+      };
+
+      rewindBtn.onclick = () => {
+        const t = currentPlayer.getCurrentTime();
+        currentPlayer.seekTo(Math.max(0, t - 10), true);
+      };
+
+      controlBar.style.display = 'flex';
+    }
+
+    function hideControls() {
+      controlBar.style.display = 'none';
+    }
+
+  const ICON_PLAY  = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+  const UPLOAD_PROXY   = 'http://138.2.33.138:8000/api/upload-lesson';
+  const DELETE_ENDPOINT= 'http://138.2.33.138:8000/api/delete-lesson/';
+  const LIST_ENDPOINT = 'http://138.2.33.138:8000/api/list-lessons';
+
+  function humanName(filename){
+    return filename
+      .replace(/\.json$/i,'')
+      .split(/[-_ ]+/)
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ');
+  }
+
+  async function loadFileList(){
+    const errorEl = document.getElementById('fileListError');
+    const listEl  = document.getElementById('fileList');
+    errorEl.textContent = '';
+    listEl.innerHTML    = '<p>Loading…</p>';
+
+    try {
+      const res = await fetch(LIST_ENDPOINT);
+      if (!res.ok) throw new Error(res.statusText);
+      const { lessons } = await res.json();
+
+      listEl.innerHTML = '';
+      if (lessons.length === 0) {
+        listEl.innerHTML = '<p>No lessons found.</p>';
+        return;
+      }
+
+      lessons.forEach(fname => {
+        const row = document.createElement('div');
+        row.className = 'fileListRow';
+
+        const loadBtn = document.createElement('button');
+        loadBtn.type        = 'button';
+        loadBtn.className   = 'btn fileListBtn';
+        loadBtn.textContent = humanName(fname);
+        loadBtn.addEventListener('click', () =>
+          loadConfig(`https://raw.githubusercontent.com/Maximiliumm/TakaKaraNoJapanese/main/Music/${fname}`)
+        );
+
+        const delBtn = document.createElement('button');
+        delBtn.type        = 'button';
+        delBtn.className   = 'deleteBtn';
+        delBtn.textContent = '×';
+        delBtn.addEventListener('click', () => deleteLesson(fname));
+
+        row.append(loadBtn, delBtn);
+        listEl.appendChild(row);
+      });
+
+    } catch(err) {
+      errorEl.textContent = 'Could not load lessons: ' + err.message;
+    }
+  }
+
+  // 2) UPLOAD via your proxy
+  async function uploadViaProxy(file){
+    const errorEl   = document.getElementById('uploadError');
+    const successEl = document.getElementById('uploadSuccess');
+    errorEl.textContent   = '';
+    successEl.textContent = '';
+
+    try {
+      const text = await file.text();
+      const b64  = btoa(unescape(encodeURIComponent(text)));
+
+      const res = await fetch(UPLOAD_PROXY, {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify({ filename:file.name, content:b64 })
+      });
+      if(!res.ok){
+        let detail = await res.json().catch(()=>({}));
+        throw new Error(detail.error||detail.detail||res.statusText);
+      }
+    successEl.textContent = `Uploaded ${file.name}! Refreshing list…`;
+    // wait for the list to finish reloading…
+    await loadFileList();
+    // then clear the success message
+    successEl.textContent = '';
+    } catch(err){
+      errorEl.textContent = 'Upload failed: '+err.message;
+    }
+  }
+
+  // 3) DELETE via your proxy
+  async function deleteLesson(filename){
+    if(!confirm(`Delete lesson "${filename}"?`)) return;
+    const errorEl = document.getElementById('fileListError');
+    errorEl.textContent = '';
+
+    try {
+      const res = await fetch(DELETE_ENDPOINT + encodeURIComponent(filename), {
+        method: 'DELETE'
+      });
+      if(!res.ok){
+        const body = await res.json().catch(()=>({}));
+        throw new Error(body.error||body.message||res.statusText);
+      }
+      loadFileList();
+    } catch(err){
+      errorEl.textContent = 'Delete failed: '+err.message;
+    }
+  }
+
+  // 4) Wire up upload input
+  document.getElementById('uploadLessonInput')
+    .addEventListener('change', e=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      if(!file.name.endsWith('.json')){
+        return document.getElementById('uploadError')
+          .textContent = 'Please select a .json file';
+      }
+      uploadViaProxy(file);
+    });
+
+  // 5) Finally, call it on page load
+  loadFileList();
+
+  // 1) Grab the button
+  const homeBtn = document.getElementById('homeBtn');
+  // 2) Clicking it returns to the selection UI
+  homeBtn.addEventListener('click', () => {
+    // hide both game stages
+    document.getElementById('stage1').style.display = 'none';
+    document.getElementById('stage2').style.display = 'none';
+
+    // show selection & upload UI again
+    document.getElementById('fileListSection').style.display     = 'block';
+    document.getElementById('githubUploadSection').style.display = 'block';
+
+    // hide the Home button
+    homeBtn.style.display = 'none';
+
+    hideControls();
+    
+    // **reset everything** so next time you pick a lesson it's fresh
+    resetGameState();
+  });
+
+  function resetGameState() {
+    // Clear selections & feedback
+    selectedWords.clear();
+    document.getElementById('feedback1').textContent = '';
+    document.getElementById('feedback2').textContent = '';
+
+    // Clear out the grids/lyrics
+    document.getElementById('wordGrid').innerHTML       = '';
+    document.getElementById('lyricsContainer').innerHTML = '';
+
+    // Hide the Next & Back buttons
+    document.getElementById('nextToStage2').style.display   = 'none';
+    document.getElementById('backToStage1').style.display   = 'none';
+
+    // Stop any playing video
+    stopVideo('yt1');
+    stopVideo('yt2');
+
+    // Reset dropdownWords (so they reshuffle next time)
+    dropdownWords = [];
+  }
+
+  // Fetch and initialize game from any JSON URL
+  function loadConfig(url){
+    fetch(url)
+      .then(r => {
+        if(!r.ok) throw new Error(r.statusText);
+        return r.json();
+      })
+      .then(data => {
+        // normalize if needed
+        correctWords = data.correctWords.map(w=>w.toLowerCase());
+        wrongWords   = data.wrongWords  .map(w=>w.toLowerCase());
+        lyrics       = data.lyrics;
+        youtubeURL   = data.youtubeURL;
+
+        // hide upload & list UIs
+        document.getElementById('fileListSection').style.display   = 'none';
+        document.getElementById('githubUploadSection').style.display     = 'none';
+        document.getElementById('fileListError').textContent       = '';
+
+        initGame();
+      })
+      .catch(err => {
+        document.getElementById('fileListError').textContent = 'Error loading config';
+        console.error(err);
+      });
+  }
+
+  // Run on page load
+  loadFileList();
+
+  // keep a quick map so we can grab by DOM id
+  const players = {};
+
+  // create or reload a player
+  function initPlayer(id, existing, url) {
+    const vid = extractVideoID(url);
+
+    if (existing) {
+      existing.loadVideoById(vid);
+      return existing;
+    }
+    players[id] = new YT.Player(id, {
+      playerVars:{enablejsapi:1,controls:1,rel:0,modestbranding:1},
+      videoId: vid
+    });
+    return players[id];
+  }
+
+  // SAFE helpers that use the API instead of nuking the iframe
+  function stopVideo(id)  { players[id]?.pauseVideo(); }
+  function playVideo(id)  { players[id]?.playVideo();  }
+
+  // Fisher–Yates shuffle
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  let correctWords=[], wrongWords=[], lyrics="", youtubeURL="";
+  let dropdownWords = [];
+
+  const selectedWords = new Set();
+
+  function escapeRegex(str){return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+  // 20+ common Japanese words for lyrics (backup pool)
+  const backupWords = [
+    "ai","uta","kokoro","yume","hikari","namida","kaze","hoshi","sora",
+    "mizu","kibou","nagare","omoi","mirai","kaori","chiisana","subete",
+    "kagayaku","hashiri","tsubasa","kanashimi","yasashisa","sasayaki",
+    "toki","kaze","kokyū"
+  ];
+
+  function initGame(){
+    homeBtn.style.display = 'block';
+    document.getElementById("fileListError").textContent = "";
+    document.getElementById("uploadError").style.display = "none";
+
+    // set iframe src *with* enablejsapi=1
+    function withApi(src){
+      const sep = src.includes('?') ? '&' : '?';
+      return src + sep + 'enablejsapi=1&controls=1&rel=0&modestbranding=1';
+    }
+    const src1 = withApi(youtubeURL);
+    const src2 = withApi(youtubeURL);
+    document.getElementById("yt1").src = src1;
+    document.getElementById("yt2").src = src2;
+
+    // now that the iframes have a real URL, init or reload players
+    player1 = initPlayer('yt1', player1, src1);
+    player2 = initPlayer('yt2', player2, src2);
+
+    showControls(player1);
+
+    // shuffle, grid, lyrics, show stage 1…
+    dropdownWords = correctWords.slice(); shuffle(dropdownWords);
+    buildGrid(); buildLyrics();
+    document.getElementById("stage1").style.display = "block";
+  }
+
+  /* ===== Stage 1 ===== */
+  function buildGrid(){
+    selectedWords.clear();
+    const grid = document.getElementById("wordGrid");
+    grid.innerHTML = "";
+
+    // 1) Combine the provided words
+    const baseWords = [...correctWords, ...wrongWords];
+    let total = baseWords.length;
+
+    // Enforce maximum of 25
+    if (total > 25) total = 25;
+
+    // 2) Pick grid size: 3, 4, or 5
+    const gridSize = total <= 9 ? 3
+                  : total <= 16 ? 4
+                  : 5;
+
+    // 3) Resize the CSS grid
+    grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+
+    // 4) Fill with backup if needed, without duplicates
+    const words = baseWords.slice(0, gridSize*gridSize);
+    if (words.length < gridSize*gridSize) {
+      const need = gridSize*gridSize - words.length;
+      // exclude any already‐used words
+      let pool = backupWords.filter(w => !words.includes(w));
+      shuffle(pool);
+      words.push(...pool.slice(0, need));
+    }
+
+    // 5) Shuffle the full list then render
+    shuffle(words);
+    words.forEach(w => {
+      const div = document.createElement("div");
+      div.className = "kBtn";
+      div.textContent = w;
+      div.dataset.word = w;
+      div.addEventListener("click", () => {
+        if (div.classList.contains("selected")) {
+          div.classList.remove("selected");
+          selectedWords.delete(w);
+        } else {
+          div.classList.add("selected");
+          selectedWords.add(w);
+        }
+      });
+      grid.appendChild(div);
+    });
+  }
+
+  document.getElementById("checkStage1").addEventListener("click",()=>{
+    let correctSel=0,wrongSel=0,missed=0;
+    document.querySelectorAll(".kBtn").forEach(btn=>{
+      const w=btn.dataset.word;
+      btn.classList.remove("selected");
+      if(selectedWords.has(w)&&correctWords.includes(w)){
+        btn.classList.add("correct"); correctSel++;
+      }else if(selectedWords.has(w)&&wrongWords.includes(w)){
+        btn.classList.add("incorrect"); wrongSel++;
+      }else if(!selectedWords.has(w)&&correctWords.includes(w)){
+        btn.classList.add("missed"); missed++;
       }
     });
-    grid.appendChild(div);
+    document.getElementById("feedback1").textContent=
+      `Corretas: ${correctSel}, Erradas: ${wrongSel}, Não Marcadas: ${missed}`;
+    document.getElementById("nextToStage2").style.display="inline-block";
   });
-}
-document.getElementById("checkStage1").addEventListener("click",()=>{
-  let correctSel=0,wrongSel=0,missed=0;
-  document.querySelectorAll(".kBtn").forEach(btn=>{
-    const w=btn.dataset.word;
-    btn.classList.remove("selected");
-    if(selectedWords.has(w)&&correctWords.includes(w)){
-      btn.classList.add("correct"); correctSel++;
-    }else if(selectedWords.has(w)&&wrongWords.includes(w)){
-      btn.classList.add("incorrect"); wrongSel++;
-    }else if(!selectedWords.has(w)&&correctWords.includes(w)){
-      btn.classList.add("missed"); missed++;
-    }
-  });
-  document.getElementById("feedback1").textContent=
-     `Corretas: ${correctSel}, Erradas: ${wrongSel}, Não Marcadas: ${missed}`;
-  document.getElementById("nextToStage2").style.display="inline-block";
-});
-document.getElementById("nextToStage2").addEventListener("click",()=>{
-  document.getElementById("stage1").style.display="none";
-  document.getElementById("stage2").style.display="block";
-  // stop stage1 audio
-  stopVideo("yt1");
-
-  // switch views
-  document.getElementById("stage1").style.display = "none";
-  document.getElementById("stage2").style.display = "block";
-
-  // start stage2 audio
-  playVideo("yt2");
-
-  // show Back button
-  document.getElementById("backToStage1").style.display = "inline-block";
-});
-
-/* ===== Stage 2 ===== */
-function buildLyrics(){
-  const container=document.getElementById("lyricsContainer");
-  container.innerHTML="";
-  const regex=new RegExp("\\b("+correctWords.map(escapeRegex).join("|")+")\\b","gi");
-  const parts=lyrics.split(regex);
-  parts.forEach(part=>{
-    if(correctWords.some(w=>w.toLowerCase()===part.toLowerCase())){
-      const sel=document.createElement("select");
-      sel.className="wordSelect";
-      sel.dataset.answer=part.toLowerCase();
-      const optBlank=document.createElement("option"); optBlank.value=""; optBlank.textContent="...";
-      sel.appendChild(optBlank);
-      correctWords.forEach(w=>{
-        const o=document.createElement("option"); o.value=w; o.textContent=w;
-        sel.appendChild(o);
-      });
-      container.appendChild(sel);
-    }else{
-      container.appendChild(document.createTextNode(part));
-    }
-  });
-}
-document.getElementById("checkStage2").addEventListener("click",()=>{
-  const selects=document.querySelectorAll("select.wordSelect");
-  let correct=0;
-  selects.forEach(sel=>{
-    if(sel.value===sel.dataset.answer){sel.classList.add("correct"); correct++;}
-    else sel.classList.add("incorrect");
-    sel.disabled=true;
-  });
-  document.getElementById("feedback2").textContent=`Score: ${correct} / ${selects.length}`;
-});
-
-document.getElementById("backToStage1")
-  .addEventListener("click", () => {
-    // stop stage2 audio
-    stopVideo("yt2");
+  document.getElementById("nextToStage2").addEventListener("click",()=>{
+    document.getElementById("stage1").style.display="none";
+    document.getElementById("stage2").style.display="block";
+    // stop stage1 audio
+    stopVideo("yt1");
 
     // switch views
-    document.getElementById("stage2").style.display = "none";
-    document.getElementById("stage1").style.display = "block";
+    document.getElementById("stage1").style.display = "none";
+    document.getElementById("stage2").style.display = "block";
 
-    // restart stage1 audio
-    playVideo("yt1");
+    showControls(player2);
 
-    // hide Back button again
-    document.getElementById("backToStage1").style.display = "none";
+    // show Back button
+    document.getElementById("backToStage1").style.display = "inline-block";
+  });
+
+  /* ===== Stage 2 ===== */
+  function buildLyrics(){
+    const container=document.getElementById("lyricsContainer");
+    container.innerHTML="";
+    const regex=new RegExp("\\b("+correctWords.map(escapeRegex).join("|")+")\\b","gi");
+    const parts=lyrics.split(regex);
+    parts.forEach(part=>{
+      if(correctWords.some(w=>w.toLowerCase()===part.toLowerCase())){
+        const sel=document.createElement("select");
+        sel.className="wordSelect";
+        sel.dataset.answer=part.toLowerCase();
+        const optBlank=document.createElement("option"); optBlank.value=""; optBlank.textContent="...";
+        sel.appendChild(optBlank);
+        dropdownWords.forEach(w => {
+          const opt = document.createElement("option");
+          opt.value = w;
+          opt.textContent = w;
+          sel.appendChild(opt);
+        });
+        container.appendChild(sel);
+      }else{
+        container.appendChild(document.createTextNode(part));
+      }
+    });
+  }
+  document.getElementById("checkStage2").addEventListener("click",()=>{
+    const selects=document.querySelectorAll("select.wordSelect");
+    let correct=0;
+    selects.forEach(sel=>{
+      if(sel.value===sel.dataset.answer){sel.classList.add("correct"); correct++;}
+      else sel.classList.add("incorrect");
+      sel.disabled=true;
+    });
+    document.getElementById("feedback2").textContent=`Score: ${correct} / ${selects.length}`;
+  });
+
+  document.getElementById("backToStage1")
+    .addEventListener("click", () => {
+      // stop stage2 audio
+      stopVideo("yt2");
+      showControls(player1);
+
+      // switch views
+      document.getElementById("stage2").style.display = "none";
+      document.getElementById("stage1").style.display = "block";
+
+      // hide Back button again
+      document.getElementById("backToStage1").style.display = "none";
+  });
 });
 </script>
 </body>

@@ -277,6 +277,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const UPLOAD_PROXY    = `${BASE_API}/upload-lesson`;
   const DELETE_ENDPOINT = `${BASE_API}/delete-lesson/`;
 
+  function apiFetch(url, options = {}) {
+    const hdr = { 'ngrok-skip-browser-warning': '1', ...options.headers };
+    return fetch(url, { ...options, headers: hdr });
+  }
+
   function humanName(filename){
     return filename
       .replace(/\.json$/i,'')
@@ -292,7 +297,7 @@ window.addEventListener('DOMContentLoaded', () => {
     listEl.innerHTML    = '<p>Loading…</p>';
 
     try {
-      const res = await fetch(LIST_ENDPOINT);
+      const res = await apiFetch(LIST_ENDPOINT);
       if (!res.ok) throw new Error(res.statusText);
       const { lessons } = await res.json();
 
@@ -340,7 +345,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const text = await file.text();
       const b64  = btoa(unescape(encodeURIComponent(text)));
 
-      const res = await fetch(UPLOAD_PROXY, {
+      const res = await apiFetch(UPLOAD_PROXY, {
         method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify({ filename:file.name, content:b64 })
@@ -366,7 +371,7 @@ window.addEventListener('DOMContentLoaded', () => {
     errorEl.textContent = '';
 
     try {
-      const res = await fetch(DELETE_ENDPOINT + encodeURIComponent(filename), {
+      const res = await apiFetch(DELETE_ENDPOINT + encodeURIComponent(filename), {
         method: 'DELETE'
       });
       if(!res.ok){

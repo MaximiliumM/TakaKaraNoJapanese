@@ -656,10 +656,18 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById("checkStage2").addEventListener("click",()=>{
     const selects=document.querySelectorAll("select.wordSelect");
     let correct=0;
-    selects.forEach(sel=>{
-      if(sel.value===sel.dataset.answer){sel.classList.add("correct"); correct++;}
-      else sel.classList.add("incorrect");
-      sel.disabled=true;
+    selects.forEach(sel => {
+      // 1) clear any previous “correct” / “incorrect” classes
+      sel.classList.remove("correct", "incorrect");
+
+      // 2) re-apply based on the current choice
+      if (sel.value === sel.dataset.answer) {
+        sel.classList.add("correct");
+        correct++;
+        sel.disabled=true;
+      } else {
+        sel.classList.add("incorrect");
+      }
     });
     document.getElementById("feedback2").textContent=`Score: ${correct} / ${selects.length}`;
   });

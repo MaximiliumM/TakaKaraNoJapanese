@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/data/pot_pass_exercises_1_db.js"></script>
+  <title>Potencial & Passiva – Exercícios Interativos</title>
+  <style>
+    *{box-sizing:border-box}
+    body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5ff;margin:0;padding:20px;color:#333}
+    .container{max-width:960px;margin:auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
+    h1,h2{color:#512da8;text-align:center;margin:0 0 20px}
+    p,li{line-height:1.6;font-size:17px}
+    .romaji{display:block;font-style:italic;color:#666;font-size:15px;margin-bottom:6px}
+    input[type=text]{width:92%;padding:8px;margin-top:4px;border:1px solid #bbb;border-radius:6px;font-size:16px}
+    .btn{background:#512da8;color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:16px;cursor:pointer;margin:12px 6px;transition:.2s}
+    .btn:hover{background:#6d48c7}
+    .feedback{font-weight:bold;margin-left:6px}
+    .drag-item{display:inline-block;padding:6px 12px;margin:4px;border:1px solid #512da8;border-radius:6px;background:#ede7f6;color:#512da8;cursor:move}
+    .drop-zone{display:inline-block;min-width:120px;min-height:32px;margin:4px;padding:6px;border:2px dashed #bbb;border-radius:6px;vertical-align:middle}
+    .tooltip { position: relative; cursor: pointer; color: #4a148c; background-color: rgba(74,20,140,0.1); border-radius: 3px; padding: 2px 4px; }
+    .tooltip .tooltiptext { visibility: hidden; opacity: 0; transition: opacity 0.3s ease; width: 240px; background-color: #4a148c; color: #fff; text-align: center; border-radius: 6px; padding: 5px; position: absolute; bottom: 125%; left: 50%; margin-left: -120px; z-index: 999; }
+    .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+    .correct{color:#2e7d32} .incorrect{color:#c62828}
+
+    #dragBox {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #wordPad {
+      grid-column: 1 / -1;      /* ocupa ambas as colunas */
+      position: sticky;         /* mantém no topo ao rolar */
+      top: 0;                   
+      background: #fff;         /* para não ficar transparente */
+      z-index: 998;            /* acima dos demais elementos */
+      margin-bottom: 1rem;      /* espaçamento abaixo do pool */
+    }
+
+    .container ol li { margin-bottom: 1.5rem; }
+    hr{border:none;border-top:1px solid #ddd;margin:36px 0}
+    @media(max-width:600px){input[type=text]{width:100%}.btn{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Forma Potencial &amp; Passiva – Prática</h1>
+    <div id="exerciseRoot"></div>
+    <hr>
+    <div style="text-align:center">
+      <button class="btn" onclick="checkAll()">Verificar Tudo</button>
+      <button class="btn" id="exportBtn" style="display:none" onclick="exportAnswers()">Exportar Respostas</button>
+    </div>
+    <p id="globalFeedback" style="font-size:18px;text-align:center;"></p>
+  </div>
+
+<script>
+// utilitário de shuffle
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// tooltip helper
+function tooltipHTML(pt) {
+  return '<span class="tooltip">?<span class="tooltiptext">'+pt+'</span></span>';
+}
+
+// restauração de estado
+window.addEventListener('load', () => {
+  // === Fill Inputs (permanece igual) ===
+  document.querySelectorAll('input[type=text]').forEach(inp => {
+    const v = localStorage.getItem(inp.id);
+    if (v !== null) inp.value = v;
+    inp.addEventListener('input', () => localStorage.setItem(inp.id, inp.value));
+  });
+
+  // === Drag & Drop Restore ===
+  const dropZones = document.querySelectorAll('.drop-zone[data-answer]');
+  const ddPool   = document.getElementById('wordPad');
+  dropZones.forEach((zone, i) => {
+    const answer = zone.getAttribute('data-answer');
+    const v = localStorage.getItem('dz_' + i);
+    if (!v) return;
+    // limpa antes
+    zone.textContent = '';
+    // cria span restaurado
+    const span = document.createElement('span');
+    span.textContent  = v;
+    span.className    = 'drag-item';
+    span.draggable    = true;
+    // dblclick devolve ao pool
+    span.addEventListener('dblclick', () => {
+      ddPool.appendChild(span);
+      zone.textContent = '';
+      zone.style.borderColor = '#bbb';
+      localStorage.removeItem('dz_' + i);
+    });
+    zone.appendChild(span);
+    // retira do pool original
+    const orig = Array.from(ddPool.children).find(c => c.textContent === v);
+    if (orig) ddPool.removeChild(orig);
+  });
+
+  // === Reorder Restore & Pool Refresh ===
+const holders = document.querySelectorAll('[data-order]');
+  holders.forEach((holder, i) => {
+    const key    = 'order_' + i;
+    const stored = localStorage.getItem(key);
+    const zone   = holder.querySelector('.drop-zone');
+    const localPool = holder.querySelector('.rePool');
+
+    // 1) Recria o pool local embaralhado
+    const originalSeq = exercisesDB.reorder[i].sequence.slice();
+    shuffle(originalSeq);
+    localPool.innerHTML = '';
+    originalSeq.forEach(w => {
+      const span = document.createElement('span');
+      span.textContent = w;
+      span.className   = 'drag-item';
+      span.draggable   = true;
+      span.addEventListener('dblclick', () => {
+        localPool.appendChild(span);
+        // atualiza cache com a nova ordem na zona
+        const rem = [...zone.querySelectorAll('span')].map(s=>s.textContent);
+        localStorage.setItem(key, rem.join(','));
+      });
+      localPool.appendChild(span);
+    });
+
+    // 2) Se houver estado salvo, popula a drop-zone e retira do pool local
+    if (stored) {
+      zone.textContent = '';
+      const savedWords = stored.split(',');
+      savedWords.forEach(w => {
+        // cria e anexa no zone
+        const span = document.createElement('span');
+        span.textContent = w;
+        span.className   = 'drag-item';
+        span.draggable   = true;
+        span.addEventListener('dblclick', () => {
+          localPool.appendChild(span);
+          const rem = [...zone.querySelectorAll('span')].map(s=>s.textContent);
+          localStorage.setItem(key, rem.join(','));
+        });
+        zone.appendChild(span);
+
+        // remove do pool local original
+        const orig = Array.from(localPool.children).find(c=>c.textContent===w);
+        if (orig) localPool.removeChild(orig);
+      });
+    }
+  });
+});
+
+// montagem dos exercícios
+const root = document.getElementById('exerciseRoot');
+let idCounter = 0, score = 0, total = 0;
+
+// Fill-in
+const h1 = document.createElement('h2'); h1.textContent = '1 • Preencha os espaços';
+root.appendChild(h1);
+const ol = document.createElement('ol');
+root.appendChild(ol);
+exercisesDB.fill.forEach(ex => {
+  total++; idCounter++;
+  const li = document.createElement('li');
+  li.innerHTML = ex.jp.replace('____','______')+' ('+ex.hint+') '+tooltipHTML(ex.pt)+
+    '<br><span class="romaji">'+ex.roma+'</span><br>'+
+    '<input type="text" id="ans_'+idCounter+'" data-answer="'+ex.answer.toLowerCase()+'">'+
+    '<span id="fb_'+idCounter+'" class="feedback"></span>';
+  ol.appendChild(li);
+});
+
+// Drag & Drop
+const h2 = document.createElement('h2'); h2.textContent = '2 • Drag & Drop';
+root.appendChild(h2);
+const dragBox = document.createElement('div'); dragBox.id = 'dragBox';
+root.appendChild(dragBox);
+const wordPad = document.createElement('div'); wordPad.id = 'wordPad';
+const items = [...exercisesDB.drag];
+shuffle(items);
+items.forEach(ex => {
+  const span = document.createElement('span');
+  span.textContent = ex.answer; span.className='drag-item'; span.draggable=true;
+  wordPad.appendChild(span);
+});
+dragBox.appendChild(wordPad);
+items.forEach(ex => {
+  total++; idCounter++;
+  const p = document.createElement('p');
+  p.innerHTML = ex.jp.replace('____','<span class="drop-zone" data-answer="'+ex.answer.toLowerCase()+'"></span>')+
+    ' '+tooltipHTML(ex.pt)+'<br><span class="romaji">'+ex.roma+'</span>';
+  dragBox.appendChild(p);
+});
+
+// Reorder
+const h3 = document.createElement('h2'); h3.textContent = '3 • Reordene';
+root.appendChild(h3);
+exercisesDB.reorder.forEach(ex => {
+  total++; idCounter++;
+  const holder = document.createElement('div');
+  holder.dataset.order = ex.sequence.join(' ');
+  let seq = [...ex.sequence];
+  shuffle(seq);
+  holder.innerHTML = '<p>'+ex.kanji+' '+tooltipHTML(ex.pt)+'</p>'+
+    '<div class="drop-zone" id="order_'+idCounter+'" style="min-height:40px;width:100%"></div>'+
+    '<div class="rePool"></div>';
+  const pool = holder.querySelector('.rePool');
+  seq.forEach(w => {
+    const s = document.createElement('span');
+    s.textContent = w; s.className='drag-item'; s.draggable=true;
+    pool.appendChild(s);
+  });
+  root.appendChild(holder);
+});
+
+// Drag handlers
+const pool = document.getElementById('wordPad');
+document.addEventListener('dragstart', e => {
+  if(e.target.classList.contains('drag-item')){
+    e.dataTransfer.setData('text/plain', e.target.textContent);
+    const par = e.target.parentElement;
+    let pid = par.id ? par.id :
+             par.classList.contains('rePool') ? 'RE_'+[...document.querySelectorAll('.rePool')].indexOf(par) :
+             'wordPad';
+    e.dataTransfer.setData('source-id', pid);
+  }
+});
+document.addEventListener('dragover', e => {
+  if(e.target.classList.contains('drop-zone')) e.preventDefault();
+});
+document.addEventListener('drop', e => {
+  if(!e.target.classList.contains('drop-zone')) return;
+  e.preventDefault();
+  const text = e.dataTransfer.getData('text/plain');
+  const origin = e.dataTransfer.getData('source-id');
+  const isDragGap = e.target.hasAttribute('data-answer');
+  const holder   = e.target.parentElement;
+  const localPool= holder.querySelector('.rePool');
+  // Drag & Drop
+  if(isDragGap){
+    if(e.target.firstChild){
+      pool.appendChild(e.target.firstChild);
+      e.target.textContent='';
+      // limpa cache antigo
+      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
+      localStorage.removeItem('dz_'+idx);
+    }
+    const span = document.createElement('span');
+    span.textContent = text; span.className='drag-item'; span.draggable=true;
+    span.addEventListener('dblclick', ()=>{
+      pool.appendChild(span);
+      e.target.textContent='';
+      e.target.style.borderColor='#bbb';
+      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
+      localStorage.removeItem('dz_'+idx);
+    });
+    e.target.appendChild(span);
+    // cache
+    const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
+    localStorage.setItem('dz_'+idx, text);
+    // remove do pool
+    if(origin==='wordPad'){
+      const orig = [...pool.children].find(c=>c.textContent===text);
+      if(orig) pool.removeChild(orig);
+    }
+    return;
+  }
+  // Reorder
+  if([...e.target.children].some(c=>c.textContent===text)) return;
+  const sp = document.createElement('span');
+  sp.textContent = text; sp.className='drag-item'; sp.draggable=true;
+  sp.addEventListener('dblclick', ()=>{ localPool.appendChild(sp); });
+  e.target.appendChild(sp);
+  if(localPool){
+    const orig = [...localPool.children].find(c=>c.textContent===text);
+    if(orig) localPool.removeChild(orig);
+    // cache reorder
+    const hidx = [...document.querySelectorAll('[data-order]')].indexOf(holder);
+    const seq = [...holder.querySelectorAll('.drop-zone span')].map(s=>s.textContent);
+    localStorage.setItem('order_'+hidx, seq.join(','));
+  }
+});
+
+// Checker
+function checkAll(){
+  score=0;
+  document.querySelectorAll('ol li input').forEach(inp=>{
+    const fb = inp.nextElementSibling;
+    if(inp.value.trim().toLowerCase()===inp.dataset.answer){
+      fb.textContent='✓'; fb.className='feedback correct'; score++;
+    } else {
+      fb.textContent='✗'; fb.className='feedback incorrect';
+    }
+  });
+  document.querySelectorAll('.drop-zone[data-answer]').forEach(z=>{
+    if(z.textContent.trim().toLowerCase()===z.dataset.answer){
+      z.style.borderColor='#2e7d32'; score++;
+    } else z.style.borderColor='#c62828';
+  });
+  document.querySelectorAll('[data-order]').forEach(holder=>{
+    const target = holder.dataset.order;
+    const words = [...holder.querySelectorAll('.drop-zone span')].map(s=>s.textContent.trim()).join(' ');
+    if(words===target){
+      holder.querySelector('.drop-zone').style.borderColor='#2e7d32'; score++;
+    } else holder.querySelector('.drop-zone').style.borderColor='#c62828';
+  });
+  document.getElementById('globalFeedback').textContent='Pontuação: '+score+' / '+total;
+  document.getElementById('exportBtn').style.display='inline-block';
+}
+
+// Exportar respostas
+function exportAnswers(){
+  let lines=[];
+  lines.push("Forma Potencial & Passiva 1\n")
+  document.querySelectorAll('input[type=text]').forEach(inp=>{
+    lines.push(inp.id+': '+inp.value);
+  });
+  document.querySelectorAll('.drop-zone[data-answer]').forEach((z,i)=>{
+    lines.push('drop_'+i+': '+z.textContent.trim());
+  });
+  document.querySelectorAll('[data-order]').forEach((h,i)=>{
+    const w=[...h.querySelectorAll('.drop-zone span')].map(s=>s.textContent.trim()).join(' ');
+    lines.push('order_'+i+': '+w);
+  });
+  const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='Forma_Potencial_Passiva_1.txt'; a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>

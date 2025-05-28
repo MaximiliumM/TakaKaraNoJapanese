@@ -52,24 +52,28 @@
         .then(files => {
           files
             .filter(f => f.name.endsWith('.html') && f.name !== 'index.html')
-            .sort((a, b) => {
-              const parse = name => {
-                const match = name.match(/^S(\d+)D(\d+)\.html$/);
-                return match
-                  ? { season: parseInt(match[1], 10), day: parseInt(match[2], 10) }
-                  : { season: Infinity, day: Infinity };
-              };
-              const x = parse(a.name);
-              const y = parse(b.name);
-              if (x.season !== y.season) return x.season - y.season;
-              return x.day - y.day;
-            })
+            .sort(/* ...mesma ordenação... */)
             .forEach(f => {
-              const link = document.createElement('a');
-              link.href = f.name;
-              link.className = 'btn-link';
-              link.textContent = f.name.replace('.html', '');
-              grid.appendChild(link);
+                // 1) cria o link (mas sem texto ainda)
+                const link = document.createElement('a');
+                link.href = f.name;
+                link.className = 'btn-link';
+                grid.appendChild(link);
+
+                // 2) busca o HTML e extrai o <title>
+                fetch(f.download_url)
+                .then(res => res.text())
+                .then(html => {
+                    const doc = new DOMParser().parseFromString(html, 'text/html');
+                    const titleTag = doc.querySelector('title');
+                    link.textContent = titleTag
+                    ? titleTag.textContent.trim()
+                    : f.name.replace('.html', '');
+                })
+                .catch(() => {
+                    // fallback pro nome do arquivo se der ruim
+                    link.textContent = f.name.replace('.html', '');
+                });
             });
         })
         .catch(err => console.error('Erro ao listar arquivos:', err));

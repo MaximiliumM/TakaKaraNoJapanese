@@ -9,6 +9,13 @@
     body{font-family:"Segoe UI",Roboto,Arial,sans-serif;background:#f5f5ff;margin:0;padding:20px;color:#333}
     .container{max-width:930px;margin:auto;background:#fff;padding:28px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.12)}
     h1{color:#512da8;text-align:center;margin:0 0 18px}
+    h2 {
+      margin-top: 40px;
+      color: #333;
+      font-size: 22px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 6px;
+    }
     .buttons-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -36,43 +43,63 @@
 </head>
 <body>
   <div class="container">
-    <h1>Exercícios Disponíveis</h1>
-    <div id="buttonsGrid" class="buttons-grid">
-      <!-- os botões serão gerados aqui -->
+    <div class="buttons-grid-section">
+      <h2>Mini Games</h2>
+      <div id="miniGamesGrid" class="buttons-grid"></div>
+    
+      <h2>Exercícios Semanais</h2>
+      <div id="mainExercisesGrid" class="buttons-grid"></div>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const repoApi = 'https://api.github.com/repos/Maximiliumm/TakaKaraNoJapanese/contents/';
-      const grid = document.getElementById('buttonsGrid');
+      const miniGamesGrid = document.getElementById('miniGamesGrid');
+      const mainExercisesGrid = document.getElementById('mainExercisesGrid');
 
       fetch(repoApi)
         .then(res => res.json())
         .then(files => {
           files
             .filter(f => f.name.endsWith('.html') && f.name !== 'index.html')
-            .sort(/* ...mesma ordenação... */)
+            .sort((a, b) => {
+              const parse = name => {
+                const match = name.match(/^S(\d+)D(\d+)\.html$/);
+                return match
+                  ? { season: parseInt(match[1], 10), day: parseInt(match[2], 10) }
+                  : { season: Infinity, day: Infinity };
+              };
+              const x = parse(a.name);
+              const y = parse(b.name);
+              if (x.season !== y.season) return x.season - y.season;
+              return x.day - y.day;
+            })
             .forEach(f => {
-                // 1) cria o link (mas sem texto ainda)
-                const link = document.createElement('a');
-                link.href = f.name;
-                link.className = 'btn-link';
-                grid.appendChild(link);
-
-                // 2) busca o HTML e extrai o <title>
-                fetch(f.download_url)
+              const link = document.createElement('a');
+              link.href = f.name;
+              link.className = 'btn-link';
+          
+              // Adiciona temporariamente um loading...
+              link.textContent = 'Carregando...';
+          
+              // Decide qual grid usar
+              const isMiniGame = f.name.startsWith('MG');
+              const targetGrid = isMiniGame ? miniGamesGrid : mainExercisesGrid;
+              targetGrid.appendChild(link);
+          
+              // Busca o título do arquivo
+              fetch(f.download_url)
                 .then(res => res.text())
                 .then(html => {
-                    const doc = new DOMParser().parseFromString(html, 'text/html');
-                    const titleTag = doc.querySelector('title');
-                    link.textContent = titleTag
+                  const doc = new DOMParser().parseFromString(html, 'text/html');
+                  const titleTag = doc.querySelector('title');
+                  link.textContent = titleTag
                     ? titleTag.textContent.trim()
                     : f.name.replace('.html', '');
                 })
                 .catch(() => {
-                    // fallback pro nome do arquivo se der ruim
-                    link.textContent = f.name.replace('.html', '');
+                  link.textContent = f.name.replace('.html', '');
                 });
             });
         })

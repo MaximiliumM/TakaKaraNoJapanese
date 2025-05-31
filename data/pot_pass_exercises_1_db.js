@@ -188,7 +188,7 @@ const exercisesDB = {
       "jp": "よく犬に顔を____。",
       "kana": "よくいぬにかおを____。",
       "roma": "Yoku inu ni kao o ____. ",
-      "hint": "nameru -polido",
+      "hint": "nameru - Polido",
       "answer": "nameraremasu",
       "pt": "O cachorro frequentemente lambe meu rosto."
     },

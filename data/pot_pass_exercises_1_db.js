@@ -164,8 +164,8 @@ const exercisesDB = {
       "jp": "大雨で試合が____。",
       "kana": "おおあめでしあいが____。",
       "roma": "Ōame de shiai ga ____. ",
-      "hint": "chūshi suru -polido",
-      "answer": "chūshi saremasu",
+      "hint": "chuushi suru - Polido",
+      "answer": "chuushi saremasu",
       "pt": "O jogo é cancelado por causa da chuva forte."
     },
     {
@@ -179,7 +179,7 @@ const exercisesDB = {
     {
       "jp": "親にゲームを____。",
       "kana": "おやにげーむを____。",
-      "roma": "Oya ni gēmu o ____.",
+      "roma": "Oya ni geemu o ____.",
       "hint": "toriageru - Passado",
       "answer": "toriagerareta",
       "pt": "Meus pais confiscaram meu jogo."
@@ -203,7 +203,7 @@ const exercisesDB = {
     {
       "jp": "部長に残業を____。",
       "kana": "ぶちょうにざんぎょうを____。",
-      "roma": "Buchō ni zangyō o ____. ",
+      "roma": "Buchou ni zangyou o ____. ",
       "hint": "saserareru - Polido Passado",
       "answer": "saseraremashita",
       "pt": "Fui forçado a fazer hora extra pelo gerente."
@@ -211,8 +211,8 @@ const exercisesDB = {
     {
       "jp": "妹にいつもテレビを____。",
       "kana": "いもうとにいつもテレビを____。",
-      "roma": "Imōto ni itsumo terebi o ____. ",
-      "hint": "kimeru -polido",
+      "roma": "Imouto ni itsumo terebi o ____. ",
+      "hint": "kimeru - Polido",
       "answer": "kimeraremasu",
       "pt": "Minha irmã sempre decide o que assistir na TV por mim."
     },
@@ -282,7 +282,7 @@ const exercisesDB = {
     {
       "jp": "無料でWi‑Fiが ____ 。",
       "kana": "むりょうでわいふぁいが____。",
-      "roma": "Muryō de Wi‑Fi ga ____.",
+      "roma": "Muryou de Wi‑Fi ga ____.",
       "answer": "tsukaemasu",
       "pt": "Wi‑Fi grátis pode ser usado."
     },

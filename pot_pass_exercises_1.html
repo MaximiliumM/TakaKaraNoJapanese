@@ -23,6 +23,59 @@
     .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
     .correct{color:#2e7d32} .incorrect{color:#c62828}
 
+    /* cor padrão (antes de arrastar) */
+    .drag-item {
+      background-color: #ede7f6;
+      color: #512da8;
+      transition: background-color 0.2s ease;
+      user-select: none;              /* new */
+      -webkit-user-select: none;      /* Safari */
+    }
+
+    /* placeholder: mesmo tamanho/cor; apenas borda tracejada */
+    .drop-zone .placeholder{
+      display:inline-block;
+      padding:6px 12px;
+      margin: 0px 4px 3px 4px;
+      border:2px dashed #f9a825;
+      border-radius:6px;
+      background:#fff9c4;
+      color:#f57f17;
+      vertical-align: middle;
+      pointer-events:none;
+      opacity: 0.3;
+    }
+
+    /* o item que está sendo arrastado fica invisível na origem */
+    .drag-item.dragging{
+      opacity:0.5;
+    }
+
+    /* cor quando estiver in-place */
+    .drag-item.placed{
+      background:#fff9c4;
+      border-color:#f9a825;
+      color:#f57f17;
+    }
+
+    /* --------------------------------------------------
+   Quando um item “placed” estiver certo, pinta de verde
+   -------------------------------------------------- */
+    .drag-item.placed.correct {
+      background: #c8e6c9;
+      border-color: #2e7d32;
+      color: #2e7d32;
+    }
+
+    /* --------------------------------------------------
+      Quando um item “placed” estiver errado, pinta de vermelho
+      -------------------------------------------------- */
+    .drag-item.placed.incorrect {
+      background: #ffebee;
+      border-color: #c62828;
+      color: #c62828;
+    }
+
     #dragBox {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -50,6 +103,7 @@
     <div style="text-align:center">
       <button class="btn" onclick="checkAll()">Verificar Tudo</button>
       <button class="btn" id="exportBtn" style="display:none" onclick="exportAnswers()">Exportar Respostas</button>
+      <button class="btn" id="recomecarBtn" style="display:none" onclick="reset()">Recomeçar</button>
     </div>
     <p id="globalFeedback" style="font-size:18px;text-align:center;"></p>
   </div>
@@ -66,6 +120,46 @@ function shuffle(arr) {
 // tooltip helper
 function tooltipHTML(pt) {
   return '<span class="tooltip">?<span class="tooltiptext">'+pt+'</span></span>';
+}
+
+function restoreToOrigin () {
+  /* tira o placeholder que possa ter ficado no DOM */
+  if (placeholder.parentNode) placeholder.remove();
+
+  /* ► Se era um item já colocado (Reorder ou Gap) */
+  if (origDZ) {
+    origDZ.appendChild(draggedEl);
+    if (wasPlaced) draggedEl.classList.add('placed');
+
+  /* ► Se veio do wordPad ou de um rePool                       */
+  } else if (origParent) {
+    if (origNext && origNext.parentNode === origParent)
+         origParent.insertBefore(draggedEl, origNext);
+    else origParent.appendChild(draggedEl);
+  }
+
+  /* limpa estilos + variáveis de controle */
+  draggedEl.classList.remove('dragging');
+  draggedEl  = null;
+  isDragging = false;
+}
+
+function getAfterElement(container, x) {
+  // pega todos os spans que não sejam placeholder E não sejam o elemento arrastado
+  const els = [...container.querySelectorAll('span.drag-item:not(.placeholder)')]
+    .filter(el => el !== draggedEl);
+
+  let closest = { offset: Number.NEGATIVE_INFINITY, element: null };
+
+  els.forEach(el => {
+    const box = el.getBoundingClientRect();
+    const offset = x - (box.left + box.width / 2);
+    if (offset < 0 && offset > closest.offset) {
+      closest = { offset, element: el };
+    }
+  });
+
+  return closest.element; // retorna null se não houver “after”
 }
 
 // restauração de estado
@@ -89,10 +183,11 @@ window.addEventListener('load', () => {
     // cria span restaurado
     const span = document.createElement('span');
     span.textContent  = v;
-    span.className    = 'drag-item';
+    span.className = 'drag-item placed';
     span.draggable    = true;
     // dblclick devolve ao pool
     span.addEventListener('dblclick', () => {
+      span.classList.remove('placed'); 
       ddPool.appendChild(span);
       zone.textContent = '';
       zone.style.borderColor = '#bbb';
@@ -122,6 +217,8 @@ const holders = document.querySelectorAll('[data-order]');
       span.className   = 'drag-item';
       span.draggable   = true;
       span.addEventListener('dblclick', () => {
+        if (!span.classList.contains('placed')) return;
+        if (span.classList.contains('correct')) return;
         localPool.appendChild(span);
         // atualiza cache com a nova ordem na zona
         const rem = [...zone.querySelectorAll('span')].map(s=>s.textContent);
@@ -138,9 +235,11 @@ const holders = document.querySelectorAll('[data-order]');
         // cria e anexa no zone
         const span = document.createElement('span');
         span.textContent = w;
-        span.className   = 'drag-item';
+        span.className = 'drag-item placed';
         span.draggable   = true;
         span.addEventListener('dblclick', () => {
+          if (span.classList.contains('correct')) return;
+          span.classList.remove('placed'); 
           localPool.appendChild(span);
           const rem = [...zone.querySelectorAll('span')].map(s=>s.textContent);
           localStorage.setItem(key, rem.join(','));
@@ -160,7 +259,7 @@ const root = document.getElementById('exerciseRoot');
 let idCounter = 0, score = 0, total = 0;
 
 // Fill-in
-const h1 = document.createElement('h2'); h1.textContent = '1 • Preencha os espaços';
+const h1 = document.createElement('h2'); h1.textContent = '1 • Preencha os Espaços';
 root.appendChild(h1);
 const ol = document.createElement('ol');
 root.appendChild(ol);
@@ -175,34 +274,58 @@ exercisesDB.fill.forEach(ex => {
 });
 
 // Drag & Drop
-const h2 = document.createElement('h2'); h2.textContent = '2 • Drag & Drop';
+const h2 = document.createElement('h2');
+h2.textContent = '2 • Escolha e Arraste';
 root.appendChild(h2);
-const dragBox = document.createElement('div'); dragBox.id = 'dragBox';
+
+const dragBox = document.createElement('div');
+dragBox.id = 'dragBox';
 root.appendChild(dragBox);
-const wordPad = document.createElement('div'); wordPad.id = 'wordPad';
-const items = [...exercisesDB.drag];
-shuffle(items);
-items.forEach(ex => {
+
+// 1) Cria wordPad usando uma cópia embaralhada
+const wordPad = document.createElement('div');
+wordPad.id = 'wordPad';
+
+// faz uma cópia dos itens e embaralha só esta cópia
+const poolItems = [...exercisesDB.drag];
+shuffle(poolItems);
+
+poolItems.forEach(ex => {
   const span = document.createElement('span');
-  span.textContent = ex.answer; span.className='drag-item'; span.draggable=true;
+  span.textContent = ex.answer;
+  span.className = 'drag-item';
+  span.draggable = true;
   wordPad.appendChild(span);
 });
 dragBox.appendChild(wordPad);
-items.forEach(ex => {
+
+// 2) Cria as frases NA ORDEM original de exercisesDB.drag (sem embaralhar)
+exercisesDB.drag.forEach(ex => {
   total++; idCounter++;
   const p = document.createElement('p');
-  p.innerHTML = ex.jp.replace('____','<span class="drop-zone" data-answer="'+ex.answer.toLowerCase()+'"></span>')+
-    ' '+tooltipHTML(ex.pt)+'<br><span class="romaji">'+ex.roma+'</span>';
+  p.innerHTML =
+    ex.jp.replace(
+      '____',
+      '<span class="drop-zone" data-answer="' +
+        ex.answer.toLowerCase() +
+        '"></span>'
+    ) +
+    ' ' +
+    tooltipHTML(ex.pt) +
+    '<br><span class="romaji">' +
+    ex.roma +
+    '</span>';
   dragBox.appendChild(p);
 });
 
 // Reorder
-const h3 = document.createElement('h2'); h3.textContent = '3 • Reordene';
+const h3 = document.createElement('h2'); h3.textContent = '3 • Coloque na Ordem Correta';
 root.appendChild(h3);
-exercisesDB.reorder.forEach(ex => {
+exercisesDB.reorder.forEach((ex, i) => {
   total++; idCounter++;
   const holder = document.createElement('div');
   holder.dataset.order = ex.sequence.join(' ');
+  holder.dataset.holder  = 're' + i;
   let seq = [...ex.sequence];
   shuffle(seq);
   holder.innerHTML = '<p>'+ex.kanji+' '+tooltipHTML(ex.pt)+'</p>'+
@@ -219,97 +342,473 @@ exercisesDB.reorder.forEach(ex => {
 
 // Drag handlers
 const pool = document.getElementById('wordPad');
+
+// Cria apenas um placeholder reutilizável
+const placeholder = document.createElement('span');
+placeholder.className = 'placeholder';
+let draggedEl   = null;   // elemento realmente arrastado
+let placeholderIndex = null;
+let isDragging = false;
+let origDZ = null;
+let wasPlaced    = false;
+let origParent = null;   // nó-pai original do span
+let origNext   = null;   // irmão imediatamente à direita (p/ recolocar na mesma posição)
+
 document.addEventListener('dragstart', e => {
-  if(e.target.classList.contains('drag-item')){
-    e.dataTransfer.setData('text/plain', e.target.textContent);
-    const par = e.target.parentElement;
-    let pid = par.id ? par.id :
-             par.classList.contains('rePool') ? 'RE_'+[...document.querySelectorAll('.rePool')].indexOf(par) :
-             'wordPad';
-    e.dataTransfer.setData('source-id', pid);
+  /* 0) Is the user dragging a text-selection?
+        If so, cancel our bookkeeping and LET THE BROWSER handle it. -------- */
+  const sel = window.getSelection();
+  if (sel && !sel.isCollapsed) {
+    draggedEl  = null;         /* ➊ clear any stale reference            */
+    isDragging = false;        /* ➋ don’t mark this as “our” drag        */
+    return;
+  }
+
+  /* 1)  Must be a .drag-item element */
+  if (!(e.target instanceof Element) ||
+      !e.target.classList.contains('drag-item')) {
+    return;
+  }
+
+   /* ───────── reset de estado do drag anterior ───────── */
+  origDZ     = null;      // <- drop-zone de onde saiu (se era placed)
+  origParent = null;      // <- pai de origem (wordPad / rePool)
+  origNext   = null;      // <- irmão à direita
+  wasPlaced  = false;     // <- flag “já estava colocado”
+
+  // sinaliza que estamos arrastando um .drag-item
+  isDragging = true;
+
+  // referencia ao elemento que será arrastado
+  draggedEl = e.target;
+  draggedEl.classList.add('dragging');
+
+  /* --- posição original: usamos só se o drop for fora de qualquer zona ---*/
+  origParent = draggedEl.parentNode;
+  origNext   = draggedEl.nextSibling;   // pode ser null
+
+  // Se ele já estiver "placed", remova SOMENTE ele do slot
+  if (draggedEl.classList.contains('placed')) {
+    wasPlaced = true;
+
+    const dz = draggedEl.closest('.drop-zone');
+    if (dz) {
+      // guarda a drop-zone original
+      origDZ = dz;
+
+      // removemos apenas o draggedEl (não todo o conteúdo da dz)
+      setTimeout(() => draggedEl.remove(), 0);
+
+      // restaura a borda padrão na drop-zone
+      dz.style.borderColor = '#bbb';
+
+      // atualiza localStorage:
+//    ─ se for Drag&Drop (com data-answer), removemos somente a chave dz_i
+      if (dz.hasAttribute('data-answer')) {
+        const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(dz);
+        localStorage.removeItem('dz_' + idx);
+      }
+      // ─ se for Reorder, removemos somente o order_i
+      else {
+        const holder = dz.parentElement;
+        const hidx = [...document.querySelectorAll('[data-order]')].indexOf(holder);
+        localStorage.removeItem('order_' + hidx);
+      }
+    }
+    // tira a classe placed do elemento que agora vai “para o ar”
+    draggedEl.classList.remove('placed');
+  }
+  // ───────────────────────────────────────────────────────────────────────
+
+  // tipo do exercício (gap ou reorder)
+  let dragType, groupId;
+  const dzAtStart  = draggedEl.closest('.drop-zone');
+  const inWordPad  = draggedEl.closest('#wordPad') !== null;
+  const inRePool   = draggedEl.closest('.rePool');
+
+  if (dzAtStart) {
+    // the element was already placed
+    if (dzAtStart.hasAttribute('data-answer')) {
+      dragType = 'gap';
+      groupId  = dzAtStart;                // the specific gap
+    } else {
+      dragType = 'reorder';
+      groupId  = dzAtStart.parentElement.dataset.holder;
+    }
+  } else if (inWordPad) {
+    // comes straight from the global pool → it's for a gap
+    dragType = 'gap';
+  } else if (inRePool) {
+    // comes from a local reorder pool
+    dragType = 'reorder';
+    groupId  = inRePool.parentElement.dataset.holder;
+  }
+
+  e.dataTransfer.setData('drag-type', dragType);
+  e.dataTransfer.setData('group-id',  groupId);
+  e.dataTransfer.setData('text/plain', draggedEl.textContent);
+  e.dataTransfer.setData('application/x-dd-word', '1');
+
+  const par = draggedEl.parentElement;
+  const pid = par.id
+    ? par.id
+    : par.classList.contains('rePool')
+      ? 'RE_' + [...document.querySelectorAll('.rePool')].indexOf(par)
+      : 'wordPad';
+  e.dataTransfer.setData('source-id', pid);
+
+  // adapta placeholder ao do elemento real
+  const rect = draggedEl.getBoundingClientRect();
+  placeholder.style.width = rect.width + 'px';
+  placeholder.style.height = rect.height + 'px';
+});
+
+document.addEventListener('dragend', () => {
+  isDragging = false;
+
+  /* ───────── caiu fora de qualquer destino válido ─────────── */
+  if (draggedEl && !draggedEl.parentElement) {
+
+    if (origDZ) {                       // era um item já colocado
+      origDZ.appendChild(draggedEl);
+      draggedEl.classList.add('placed');
+
+    } else if (origParent) {            // veio do wordPad / rePool
+      if (origNext && origNext.parentNode === origParent)
+           origParent.insertBefore(draggedEl, origNext);
+      else origParent.appendChild(draggedEl);
+    }
+  }
+
+  /* limpeza de estado visual e variáveis --------------------- */;
+  draggedEl?.classList.remove('dragging');
+  draggedEl  = null;
+  origDZ     = null;
+  origParent = null;
+  origNext   = null;
+
+  if (placeholder.parentNode) placeholder.remove();
+});
+
+document.addEventListener('dragover', e => {
+  // Accept only drags that carry our private flag
+  if (isDragging && e.dataTransfer.types.includes('application/x-dd-word')) {
+    e.preventDefault();      // enable the drop
+  }
+  // otherwise do nothing → browser shows the “not-allowed” cursor
+});
+
+// === HANDLER: dragover com placeholder para Reorder e Drag&Drop =====
+document.addEventListener('dragover', e => {
+  // Só atende se estivermos arrastando nosso .drag-item
+  if (!isDragging) return;
+
+  const dz = e.target.closest('.drop-zone');
+  if (!dz) return;
+  e.preventDefault();
+
+  // remove placeholder de outro lugar, se existir
+  if (placeholder.parentNode && placeholder.parentNode !== dz) {
+    placeholder.parentNode.removeChild(placeholder);
+  }
+
+  // Descobre o filho após o qual devemos colocar o placeholder
+  const afterEl = getAfterElement(dz, e.clientX);
+
+  if (!afterEl) {
+    dz.appendChild(placeholder);
+    placeholderIndex = dz.children.length - 1; // último índice
+  } else {
+    dz.insertBefore(placeholder, afterEl);
+    // calcula índice do placeholder dentro de dz.children
+    placeholderIndex = Array.from(dz.children).indexOf(placeholder);
   }
 });
-document.addEventListener('dragover', e => {
-  if(e.target.classList.contains('drop-zone')) e.preventDefault();
+
+/* DRAGLEAVE = limpa placeholder se sair da zona */
+document.addEventListener('dragleave', e => {
+  const dz = e.target.closest('.drop-zone');
+  if (!dz) return;
+  const rect = dz.getBoundingClientRect();
+  if (
+    e.clientX < rect.left || e.clientX > rect.right ||
+    e.clientY < rect.top  || e.clientY > rect.bottom
+  ) {
+    if (placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
+    placeholderIndex = null;
+  }
 });
+
+// === HANDLER: dragleave para remover placeholder se sair da zona =====
+document.addEventListener('dragleave', e => {
+  // Se sair completamente de uma drop-zone, remova o placeholder
+  const dz = e.target.closest('.drop-zone');
+  if (!dz) return;
+  // Verifica se o ponteiro saiu do próprio drop-zone (não apenas de um filho)
+  const rectDZ = dz.getBoundingClientRect();
+  if (
+    e.clientX < rectDZ.left ||
+    e.clientX > rectDZ.right ||
+    e.clientY < rectDZ.top ||
+    e.clientY > rectDZ.bottom
+  ) {
+    dz.querySelectorAll('.placeholder').forEach(ph => ph.remove());
+  }
+});
+
+// === HANDLER: drop aprimorado para Reorder e Drag&Drop ==============
 document.addEventListener('drop', e => {
-  if(!e.target.classList.contains('drop-zone')) return;
+  const dz = e.target.closest('.drop-zone');
+
+   /* 0)  Whatever is being dropped, we never want the browser to
+         insert its own data into a drop-zone.  This MUST run
+         before we look at `draggedEl`. ---------------------------------- */
+  if (dz) {
+    e.preventDefault();        // block the native insertion of text/links
+    e.stopPropagation();
+  }
+
+   // If it isn't one of our draggables, we’re done.
+  if (!draggedEl) return;
+
+  /* ==============================================================
+    --- 1) DROP FORA DE QUALQUER ZONA  ----------------------------
+  ================================================================*/
+  if (!dz) {
+    /* se era um span que já estava colocado, devolve-o à drop-zone original */
+    restoreToOrigin();
+    return;
+  }
+
   e.preventDefault();
-  const text = e.dataTransfer.getData('text/plain');
+  e.stopPropagation();
+
+  // remove placeholder se existir
+  if(placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
+
+  const text   = e.dataTransfer.getData('text/plain');
   const origin = e.dataTransfer.getData('source-id');
-  const isDragGap = e.target.hasAttribute('data-answer');
-  const holder   = e.target.parentElement;
-  const localPool= holder.querySelector('.rePool');
-  // Drag & Drop
-  if(isDragGap){
-    if(e.target.firstChild){
-      pool.appendChild(e.target.firstChild);
-      e.target.textContent='';
-      // limpa cache antigo
-      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
-      localStorage.removeItem('dz_'+idx);
+  const isDragGap = dz.hasAttribute('data-answer'); // Drag & Drop gap?
+  const holder    = dz.parentElement;
+  const localPool = holder.querySelector('.rePool');
+  const dragType  = e.dataTransfer.getData('drag-type');
+  const srcGroup  = e.dataTransfer.getData('group-id');
+
+  /* ---------- Tentou largar item de REORDER em GAP -------- */
+  if (isDragGap && dragType === 'reorder') {
+    restoreToOrigin();
+    return;
+  }
+
+  // --- VALIDAÇÃO DE GRUPO / RESPOSTA CORRETA --------------------------
+  let   destGroup = null;
+
+  if (!isDragGap) {
+    destGroup = holder.dataset.holder;
+    if (srcGroup && srcGroup !== destGroup) {
+      // tentou largar em frase diferente → repoe
+      if (origDZ) {
+        origDZ.appendChild(draggedEl);
+
+        // ← Só reaplica “placed” se ele realmente já tinha sido placed
+        if (wasPlaced) {
+          draggedEl.classList.add('placed');
+          // se quiser manter o cache
+          const idxHolder = [...document.querySelectorAll('[data-order]')].indexOf(origDZ.parentElement);
+          const seqOrig = [...origDZ.querySelectorAll('span')].map(s=>s.textContent);
+          localStorage.setItem('order_' + idxHolder, seqOrig.join(','));
+        }
+      }
+      return; // aborta o drop inválido
     }
+  }
+  // --------------------------------------------------------------------
+
+  // ---------- PARTE 1: Drag & Drop (com placeholder) ----------
+  if (isDragGap) {
+    // Se já houver um span posicionado, devolve-o
+    if (dz.firstChild) {
+      const prev = dz.firstChild;
+      prev.classList.remove('placed');
+      pool.appendChild(prev);
+      dz.textContent = '';
+      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(dz);
+      localStorage.removeItem('dz_' + idx);
+    }
+    // Cria novo span “placed”
     const span = document.createElement('span');
-    span.textContent = text; span.className='drag-item'; span.draggable=true;
-    span.addEventListener('dblclick', ()=>{
-      pool.appendChild(span);
-      e.target.textContent='';
-      e.target.style.borderColor='#bbb';
-      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
-      localStorage.removeItem('dz_'+idx);
+    span.textContent = text;
+    span.className   = 'drag-item placed';
+    span.draggable   = true;
+    span.addEventListener('dblclick', () => {
+      if (span.classList.contains('correct')) return;
+      span.classList.remove('placed');
+      pool.appendChild(span);      
+      dz.textContent = '';
+      dz.style.borderColor = '#bbb';
+      const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(dz);
+      localStorage.removeItem('dz_' + idx);
     });
-    e.target.appendChild(span);
-    // cache
-    const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(e.target);
-    localStorage.setItem('dz_'+idx, text);
-    // remove do pool
-    if(origin==='wordPad'){
-      const orig = [...pool.children].find(c=>c.textContent===text);
-      if(orig) pool.removeChild(orig);
+    // Se havia placeholder, substitui; senão, add no final
+    const ph = dz.querySelector('.placeholder');
+    if (ph) dz.replaceChild(span, ph);
+    else dz.appendChild(span);
+
+    // Cache no localStorage
+    const idx = [...document.querySelectorAll('.drop-zone[data-answer]')].indexOf(dz);
+    localStorage.setItem('dz_' + idx, text);
+
+    // Remove do pool principal
+    if (origin === 'wordPad') {
+      const orig = Array.from(pool.children).find(c => c.textContent === text);
+      if (orig) pool.removeChild(orig);
     }
     return;
   }
-  // Reorder
-  if([...e.target.children].some(c=>c.textContent===text)) return;
+
+  // ---------- PARTE 2: Reorder (com placeholder) ----------
+  // Primeiramente, se o elemento vem da mesma zona, descubra seu índice original:
+  let origIndex = null;
+  if (draggedEl && draggedEl.parentElement === dz) {
+    origIndex = Array.from(dz.children).indexOf(draggedEl);
+  }
+
+  // Agora remova-o do DOM (caso venha da mesma zona):
+  if (origIndex !== null) {
+    draggedEl.remove();
+  }
+
+  // Evita duplicatas (ignorando placeholder)
+  if ([...dz.children].some(c => c.textContent === text && !c.classList.contains('placeholder'))) {
+    return;
+  }
+
+  // Cria novo span “placed”
   const sp = document.createElement('span');
-  sp.textContent = text; sp.className='drag-item'; sp.draggable=true;
-  sp.addEventListener('dblclick', ()=>{ localPool.appendChild(sp); });
-  e.target.appendChild(sp);
-  if(localPool){
-    const orig = [...localPool.children].find(c=>c.textContent===text);
-    if(orig) localPool.removeChild(orig);
-    // cache reorder
+  sp.textContent = text;
+  sp.className   = 'drag-item placed';
+  sp.draggable   = true;
+  sp.addEventListener('dblclick', () => {
+    if (sp.classList.contains('correct')) return;
+    sp.classList.remove('placed');
+    localPool.appendChild(sp);
     const hidx = [...document.querySelectorAll('[data-order]')].indexOf(holder);
-    const seq = [...holder.querySelectorAll('.drop-zone span')].map(s=>s.textContent);
-    localStorage.setItem('order_'+hidx, seq.join(','));
+    const seq  = [...dz.querySelectorAll('span')].map(s => s.textContent);
+    localStorage.setItem('order_' + hidx, seq.join(','));
+  });
+
+  // Remove o placeholder, caso ainda exista
+  if (placeholder.parentNode) {
+    placeholder.parentNode.removeChild(placeholder);
+  }
+
+  // Se origIndex for menor que placeholderIndex, reduza placeholderIndex em 1:
+  if (origIndex !== null && placeholderIndex !== null && origIndex < placeholderIndex) {
+    placeholderIndex--;
+  }
+
+  // Compute os filhos que não são placeholder
+  const children = [...dz.querySelectorAll('span:not(.placeholder)')];
+  const insertBeforeNode = children[placeholderIndex];
+  if (insertBeforeNode) {
+    dz.insertBefore(sp, insertBeforeNode);
+  } else {
+    dz.appendChild(sp);
+  }
+
+  // Reseta placeholderIndex para o próximo drag
+  placeholderIndex = null;
+
+  // Depois de inserir `sp` no novo slot via placeholderIndex:
+  origDZ = null;
+  isDragging = false;
+
+  // Remove do pool local e atualiza cache
+  if (localPool) {
+    const orig2 = Array.from(localPool.children).find(c => c.textContent === text);
+    if (orig2) localPool.removeChild(orig2);
+    const hidx = [...document.querySelectorAll('[data-order]')].indexOf(holder);
+    const seq  = [...dz.querySelectorAll('span')].map(s => s.textContent);
+    localStorage.setItem('order_' + hidx, seq.join(','));
   }
 });
 
 // Checker
 function checkAll(){
-  score=0;
-  document.querySelectorAll('ol li input').forEach(inp=>{
+  score = 0;
+
+  // === 1) Preenchimento de campos (“Fill Inputs”) – permanece igual ===
+  document.querySelectorAll('ol li input').forEach(inp => {
     const fb = inp.nextElementSibling;
-    if(inp.value.trim().toLowerCase()===inp.dataset.answer){
-      fb.textContent='✓'; fb.className='feedback correct'; score++;
+    if (inp.value.trim().toLowerCase() === inp.dataset.answer) {
+      fb.textContent = '✓';
+      fb.className = 'feedback correct';
+      score++;
     } else {
-      fb.textContent='✗'; fb.className='feedback incorrect';
+      fb.textContent = '✗';
+      fb.className = 'feedback incorrect';
     }
   });
-  document.querySelectorAll('.drop-zone[data-answer]').forEach(z=>{
-    if(z.textContent.trim().toLowerCase()===z.dataset.answer){
-      z.style.borderColor='#2e7d32'; score++;
-    } else z.style.borderColor='#c62828';
+
+  // === 2) Drag & Drop – colorir cada “placed” e verificar resposta individual ===
+  document.querySelectorAll('.drop-zone[data-answer]').forEach(z => {
+    // Encontramos o <span> que está dentro desta drop-zone (se houver)
+    const spanPlaced = z.querySelector('span.drag-item.placed');
+    if (spanPlaced) {
+      // testa se o texto bate com a resposta esperada
+      if (spanPlaced.textContent.trim().toLowerCase() === z.dataset.answer) {
+        // CORRETO:
+        z.style.borderColor = '#2e7d32';
+        spanPlaced.classList.remove('incorrect');
+        spanPlaced.classList.add('correct');
+        spanPlaced.draggable = false;
+        score++;
+      } else {
+        // INCORRETO:
+        z.style.borderColor = '#c62828';
+        spanPlaced.classList.remove('correct');
+        spanPlaced.classList.add('incorrect');
+        spanPlaced.draggable = true;
+      }
+    } else {
+      // se não tiver nenhum span (“placed”) naquela zona, marca borda como incorreto
+      z.style.borderColor = '#c62828';
+    }
   });
-  document.querySelectorAll('[data-order]').forEach(holder=>{
-    const target = holder.dataset.order;
-    const words = [...holder.querySelectorAll('.drop-zone span')].map(s=>s.textContent.trim()).join(' ');
-    if(words===target){
-      holder.querySelector('.drop-zone').style.borderColor='#2e7d32'; score++;
-    } else holder.querySelector('.drop-zone').style.borderColor='#c62828';
+
+  // === 3) Reorder – toda a sequência deve bater
+  document.querySelectorAll('[data-order]').forEach(holder => {
+    const targetSequence = holder.dataset.order; // ex: "kare wa sensei ni homerareru"
+    const placedSpans = [...holder.querySelectorAll('.drop-zone span')];
+    const placedText = placedSpans.map(s => s.textContent.trim()).join(' ');
+
+    const dropZoneBox = holder.querySelector('.drop-zone');
+    if (placedText === targetSequence) {
+      // TODOS corretos
+      dropZoneBox.style.borderColor = '#2e7d32';
+      placedSpans.forEach(s => {
+        s.classList.remove('incorrect');
+        s.classList.add('correct');
+        s.draggable = false;
+      });
+      score++;
+    } else {
+      // sequência errada → pinta tudo de vermelho
+      dropZoneBox.style.borderColor = '#c62828';
+      placedSpans.forEach(s => {
+        s.classList.remove('correct');
+        s.classList.add('incorrect');
+        s.draggable = true;
+      });
+    }
   });
-  document.getElementById('globalFeedback').textContent='Pontuação: '+score+' / '+total;
-  document.getElementById('exportBtn').style.display='inline-block';
+
+  // === 4) Exibe pontuação ===
+  document.getElementById('globalFeedback').textContent = 'Pontuação: ' + score + ' / ' + total;
+
+  // === 5) Torna visível o botão “Exportar Respostas” e também “Recomeçar” ===
+  document.getElementById('exportBtn').style.display   = 'inline-block';
+  document.getElementById('recomecarBtn').style.display = 'inline-block';
 }
 
 // Exportar respostas
@@ -331,6 +830,13 @@ function exportAnswers(){
   const a=document.createElement('a');
   a.href=url; a.download='Forma_Potencial_Passiva_1.txt'; a.click();
   URL.revokeObjectURL(url);
+}
+
+function reset() {
+  // Limpa todo o localStorage
+  localStorage.clear();
+  // Recarrega a página
+  window.location.reload();
 }
 </script>
 </body>

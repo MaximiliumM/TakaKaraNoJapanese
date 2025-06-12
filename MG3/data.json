@@ -1,0 +1,1100 @@
+[
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "ite",
+    "options": [
+      "ite",
+      "ide",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "く",
+        "romaji": "ku",
+        "verbs": [
+          {
+            "kanji": "書く",
+            "kana": "かく",
+            "romaji": "kaku",
+            "meaning": "escrever"
+          },
+          {
+            "kanji": "聞く",
+            "kana": "きく",
+            "romaji": "kiku",
+            "meaning": "ouvir"
+          },
+          {
+            "kanji": "歩く",
+            "kana": "あるく",
+            "romaji": "aruku",
+            "meaning": "andar"
+          },
+          {
+            "kanji": "働く",
+            "kana": "はたらく",
+            "romaji": "hataraku",
+            "meaning": "trabalhar"
+          },
+          {
+            "kanji": "弾く",
+            "kana": "ひく",
+            "romaji": "hiku",
+            "meaning": "tocar (instrumento)"
+          },
+          {
+            "kanji": "引く",
+            "kana": "ひく",
+            "romaji": "hiku",
+            "meaning": "puxar"
+          },
+          {
+            "kanji": "抜く",
+            "kana": "ぬく",
+            "romaji": "nuku",
+            "meaning": "arrancar"
+          },
+          {
+            "kanji": "咲く",
+            "kana": "さく",
+            "romaji": "saku",
+            "meaning": "florescer"
+          },
+          {
+            "kanji": "履く",
+            "kana": "はく",
+            "romaji": "haku",
+            "meaning": "calçar/vestir (parte inferior)"
+          },
+          {
+            "kanji": "歩く",
+            "kana": "あるく",
+            "romaji": "aruku",
+            "meaning": "caminhar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "ide",
+    "options": [
+      "ite",
+      "ide",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "ぐ",
+        "romaji": "gu",
+        "verbs": [
+          {
+            "kanji": "泳ぐ",
+            "kana": "およぐ",
+            "romaji": "oyogu",
+            "meaning": "nadar"
+          },
+          {
+            "kanji": "急ぐ",
+            "kana": "いそぐ",
+            "romaji": "isogu",
+            "meaning": "apressar-se"
+          },
+          {
+            "kanji": "脱ぐ",
+            "kana": "ぬぐ",
+            "romaji": "nugu",
+            "meaning": "tirar (roupa)"
+          },
+          {
+            "kanji": "嗅ぐ",
+            "kana": "かぐ",
+            "romaji": "kagu",
+            "meaning": "cheirar"
+          },
+          {
+            "kanji": "注ぐ",
+            "kana": "そそぐ",
+            "romaji": "sosogu",
+            "meaning": "derramar"
+          },
+          {
+            "kanji": "研ぐ",
+            "kana": "とぐ",
+            "romaji": "togu",
+            "meaning": "afiar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "shite",
+    "options": [
+      "ite",
+      "ide",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "す",
+        "romaji": "su",
+        "verbs": [
+          {
+            "kanji": "話す",
+            "kana": "はなす",
+            "romaji": "hanasu",
+            "meaning": "falar"
+          },
+          {
+            "kanji": "指す",
+            "kana": "さす",
+            "romaji": "sasu",
+            "meaning": "apontar"
+          },
+          {
+            "kanji": "貸す",
+            "kana": "かす",
+            "romaji": "kasu",
+            "meaning": "emprestar"
+          },
+          {
+            "kanji": "返す",
+            "kana": "かえす",
+            "romaji": "kaesu",
+            "meaning": "devolver"
+          },
+          {
+            "kanji": "消す",
+            "kana": "けす",
+            "romaji": "kesu",
+            "meaning": "desligar/apagar"
+          },
+          {
+            "kanji": "押す",
+            "kana": "おす",
+            "romaji": "osu",
+            "meaning": "empurrar"
+          },
+          {
+            "kanji": "起こす",
+            "kana": "おこす",
+            "romaji": "okosu",
+            "meaning": "acordar (alguém)"
+          },
+          {
+            "kanji": "飛ばす",
+            "kana": "とばす",
+            "romaji": "tobasu",
+            "meaning": "fazer voar"
+          },
+          {
+            "kanji": "探す",
+            "kana": "さがす",
+            "romaji": "sagasu",
+            "meaning": "procurar"
+          },
+          {
+            "kanji": "写す",
+            "kana": "うつす",
+            "romaji": "utsusu",
+            "meaning": "copiar"
+          }
+        ]
+      },
+      {
+        "kana": "する",
+        "romaji": "suru",
+        "verbs": [
+          {
+            "kanji": "勉強する",
+            "kana": "べんきょうする",
+            "romaji": "benkyou suru",
+            "meaning": "estudar"
+          },
+          {
+            "kanji": "運動する",
+            "kana": "うんどうする",
+            "romaji": "undou suru",
+            "meaning": "exercitar-se"
+          },
+          {
+            "kanji": "コピーする",
+            "kana": "コピーする",
+            "romaji": "kopi- suru",
+            "meaning": "copiar"
+          },
+          {
+            "kanji": "散歩する",
+            "kana": "さんぽする",
+            "romaji": "sanpo suru",
+            "meaning": "passear"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "tte",
+    "options": [
+      "ite",
+      "ide",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "う",
+        "romaji": "u",
+        "verbs": [
+          {
+            "kanji": "会う",
+            "kana": "あう",
+            "romaji": "au",
+            "meaning": "encontrar"
+          },
+          {
+            "kanji": "買う",
+            "kana": "かう",
+            "romaji": "kau",
+            "meaning": "comprar"
+          },
+          {
+            "kanji": "歌う",
+            "kana": "うたう",
+            "romaji": "utau",
+            "meaning": "cantar"
+          },
+          {
+            "kanji": "言う",
+            "kana": "いう",
+            "romaji": "iu",
+            "meaning": "dizer"
+          },
+          {
+            "kanji": "思う",
+            "kana": "おもう",
+            "romaji": "omou",
+            "meaning": "pensar"
+          },
+          {
+            "kanji": "使う",
+            "kana": "つかう",
+            "romaji": "tsukau",
+            "meaning": "usar"
+          },
+          {
+            "kanji": "吸う",
+            "kana": "すう",
+            "romaji": "suu",
+            "meaning": "fumar/aspirar"
+          }
+        ]
+      },
+      {
+        "kana": "つ",
+        "romaji": "tsu",
+        "verbs": [
+          {
+            "kanji": "待つ",
+            "kana": "まつ",
+            "romaji": "matsu",
+            "meaning": "esperar"
+          },
+          {
+            "kanji": "立つ",
+            "kana": "たつ",
+            "romaji": "tatsu",
+            "meaning": "levantar-se"
+          },
+          {
+            "kanji": "持つ",
+            "kana": "もつ",
+            "romaji": "motsu",
+            "meaning": "segurar"
+          },
+          {
+            "kanji": "勝つ",
+            "kana": "かつ",
+            "romaji": "katsu",
+            "meaning": "vencer"
+          }
+        ]
+      },
+      {
+        "kana": "る",
+        "romaji": "ru",
+        "verbs": [
+          {
+            "kanji": "取る",
+            "kana": "とる",
+            "romaji": "toru",
+            "meaning": "pegar"
+          },
+          {
+            "kanji": "帰る",
+            "kana": "かえる",
+            "romaji": "kaeru",
+            "meaning": "voltar para casa"
+          },
+          {
+            "kanji": "走る",
+            "kana": "はしる",
+            "romaji": "hashiru",
+            "meaning": "correr"
+          },
+          {
+            "kanji": "切る",
+            "kana": "きる",
+            "romaji": "kiru",
+            "meaning": "cortar"
+          },
+          {
+            "kanji": "要る",
+            "kana": "いる",
+            "romaji": "iru",
+            "meaning": "necessitar"
+          },
+          {
+            "kanji": "売る",
+            "kana": "うる",
+            "romaji": "uru",
+            "meaning": "vender"
+          },
+          {
+            "kanji": "作る",
+            "kana": "つくる",
+            "romaji": "tsukuru",
+            "meaning": "fazer"
+          },
+          {
+            "kanji": "送る",
+            "kana": "おくる",
+            "romaji": "okuru",
+            "meaning": "enviar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "nde",
+    "options": [
+      "ite",
+      "ide",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "む",
+        "romaji": "mu",
+        "verbs": [
+          {
+            "kanji": "読む",
+            "kana": "よむ",
+            "romaji": "yomu",
+            "meaning": "ler"
+          },
+          {
+            "kanji": "飲む",
+            "kana": "のむ",
+            "romaji": "nomu",
+            "meaning": "beber"
+          },
+          {
+            "kanji": "休む",
+            "kana": "やすむ",
+            "romaji": "yasumu",
+            "meaning": "descansar"
+          },
+          {
+            "kanji": "頼む",
+            "kana": "たのむ",
+            "romaji": "tanomu",
+            "meaning": "pedir"
+          },
+          {
+            "kanji": "歩む",
+            "kana": "あゆむ",
+            "romaji": "ayumu",
+            "meaning": "caminhar"
+          }
+        ]
+      },
+      {
+        "kana": "ぶ",
+        "romaji": "bu",
+        "verbs": [
+          {
+            "kanji": "遊ぶ",
+            "kana": "あそぶ",
+            "romaji": "asobu",
+            "meaning": "brincar"
+          },
+          {
+            "kanji": "飛ぶ",
+            "kana": "とぶ",
+            "romaji": "tobu",
+            "meaning": "voar"
+          },
+          {
+            "kanji": "呼ぶ",
+            "kana": "よぶ",
+            "romaji": "yobu",
+            "meaning": "chamar"
+          },
+          {
+            "kanji": "学ぶ",
+            "kana": "まなぶ",
+            "romaji": "manabu",
+            "meaning": "aprender"
+          },
+          {
+            "kanji": "喜ぶ",
+            "kana": "よろこぶ",
+            "romaji": "yorokobu",
+            "meaning": "alegrar-se"
+          }
+        ]
+      },
+      {
+        "kana": "ぬ",
+        "romaji": "nu",
+        "verbs": [
+          {
+            "kanji": "死ぬ",
+            "kana": "しぬ",
+            "romaji": "shinu",
+            "meaning": "morrer"
+          },
+          {
+            "kanji": "抜く",
+            "kana": "ぬく",
+            "romaji": "nuku",
+            "meaning": "extrair"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "て-form",
+      "romaji": "te-form"
+    },
+    "correct": "kite",
+    "options": [
+      "ite",
+      "kite",
+      "shite",
+      "tte",
+      "nde"
+    ],
+    "endings": [
+      {
+        "kana": "くる",
+        "romaji": "kuru",
+        "verbs": [
+          {
+            "kanji": "来る",
+            "kana": "くる",
+            "romaji": "kuru",
+            "meaning": "vir"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "ita",
+    "options": [
+      "ita",
+      "ida",
+      "shita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "く",
+        "romaji": "ku",
+        "verbs": [
+          {
+            "kanji": "書く",
+            "kana": "かく",
+            "romaji": "kaku",
+            "meaning": "escrever"
+          },
+          {
+            "kanji": "聞く",
+            "kana": "きく",
+            "romaji": "kiku",
+            "meaning": "ouvir"
+          },
+          {
+            "kanji": "歩く",
+            "kana": "あるく",
+            "romaji": "aruku",
+            "meaning": "andar"
+          },
+          {
+            "kanji": "働く",
+            "kana": "はたらく",
+            "romaji": "hataraku",
+            "meaning": "trabalhar"
+          },
+          {
+            "kanji": "弾く",
+            "kana": "ひく",
+            "romaji": "hiku",
+            "meaning": "tocar (instrumento)"
+          },
+          {
+            "kanji": "引く",
+            "kana": "ひく",
+            "romaji": "hiku",
+            "meaning": "puxar"
+          },
+          {
+            "kanji": "抜く",
+            "kana": "ぬく",
+            "romaji": "nuku",
+            "meaning": "arrancar"
+          },
+          {
+            "kanji": "咲く",
+            "kana": "さく",
+            "romaji": "saku",
+            "meaning": "florescer"
+          },
+          {
+            "kanji": "履く",
+            "kana": "はく",
+            "romaji": "haku",
+            "meaning": "calçar/vestir (parte inferior)"
+          },
+          {
+            "kanji": "歩く",
+            "kana": "あるく",
+            "romaji": "aruku",
+            "meaning": "caminhar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "ida",
+    "options": [
+      "ita",
+      "ida",
+      "shita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "ぐ",
+        "romaji": "gu",
+        "verbs": [
+          {
+            "kanji": "泳ぐ",
+            "kana": "およぐ",
+            "romaji": "oyogu",
+            "meaning": "nadar"
+          },
+          {
+            "kanji": "急ぐ",
+            "kana": "いそぐ",
+            "romaji": "isogu",
+            "meaning": "apressar-se"
+          },
+          {
+            "kanji": "脱ぐ",
+            "kana": "ぬぐ",
+            "romaji": "nugu",
+            "meaning": "tirar (roupa)"
+          },
+          {
+            "kanji": "嗅ぐ",
+            "kana": "かぐ",
+            "romaji": "kagu",
+            "meaning": "cheirar"
+          },
+          {
+            "kanji": "注ぐ",
+            "kana": "そそぐ",
+            "romaji": "sosogu",
+            "meaning": "derramar"
+          },
+          {
+            "kanji": "研ぐ",
+            "kana": "とぐ",
+            "romaji": "togu",
+            "meaning": "afiar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "shita",
+    "options": [
+      "ita",
+      "ida",
+      "shita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "す",
+        "romaji": "su",
+        "verbs": [
+          {
+            "kanji": "話す",
+            "kana": "はなす",
+            "romaji": "hanasu",
+            "meaning": "falar"
+          },
+          {
+            "kanji": "指す",
+            "kana": "さす",
+            "romaji": "sasu",
+            "meaning": "apontar"
+          },
+          {
+            "kanji": "貸す",
+            "kana": "かす",
+            "romaji": "kasu",
+            "meaning": "emprestar"
+          },
+          {
+            "kanji": "返す",
+            "kana": "かえす",
+            "romaji": "kaesu",
+            "meaning": "devolver"
+          },
+          {
+            "kanji": "消す",
+            "kana": "けす",
+            "romaji": "kesu",
+            "meaning": "desligar/apagar"
+          },
+          {
+            "kanji": "押す",
+            "kana": "おす",
+            "romaji": "osu",
+            "meaning": "empurrar"
+          },
+          {
+            "kanji": "起こす",
+            "kana": "おこす",
+            "romaji": "okosu",
+            "meaning": "acordar (alguém)"
+          },
+          {
+            "kanji": "飛ばす",
+            "kana": "とばす",
+            "romaji": "tobasu",
+            "meaning": "fazer voar"
+          },
+          {
+            "kanji": "探す",
+            "kana": "さがす",
+            "romaji": "sagasu",
+            "meaning": "procurar"
+          },
+          {
+            "kanji": "写す",
+            "kana": "うつす",
+            "romaji": "utsusu",
+            "meaning": "copiar"
+          }
+        ]
+      },
+      {
+        "kana": "する",
+        "romaji": "suru",
+        "verbs": [
+          {
+            "kanji": "勉強する",
+            "kana": "べんきょうする",
+            "romaji": "benkyou suru",
+            "meaning": "estudar"
+          },
+          {
+            "kanji": "運動する",
+            "kana": "うんどうする",
+            "romaji": "undou suru",
+            "meaning": "exercitar-se"
+          },
+          {
+            "kanji": "コピーする",
+            "kana": "コピーする",
+            "romaji": "kopi- suru",
+            "meaning": "copiar"
+          },
+          {
+            "kanji": "散歩する",
+            "kana": "さんぽする",
+            "romaji": "sanpo suru",
+            "meaning": "passear"
+          }
+        ]
+      },
+      {
+        "kana": "する",
+        "romaji": "suru",
+        "verbs": [
+          {
+            "kanji": "勉強する",
+            "kana": "べんきょうする",
+            "romaji": "benkyou suru",
+            "meaning": "estudar"
+          },
+          {
+            "kanji": "運動する",
+            "kana": "うんどうする",
+            "romaji": "undou suru",
+            "meaning": "exercitar-se"
+          },
+          {
+            "kanji": "コピーする",
+            "kana": "コピーする",
+            "romaji": "kopi- suru",
+            "meaning": "copiar"
+          },
+          {
+            "kanji": "散歩する",
+            "kana": "さんぽする",
+            "romaji": "sanpo suru",
+            "meaning": "passear"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "tta",
+    "options": [
+      "ita",
+      "ida",
+      "shita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "う",
+        "romaji": "u",
+        "verbs": [
+          {
+            "kanji": "会う",
+            "kana": "あう",
+            "romaji": "au",
+            "meaning": "encontrar"
+          },
+          {
+            "kanji": "買う",
+            "kana": "かう",
+            "romaji": "kau",
+            "meaning": "comprar"
+          },
+          {
+            "kanji": "歌う",
+            "kana": "うたう",
+            "romaji": "utau",
+            "meaning": "cantar"
+          },
+          {
+            "kanji": "言う",
+            "kana": "いう",
+            "romaji": "iu",
+            "meaning": "dizer"
+          },
+          {
+            "kanji": "思う",
+            "kana": "おもう",
+            "romaji": "omou",
+            "meaning": "pensar"
+          },
+          {
+            "kanji": "使う",
+            "kana": "つかう",
+            "romaji": "tsukau",
+            "meaning": "usar"
+          },
+          {
+            "kanji": "吸う",
+            "kana": "すう",
+            "romaji": "suu",
+            "meaning": "fumar/aspirar"
+          }
+        ]
+      },
+      {
+        "kana": "つ",
+        "romaji": "tsu",
+        "verbs": [
+          {
+            "kanji": "待つ",
+            "kana": "まつ",
+            "romaji": "matsu",
+            "meaning": "esperar"
+          },
+          {
+            "kanji": "立つ",
+            "kana": "たつ",
+            "romaji": "tatsu",
+            "meaning": "levantar-se"
+          },
+          {
+            "kanji": "持つ",
+            "kana": "もつ",
+            "romaji": "motsu",
+            "meaning": "segurar"
+          },
+          {
+            "kanji": "勝つ",
+            "kana": "かつ",
+            "romaji": "katsu",
+            "meaning": "vencer"
+          }
+        ]
+      },
+      {
+        "kana": "る",
+        "romaji": "ru",
+        "verbs": [
+          {
+            "kanji": "取る",
+            "kana": "とる",
+            "romaji": "toru",
+            "meaning": "pegar"
+          },
+          {
+            "kanji": "帰る",
+            "kana": "かえる",
+            "romaji": "kaeru",
+            "meaning": "voltar para casa"
+          },
+          {
+            "kanji": "走る",
+            "kana": "はしる",
+            "romaji": "hashiru",
+            "meaning": "correr"
+          },
+          {
+            "kanji": "切る",
+            "kana": "きる",
+            "romaji": "kiru",
+            "meaning": "cortar"
+          },
+          {
+            "kanji": "要る",
+            "kana": "いる",
+            "romaji": "iru",
+            "meaning": "necessitar"
+          },
+          {
+            "kanji": "売る",
+            "kana": "うる",
+            "romaji": "uru",
+            "meaning": "vender"
+          },
+          {
+            "kanji": "作る",
+            "kana": "つくる",
+            "romaji": "tsukuru",
+            "meaning": "fazer"
+          },
+          {
+            "kanji": "送る",
+            "kana": "おくる",
+            "romaji": "okuru",
+            "meaning": "enviar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "nda",
+    "options": [
+      "ita",
+      "ida",
+      "shita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "む",
+        "romaji": "mu",
+        "verbs": [
+          {
+            "kanji": "読む",
+            "kana": "よむ",
+            "romaji": "yomu",
+            "meaning": "ler"
+          },
+          {
+            "kanji": "飲む",
+            "kana": "のむ",
+            "romaji": "nomu",
+            "meaning": "beber"
+          },
+          {
+            "kanji": "休む",
+            "kana": "やすむ",
+            "romaji": "yasumu",
+            "meaning": "descansar"
+          },
+          {
+            "kanji": "頼む",
+            "kana": "たのむ",
+            "romaji": "tanomu",
+            "meaning": "pedir"
+          },
+          {
+            "kanji": "歩む",
+            "kana": "あゆむ",
+            "romaji": "ayumu",
+            "meaning": "caminhar"
+          }
+        ]
+      },
+      {
+        "kana": "ぶ",
+        "romaji": "bu",
+        "verbs": [
+          {
+            "kanji": "遊ぶ",
+            "kana": "あそぶ",
+            "romaji": "asobu",
+            "meaning": "brincar"
+          },
+          {
+            "kanji": "飛ぶ",
+            "kana": "とぶ",
+            "romaji": "tobu",
+            "meaning": "voar"
+          },
+          {
+            "kanji": "呼ぶ",
+            "kana": "よぶ",
+            "romaji": "yobu",
+            "meaning": "chamar"
+          },
+          {
+            "kanji": "学ぶ",
+            "kana": "まなぶ",
+            "romaji": "manabu",
+            "meaning": "aprender"
+          },
+          {
+            "kanji": "喜ぶ",
+            "kana": "よろこぶ",
+            "romaji": "yorokobu",
+            "meaning": "alegrar-se"
+          }
+        ]
+      },
+      {
+        "kana": "ぬ",
+        "romaji": "nu",
+        "verbs": [
+          {
+            "kanji": "死ぬ",
+            "kana": "しぬ",
+            "romaji": "shinu",
+            "meaning": "morrer"
+          },
+          {
+            "kanji": "抜く",
+            "kana": "ぬく",
+            "romaji": "nuku",
+            "meaning": "extrair"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "form": {
+      "label": "た-form",
+      "romaji": "ta-form"
+    },
+    "correct": "kita",
+    "options": [
+      "ita",
+      "ida",
+      "kita",
+      "tta",
+      "nda"
+    ],
+    "endings": [
+      {
+        "kana": "くる",
+        "romaji": "kuru",
+        "verbs": [
+          {
+            "kanji": "来る",
+            "kana": "くる",
+            "romaji": "kuru",
+            "meaning": "vir"
+          }
+        ]
+      }
+    ]
+  }
+]

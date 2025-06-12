@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Conjugation Blitz</title>
+<link rel="stylesheet" href="MG3/style.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body>
+  <!-- Title Screen -->
+  <div id="titleScreen" class="screen">
+    <h1>Conjugation&nbsp;Blitz</h1>
+    <button id="settingsBtn" class="cogBtn material-icons" title="Settings">
+      settings
+    </button>
+    <button id="unlockBtn" class="menuBtn">Unlock Verbs</button>
+    <button id="reviewBtn" class="menuBtn">Review Verbs</button>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="gameScreen" class="screen">
+    <div id="gameWrap">
+      <h2>Unlock&nbsp;Verbs</h2>
+      <div id="score">Score: 0</div>
+      <div id="round">Round 1</div>
+      <div id="timerBarWrap"><div id="timerBar"></div></div>
+      <div id="prompt">Loading…</div>
+      <div id="options"></div>
+      <div id="feedback"></div>
+      <div id="reward"></div>
+      <div id="summary"></div>
+      <button id="restartBtn" style="display:none">Restart</button>
+      <button id="backMenuFromGame" class="menuBtn small">Back to Menu</button>
+    </div>
+  </div>
+
+  <!-- Review Screen -->
+  <div id="reviewScreen" class="screen">
+    <h2>Flashcard Review</h2>
+    <button id="reviewSettingsBtn" class="icon-btn" title="Settings">
+      <span class="material-icons">settings</span>
+    </button>
+    <fieldset id="reviewFilterBox" class="filter-box hidden">
+      <legend class="filter-title">Review:</legend>
+      <div id="keyFilters" class="filter-cols"></div>
+
+      <button id="keyAllBtn" type="button" class="menuBtn small">
+        Select / Deselect All
+      </button>
+    </fieldset>
+    <p id="filterWarning" class="warn hidden">
+      ⚠️ Select at least <strong>two</strong> fields to review.
+    </p>
+    <div id="reviewLabel"></div>
+    <div id="card" class="card">
+      <div class="card-inner">
+        <div class="card-face card-front"></div>
+        <div class="card-face card-back"></div>
+      </div>
+    </div>
+    <button id="backMenuFromReview" class="menuBtn small">Back to Menu</button>
+    <button id="nextCardBtn" class="menuBtn small" style="display:none">Next</button>
+  </div>
+
+<script src="MG3/game.js"></script>
+<!-- Manager Screen -->
+<div id="managerScreen" class="screen">
+  <h2>Learned Verbs Manager</h2>
+  <div id="verbsList"></div>
+  <button id="exportBtn" class="menuBtn small">Export .txt</button>
+  <button id="clearBtn"  class="menuBtn small">Clear All</button>
+  <button id="backMenuFromManager" class="menuBtn small">Back</button>
+</div>
+</body>
+</html>
